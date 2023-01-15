@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg text-gray-900 dark:text-gray-100;
+  }
+}
+
+@layer components {
+  .container {
+    @apply mx-auto w-full max-w-[1500px] px-4;
+  }
+  .section {
+    @apply flex min-h-[800px] flex-col items-stretch py-32;
+  }
+  .bg {
+    @apply bg-zinc-50 dark:bg-[#121212];
+  }
+  .b {
+    @apply bg-white dark:bg-zinc-900;
+  }
+  .br {
+    @apply border border-zinc-200 dark:border-zinc-700/50;
+  }
+  .bb {
+    @apply border border-zinc-200 bg-white dark:border-zinc-700/50 dark:bg-zinc-900;
+  }
+  .c-secondary {
+    @apply text-zinc-500 dark:text-zinc-400;
+  }
+  .link {
+    @apply rounded-lg py-2 px-4 font-medium
+          text-gray-700 transition-[background]
+          duration-150 
+          hover:bg-zinc-200/50
+          hover:text-gray-900
+          dark:text-gray-300
+          dark:hover:bg-zinc-800/50
+          dark:hover:text-white;
+  }
+  .text-gradient {
+    @apply bg-gradient-to-r 
+            from-zinc-700 to-zinc-400 
+            bg-clip-text text-transparent 
+            dark:from-zinc-400 dark:to-zinc-600;
+  }
+  button,
+  input,
+  textarea {
+    @apply ring-zinc-200/50 focus:ring-4 dark:ring-zinc-700/50;
+  }
+  button {
+    @apply rounded-lg
+    active:ring-zinc-200/70 disabled:cursor-not-allowed
+    disabled:opacity-70 dark:active:ring-zinc-800/70;
+  }
+  .btn {
+    @apply bb
+    rounded-lg 
+    border-[rgba(193,191,185,.6)]
+    p-2
+    dark:border-gray-700/70
+    dark:hover:bg-zinc-800/60;
+  }
+  .btn-dark {
+    @apply border-transparent bg-zinc-700 text-zinc-50 ring-zinc-200 hover:bg-zinc-800 dark:bg-black/20 dark:hover:bg-black/60;
+  }
+  .btn-light {
+    @apply dark:bg-zinc-700 dark:hover:bg-zinc-600;
+  }
+  .btn-darker {
+    @apply btn-dark dark:bg-zinc-700 dark:hover:bg-zinc-600;
+  }
+
+  input,
+  textarea {
+    @apply rounded-xl border-2 border-zinc-300 bg-transparent py-4 px-5 outline-none dark:border-zinc-700;
+  }
+}
