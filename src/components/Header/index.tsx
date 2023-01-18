@@ -1,69 +1,80 @@
 "use client";
 
-import { useState } from "react";
+import type { LegacyRef } from "react";
+import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import ThemeSwitcher from "@components/ThemeSwitcher";
 import { menus } from "@data/links";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 
 const Header = () => {
+  const ref: LegacyRef<HTMLUListElement> | null = useRef(null);
   const [open, setOpen] = useState(false);
+
+  const h = useMemo(
+    () => ref.current?.getBoundingClientRect()?.height,
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [open, ref]
+  );
 
   const handleOpen = (b?: boolean) => {
     setOpen((prev) => b ?? !prev);
   };
 
-  const back = (
-    <div className="absolute inset-0 -z-[1] bg-white/70 backdrop-blur-lg dark:bg-black/40" />
+  const actionbtns = (
+    <div className="flex items-center space-x-4">
+      {/* <Link href="/my-team">
+        <button
+          className="
+              btn-darker
+              py-2 px-4 font-medium"
+        >
+          My team
+        </button>
+      </Link> */}
+      <ThemeSwitcher />
+      <button className="btn h-10 w-10 lg:hidden" onClick={() => handleOpen()}>
+        {open ? <XMarkIcon /> : <Bars3Icon />}
+      </button>
+    </div>
   );
+
   return (
     <header
-      className={`sticky top-0 isolate
-      z-40 border-b border-zinc-100 dark:border-transparent`}
+      className={`fixed left-0 right-0 top-0 isolate
+      z-40 border-b border-zinc-100 bg-white/70
+      backdrop-blur-xl dark:border-transparent dark:bg-black/40`}
     >
-      {back}
-      <div className="container flex h-20 items-center justify-between md:h-24">
-        <h2 className="text-lg">{"< asilbek />"}</h2>
-        <div className="flex items-center space-x-6">
+      <div className="container flex flex-col overflow-hidden md:justify-between lg:flex-row lg:items-center">
+        <div className="flex h-20 w-full items-center justify-between lg:w-fit">
+          <h2 className="text-lg">{"< asilbek />"}</h2>
+          <div className="lg:hidden">{actionbtns}</div>
+        </div>
+        <nav
+          style={{
+            height: open && h && h > 30 ? h : 0,
+          }}
+          className="transition-[height] duration-300 max-lg:overflow-hidden lg:flex lg:!h-auto lg:space-x-6"
+        >
           <ul
-            className={`absolute left-0 -z-10
-            duration-300 ${
-              open
-                ? "visible top-20 md:top-24"
-                : "invisible -top-[calc(100%+100px)]"
-            }
-            grid w-full grid-cols-2 place-items-center
-            gap-5 py-10 sm:grid-cols-3
-            lg:visible
-            lg:relative lg:top-0 lg:left-auto lg:z-0 lg:flex lg:w-auto
-            lg:items-center lg:gap-0 lg:space-x-3 lg:py-0 lg:transition-none`}
+            ref={ref}
+            className={`flex flex-col items-center space-y-2 pt-3 pb-6 transition-[transform,opacity] duration-300 lg:flex-row lg:space-y-0 lg:space-x-6 lg:p-0
+            ${open ? "" : "max-lg:translate-y-5 max-lg:opacity-0"}
+            `}
           >
-            <span className="block lg:hidden">{back}</span>
             {menus.map((menu, i) => (
-              <Link href={menu.link} key={i}>
-                <span key={i} className="link">
-                  {menu.name}
-                </span>
+              <Link
+                href={menu.link}
+                onClick={() => handleOpen(false)}
+                key={i}
+                className="link"
+              >
+                {menu.name}
               </Link>
             ))}
           </ul>
-          {/* <Link href="/my-team">
-            <button
-              className="
-              btn-darker
-              py-2 px-4 font-medium"
-            >
-              My team
-            </button>
-          </Link> */}
-          <ThemeSwitcher />
-          <button
-            className="btn h-10 w-10 lg:hidden"
-            onClick={() => handleOpen()}
-          >
-            {open ? <XMarkIcon /> : <Bars3Icon />}
-          </button>
-        </div>
+          <div className="max-lg:hidden">{actionbtns}</div>
+        </nav>
       </div>
     </header>
   );
