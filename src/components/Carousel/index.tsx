@@ -4,6 +4,8 @@ interface Props {
   children: React.ReactNode;
   className?: string;
 }
+
+// embla__slide
 const Carousel: React.FC<Props> = ({ children, className = "" }) => {
   const [emblaRef] = useEmblaCarousel({
     containScroll: "trimSnaps",

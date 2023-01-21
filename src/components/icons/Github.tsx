@@ -1,4 +1,4 @@
-import { github_link } from "src/data/social";
+import { github_link } from "src/static/social";
 
 const Github = ({ className = "" }: { className?: string }) => {
   return (

@@ -2,7 +2,7 @@
 
 import Carousel from "@components/Carousel";
 import Title from "@components/Title";
-import { services } from "@data/services";
+import { services } from "@static/services";
 import { useRef } from "react";
 import type { ModalMutableRefProps } from "src/types/modalRef";
 import DetailsModal from "./DetailsModal";

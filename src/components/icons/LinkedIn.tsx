@@ -1,4 +1,4 @@
-import { linkedIn_link } from "src/data/social";
+import { linkedIn_link } from "src/static/social";
 
 const LinkedIn = ({ className = "" }: { className?: string }) => {
   return (

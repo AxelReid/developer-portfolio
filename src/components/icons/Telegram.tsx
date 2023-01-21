@@ -1,6 +1,6 @@
 "use client";
 
-import { telegram_link } from "@data/social";
+import { telegram_link } from "src/static/social";
 
 const Telegram = ({
   unstyled,

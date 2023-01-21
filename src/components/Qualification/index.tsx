@@ -41,8 +41,8 @@ const experience = [
 
 const Qualification = () => {
   return (
-    <section id="qualification" className="section container">
-      <div>
+    <section id="qualification" className="section overflow-hidden">
+      <div className="container">
         <Title title="Qualification" desc="My personel journey" />
         <div>
           {experience.map((ex, i) => {
@@ -68,6 +68,31 @@ const Qualification = () => {
             );
           })}
         </div>
+        {/* <div className="mt-20 border-l-4 border-black">
+          <Carousel>
+            {[...Array(4)].map((_, i) => (
+              <div key={i} className="embla__slide -ml-px flex-[0_0_33%]">
+                <h1 className="px-6 text-5xl font-semibold">2023</h1>
+                <div className="relative mt-2">
+                  <div className="absolute top-0 left-0 h-full w-px bg-gradient-to-b from-zinc-300 to-transparent" />
+                  <div className="absolute top-0 right-0 h-full w-px bg-gradient-to-b from-zinc-300 to-transparent" />
+                  <div className="flex w-full items-center justify-between border-b border-zinc-300 px-6 py-2">
+                    <p className="c-secondary sticky left-4 w-fit">October</p>
+                    <p className="c-secondary sticky left-4 w-fit">February</p>
+                  </div>
+                  <div className="mt-10 px-6">
+                    <h2 className="text-2xl font-medium">Frontend Engineer</h2>
+                    <p className="c-secondary">Tinfis Global, Tashkent</p>
+                    <p className="mt-2 opacity-90">
+                      Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                      Dolor obcaecati iste neque officiis sint ex.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </Carousel>
+        </div> */}
       </div>
     </section>
   );

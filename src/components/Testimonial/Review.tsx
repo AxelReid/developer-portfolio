@@ -1,7 +1,8 @@
+import Stars from "@components/Stars";
 import React from "react";
 import type { ReviewType } from "src/types/review";
 
-const Review: React.FC<ReviewType> = ({ name, avatar, review }) => {
+const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {
   return (
     <div
       className="embla__slide bb flex-[0_0_calc(100%-10px)]
@@ -13,12 +14,17 @@ const Review: React.FC<ReviewType> = ({ name, avatar, review }) => {
       lg:flex-[0_0_calc(40%-10px)] 
       xl:flex-[0_0_calc(33%-20px)]"
     >
-      <div className="h-16 w-16 rounded-full bg-black/5 dark:bg-zinc-700"></div>
-      <h3 className="mt-7 text-xl font-medium">{name}</h3>
-      <p className="c-secondary mt-2 text-lg">
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos sed
-        praesentium voluptate laudantium facilis enim.
-      </p>
+      <div className="flex items-center space-x-5">
+        <div className="relative h-[60px] w-[60px] rounded-full bg-black/5 dark:bg-white/5">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={avatar} alt="" className="absolute inset-0 object-cover" />
+        </div>
+        <div>
+          <h3 className="mb-1 text-xl font-medium">{name}</h3>
+          {rating ? <Stars rating={rating} /> : null}
+        </div>
+      </div>
+      <p className="c-secondary text-md mt-5 md:text-lg">{review}</p>
     </div>
   );
 };

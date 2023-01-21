@@ -1,5 +1,5 @@
 import Modal from "@components/Modal";
-import { services } from "@data/services";
+import { services } from "@static/services";
 import Image from "next/image";
 import React, {
   forwardRef,

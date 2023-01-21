@@ -1,4 +1,4 @@
-import { twitter_link } from "src/data/social";
+import { twitter_link } from "src/static/social";
 
 const Twitter = ({ className = "" }: { className?: string }) => {
   return (

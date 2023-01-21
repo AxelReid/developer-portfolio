@@ -4,7 +4,7 @@ import type { LegacyRef } from "react";
 import { useMemo, useRef, useState } from "react";
 import Link from "next/link";
 import ThemeSwitcher from "@components/ThemeSwitcher";
-import { menus } from "@data/links";
+import { menus } from "@static/links";
 import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 
 const Header = () => {
@@ -46,7 +46,7 @@ const Header = () => {
       backdrop-blur-xl dark:border-transparent dark:bg-black/40`}
     >
       <div className="container flex flex-col overflow-hidden md:justify-between lg:flex-row lg:items-center">
-        <div className="flex h-20 w-full items-center justify-between lg:w-fit">
+        <div className="flex h-20 w-full items-center justify-between lg:h-24 lg:w-fit">
           <h2 className="text-lg">{"< asilbek />"}</h2>
           <div className="lg:hidden">{actionbtns}</div>
         </div>

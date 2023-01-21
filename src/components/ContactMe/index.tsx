@@ -1,5 +1,5 @@
 import Title from "@components/Title";
-import { email, phone, telegram_link } from "@data/social";
+import { email, phone, telegram_link } from "src/static/social";
 import { TelegramSVG } from "@components/icons/Telegram";
 import { ArrowSmallRightIcon } from "@heroicons/react/20/solid";
 import {
@@ -22,7 +22,7 @@ const talkToMe = [
     link: "tel:" + phone,
   },
   {
-    icon: <TelegramSVG className="h-[35px] w-[35px]" />,
+    icon: <TelegramSVG className="h-[33px] w-[33px]" />,
     title: "Telegram",
     name: "@rvse7en",
     link: telegram_link,

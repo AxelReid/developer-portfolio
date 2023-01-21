@@ -1,5 +1,5 @@
 import type { EmblaCarouselType } from "embla-carousel-react";
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface Props {
   length: number;
@@ -7,18 +7,34 @@ interface Props {
 }
 
 const Dots: React.FC<Props> = ({ length, emblaApi }) => {
-  const [active, setActive] = useState(0);
+  const [activeIndex, setIndex] = useState(0);
+
+  const handleScroll = useCallback(() => {
+    if (!emblaApi) return;
+    setIndex(emblaApi.selectedScrollSnap());
+  }, [emblaApi, setIndex]);
+
+  useEffect(() => {
+    if (emblaApi) {
+      emblaApi.on("select", handleScroll);
+      handleScroll();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [emblaApi]);
 
   const handleClick = (i: number) => {
     emblaApi?.scrollTo(i);
-    setActive(i);
+    setIndex(length < 1 ? 0 : Math.ceil(i / 3));
   };
+  if (length < 1) return null;
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const dots = [...Array(Math.ceil(length / 3))];
 
   return (
     <div className="mt-10 flex items-center justify-center space-x-2.5">
-      {!!length &&
+      {dots.length > 1 &&
         // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-        [...Array(Math.ceil(length / 3))].map((_, i) => {
+        dots.map((_, i) => {
           const index = i * 3;
           return (
             <div
@@ -26,7 +42,7 @@ const Dots: React.FC<Props> = ({ length, emblaApi }) => {
               key={i}
               className={`h-3 w-3 cursor-pointer rounded-full
               ${
-                index === active
+                index === activeIndex
                   ? "bg-zinc-700 dark:bg-zinc-300"
                   : "bg-black/10 dark:bg-zinc-700"
               }

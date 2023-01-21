@@ -1,4 +1,4 @@
-import { stackoverflow_link } from "src/data/social";
+import { stackoverflow_link } from "src/static/social";
 
 const StackOverflow = ({
   unstyled,

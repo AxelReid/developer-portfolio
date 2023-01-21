@@ -16,7 +16,7 @@
     @apply flex min-h-[800px] flex-col items-stretch py-32;
   }
   .bg {
-    @apply bg-zinc-50 dark:bg-[#121212];
+    @apply bg-zinc-50 dark:bg-[#111];
   }
   .b {
     @apply bg-white dark:bg-zinc-900;
@@ -37,7 +37,7 @@
           hover:bg-zinc-200/50
           hover:text-gray-900
           dark:text-gray-300
-          dark:hover:bg-zinc-800/50
+          dark:hover:bg-zinc-800/80
           dark:hover:text-white;
   }
   .text-gradient {
