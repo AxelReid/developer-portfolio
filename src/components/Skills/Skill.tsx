@@ -12,9 +12,9 @@ const Skill: React.FC<SkillType> = ({ name, level, icon }) => {
 
   return (
     <div
-      className={` bb flex w-max items-center gap-4 rounded-lg p-5 sm:min-w-[200px] sm:gap-5`}
+      className={` bb flex w-max items-center gap-4 rounded-lg p-4 sm:min-w-[200px] md:gap-5 md:p-5`}
     >
-      <div className="flex h-10 w-10 flex-shrink-0 items-center sm:h-12 sm:w-12">
+      <div className="flex h-10 w-10 flex-shrink-0 items-center md:h-12 md:w-12">
         {icon}
       </div>
       <div>
