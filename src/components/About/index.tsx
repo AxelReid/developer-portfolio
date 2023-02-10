@@ -1,8 +1,6 @@
 import Title from "@components/Title";
 import { resume } from "src/static/social";
 import { BriefcaseIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import Anim from "public/images/anim.svg";
 
 const cards = [
   {
@@ -55,44 +53,41 @@ const cards = [
 
 const About = () => {
   return (
-    <section id="about-me" className="section container">
+    <section id="about-me" className="section container max-w-5xl">
       <div>
         <Title title="About Me" desc="My introduction" />
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20">
-          <div className="bb flex items-center justify-center rounded-2xl p-10">
-            {/* // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
-            {/* <Image className="object-contain" src={Anim} alt="" /> */}
+        {/* <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20"> */}
+        {/* <div className="bb flex items-center justify-center rounded-2xl p-10">
+            <Image className="object-contain" src={Anim} alt="" />
+          </div> */}
+        <div>
+          <div className="flex flex-wrap gap-4">
+            {cards.map((card, i) => (
+              <div
+                key={i}
+                className="bb flex min-w-[150px] flex-1 flex-col items-center justify-center rounded-lg p-5"
+              >
+                <div className="mb-1 h-7 w-7">{card.icon}</div>
+                <p className="my-2 text-center text-lg">{card.name}</p>
+                <p className="c-secondary text-center text-sm">{card.value}</p>
+              </div>
+            ))}
           </div>
-          <div>
-            <div className="flex flex-wrap gap-4">
-              {cards.map((card, i) => (
-                <div
-                  key={i}
-                  className="bb flex min-w-[150px] flex-1 flex-col items-center justify-center rounded-lg p-5"
-                >
-                  <div className="mb-1 h-7 w-7">{card.icon}</div>
-                  <p className="my-2 text-center text-lg">{card.name}</p>
-                  <p className="c-secondary text-center text-sm">
-                    {card.value}
-                  </p>
-                </div>
-              ))}
-            </div>
-            <p className="c-secondary my-10 text-xl">
-              I build web in javascript ecosystem, since 2019. Worked massively
-              on UI/UX design using tons of libraries. I convert Figma designs
-              into code with an eye of an eagle to pixel perfection. I&rsquo;m
-              always up to date with latest technologies. I write clean,
-              re-usable, scalable and performant code.
-            </p>
-            <a href={resume} target="_blank" rel="noreferrer">
-              <button className="btn btn-dark flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
-                <span className="whitespace-nowrap">View Resume</span>
-                <DocumentTextIcon className="w-6 -translate-y-1" />
-              </button>
-            </a>
-          </div>
+          <p className="c-secondary my-10 text-xl">
+            I build web in javascript ecosystem, since 2019. Worked massively on
+            UI/UX design using tons of libraries. I convert Figma designs into
+            code with an eye of an eagle to pixel perfection. I&rsquo;m always
+            up to date with latest technologies. I write clean, re-usable,
+            scalable and performant code.
+          </p>
+          <a href={resume} target="_blank" rel="noreferrer">
+            <button className="btn btn-dark flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
+              <span className="whitespace-nowrap">View Resume</span>
+              <DocumentTextIcon className="w-6 -translate-y-1" />
+            </button>
+          </a>
         </div>
+        {/* </div> */}
       </div>
     </section>
   );

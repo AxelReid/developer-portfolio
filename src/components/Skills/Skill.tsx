@@ -1,31 +1,40 @@
-import { CheckBadgeIcon } from '@heroicons/react/20/solid'
+import { CheckBadgeIcon } from "@heroicons/react/20/solid";
+import { Level } from "src/types/index.d";
 
 interface Props {
-  name: string
-  level: string
+  name: string;
+  level: Level;
 }
 
 const Skill: React.FC<Props> = ({ name, level }) => {
+  const bg = `${
+    level === Level.Advanced
+      ? "bg-red-500/10 dark:bg-red-500/20"
+      : level === Level.Intermediate
+      ? "bg-orange-500/10 dark:bg-yellow-500/10"
+      : "bg-blue-500/10"
+  }`;
+  const cl = `${
+    level === Level.Advanced
+      ? "text-red-600"
+      : level === Level.Intermediate
+      ? "text-yellow-500"
+      : "text-blue-400"
+  }`;
   return (
     <div
-      className='flex items-start gap-2.5 py-3 px-2 lg:px-5
-      '
+      className={` flex min-w-[200px] items-start gap-2.5 rounded-lg p-5 ${bg}`}
     >
-      {/* border border-transparent 
-      transition
-      hover:duration-[0s]
-      duration-500
-      hover:bb
-      hover:bg-zinc-50 dark:hover:bg-zinc-900
-      active:bg-zinc-100 dark:active:bg-black/50
-      rounded-xl py-3 px-5 */}
-      <CheckBadgeIcon strokeWidth={1.25} className='w-5 mt-1 flex-shrink-0' />
+      <CheckBadgeIcon
+        strokeWidth={1.25}
+        className={`mt-1 w-6 flex-shrink-0 ${cl}`}
+      />
       <div>
-        <p className='text-lg'>{name}</p>
-        <p className='c-secondary text-[12px]'>{level}</p>
+        <p className="text-lg font-medium">{name}</p>
+        <p className={`c-secondary mt-1 text-sm`}>{level}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Skill
+export default Skill;

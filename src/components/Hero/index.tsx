@@ -12,15 +12,13 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <main className="container flex max-h-[850px] items-center pt-20 md:h-[calc(100vh-100px)]">
-      <section className="flex flex-col items-center pl-5 pt-20 max-[500px]:pl-0 md:flex-row lg:pt-28">
-        <div className="pb-20 pt-5 min-[500px]:pt-10 md:pt-20">
-          <div className="flex w-40 flex-col items-start space-y-8">
+    <main className="container my-20 flex h-full max-h-[900px] items-center lg:mt-24">
+      <section className="mt-24 flex flex-col pl-5 max-[500px]:pl-0 sm:mt-40 sm:flex-row lg:mt-44">
+        <div className="pb-10 min-[500px]:pt-10 sm:block sm:pb-20">
+          <div className="flex flex-row items-start gap-8 sm:w-24 sm:flex-col md:w-32 lg:w-40">
             <Telegram />
             <StackOverflow />
             <Github />
-            {/* <LinkedIn />
-            <Twitter /> */}
           </div>
         </div>
         <div>

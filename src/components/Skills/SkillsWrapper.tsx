@@ -1,8 +1,9 @@
+import type { Level } from "src/types";
 import Skill from "./Skill";
 
 interface Props {
   title: string;
-  data: { name: string; level: string }[];
+  data: { name: string; level: Level }[];
 }
 
 const SkillsWrapper: React.FC<Props> = ({ title, data }) => {
