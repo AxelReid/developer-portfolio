@@ -6,6 +6,7 @@ import {
   EnvelopeIcon,
   PhoneArrowUpRightIcon,
 } from "@heroicons/react/24/outline";
+import { handleHoverEffect } from "@utils/hoverCardEffect";
 
 const talkToMe = [
   {
@@ -32,32 +33,33 @@ const ContactMe = () => {
   return (
     <section id="get-in-touch" className="container max-w-5xl pb-32">
       <Title title="Contact Me" desc="Get in touch" />
-      {/* <div className="flex flex-col gap-10 md:flex-row md:gap-14 lg:gap-20"> */}
-      <div className="flex flex-wrap gap-4">
+      <div
+        className="flex flex-wrap gap-4"
+        id="hover-cards"
+        onMouseMove={handleHoverEffect}
+      >
         {talkToMe.map((item, i) => (
-          <div
-            key={i}
-            className="bb flex flex-1 flex-col items-center rounded-lg p-5"
-          >
-            {item.icon}
-            <h4 className="mt-2 text-lg font-medium">{item.title}</h4>
-            <p className="c-secondary">{item.name}</p>
-            <a
-              href={item.link}
-              target="_blank"
-              rel="noreferrer"
-              className="c-secondary mt-4 flex items-center gap-0.5 transition-[gap] hover:gap-2"
-            >
-              <span className="whitespace-nowrap font-medium">
-                Get in touch
-              </span>
-              <ArrowSmallRightIcon className="w-6" />
-            </a>
+          <div id="hover-card" key={i} className="flex-1 rounded-lg">
+            <span id="hover-card-overlay" />
+            <div className="relative p-5">
+              {item.icon}
+              <h4 className="mt-2 text-lg font-medium">{item.title}</h4>
+              <p className="c-secondary">{item.name}</p>
+              <a
+                href={item.link}
+                target="_blank"
+                rel="noreferrer"
+                className="c-secondary mt-4 flex items-center gap-0.5 transition-[gap] hover:gap-2"
+              >
+                <span className="whitespace-nowrap font-medium">
+                  Get in touch
+                </span>
+                <ArrowSmallRightIcon className="w-6" />
+              </a>
+            </div>
           </div>
         ))}
       </div>
-      {/* <Form /> */}
-      {/* </div> */}
     </section>
   );
 };

@@ -47,7 +47,7 @@ const Header = () => {
     >
       <div className="container flex flex-col overflow-hidden md:justify-between lg:flex-row lg:items-center">
         <div className="flex h-20 w-full items-center justify-between lg:h-24 lg:w-fit">
-          <h2 className="text-lg">{"< asilbek />"}</h2>
+          <h2 className="text-xl font-semibold">HYPERBEAST</h2>
           <div className="lg:hidden">{actionbtns}</div>
         </div>
         <nav

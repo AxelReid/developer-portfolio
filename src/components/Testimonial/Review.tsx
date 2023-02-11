@@ -5,7 +5,8 @@ import type { ReviewType } from "src/types/review";
 const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {
   return (
     <div
-      className="embla__slide bb flex-[0_0_calc(100%-10px)]
+      id="hover-card"
+      className="embla__slide flex-[0_0_calc(100%-10px)]
       rounded-2xl 
       p-8 
       min-[400px]:flex-[0_0_calc(90%-10px)] 
@@ -14,6 +15,7 @@ const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {
       lg:flex-[0_0_calc(40%-10px)] 
       xl:flex-[0_0_calc(33%-20px)]"
     >
+      <span id="hover-card-overlay" />
       <div className="flex items-center space-x-5">
         <div className="relative h-[60px] w-[60px] rounded-full bg-black/5 dark:bg-white/5">
           {/* eslint-disable-next-line @next/next/no-img-element */}

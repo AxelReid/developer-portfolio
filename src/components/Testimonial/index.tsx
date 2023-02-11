@@ -5,6 +5,7 @@ import Title from "@components/Title";
 import Review from "./Review";
 import type { ReviewType } from "src/types/review";
 import Dots from "./Dots";
+import { handleHoverEffect } from "@utils/hoverCardEffect";
 
 const upworkUrl =
   "https://assets-global.website-files.com/603fea6471d9d8559d077603/6092b7514135708162a4be92_Favicon%20256.png";
@@ -33,7 +34,11 @@ const Testimonial = () => {
 
   return (
     <section id="testimonial" className="section overflow-hidden">
-      <div className="container">
+      <div
+        className="container"
+        onMouseMove={handleHoverEffect}
+        id="hover-cards"
+      >
         <Title title="Testimonial" desc="My clients saying" />
         <div className="embla pr-4 xl:pr-0" ref={emblaRef}>
           <div className="embla__container flex items-stretch space-x-5 xl:space-x-10">

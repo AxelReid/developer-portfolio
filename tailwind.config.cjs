@@ -8,23 +8,25 @@ module.exports = {
         sans: ["var(--font-default)"],
       },
       backgroundImage: {
+        // overlay bg
         "radial-before": `radial-gradient(
-          500px circle at var(--mouse-x) var(--mouse-y), 
-          rgba(0,0,0,.03),
+          700px circle at var(--mouse-x) var(--mouse-y), 
+          rgba(0,0,0,.04),
           transparent 40%
         )`,
         "radial-before-dark": `radial-gradient(
-          500px circle at var(--mouse-x) var(--mouse-y), 
+          700px circle at var(--mouse-x) var(--mouse-y), 
           rgba(255,255,255,.1),
           transparent 40%
         )`,
+        // border highlight
         "radial-after": `radial-gradient(
-          400px circle at var(--mouse-x) var(--mouse-y), 
-          rgba(0, 0, 0, 0.4),
+          500px circle at var(--mouse-x) var(--mouse-y), 
+          rgba(0, 0, 0, 0.5),
           transparent 40%
         )`,
         "radial-after-dark": `radial-gradient(
-          400px circle at var(--mouse-x) var(--mouse-y), 
+          500px circle at var(--mouse-x) var(--mouse-y), 
           rgba(255, 255, 255, .7),
           transparent 40%
         )`,

@@ -1,5 +1,6 @@
 "use client";
 
+import { handleHoverEffect } from "@utils/hoverCardEffect";
 import React, { memo, useState } from "react";
 import type { ProjectType } from "src/types/project";
 import Project from "./Project";
@@ -96,6 +97,8 @@ const Projects: React.FC<Props> = memo(() => {
         ))}
       </div>
       <div
+        id="hover-cards"
+        onMouseMove={handleHoverEffect}
         className="mt-14 grid
       grid-cols-1 gap-5 sm:grid-cols-2
       lg:grid-cols-3 xl:gap-10"

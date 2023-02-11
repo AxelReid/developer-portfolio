@@ -3,7 +3,11 @@ import Tag from "./Tag";
 
 const Project: React.FC<ProjectType> = ({ title, tags, link, thumbnail }) => {
   return (
-    <div className="bb flex flex-col justify-between rounded-2xl p-6">
+    <div
+      id="hover-card"
+      className="flex flex-col justify-between rounded-2xl p-6"
+    >
+      <span id="hover-card-overlay" />
       <div>
         <div className="aspect-[9/6] rounded-2xl bg-black/5 dark:bg-zinc-700"></div>
         <h3 className="mt-7 text-xl font-medium">{title}</h3>
