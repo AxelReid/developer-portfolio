@@ -7,7 +7,32 @@
     @apply bg text-gray-900 dark:text-gray-100;
   }
 }
-
+@layer utilities {
+  #skill::before,
+  #skill::after {
+    border-radius: inherit;
+    content: "";
+    height: 100%;
+    left: 0px;
+    opacity: 0;
+    position: absolute;
+    top: 0px;
+    transition: opacity 500ms;
+    width: 100%;
+  }
+  #skill::before {
+    z-index: 3;
+  }
+  #skill::after {
+    z-index: 1;
+  }
+  #skills:hover #skill::after {
+    opacity: 1;
+  }
+  #skill:hover::before {
+    opacity: 1;
+  }
+}
 @layer components {
   .container {
     @apply mx-auto w-full max-w-[1500px] px-4;

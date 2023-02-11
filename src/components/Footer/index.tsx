@@ -1,10 +1,10 @@
 import Link from "next/link";
-import { footerLinks } from "@static/links";
 import Telegram from "@components/icons/Telegram";
 import StackOverflow from "@components/icons/StackOverflow";
 import Github from "@components/icons/Github";
 import LinkedIn from "@components/icons/LinkedIn";
 import Twitter from "@components/icons/Twitter";
+import { footerLinks } from "@static/links";
 
 const Footer = () => {
   return (
