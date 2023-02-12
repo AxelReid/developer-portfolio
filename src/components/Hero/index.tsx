@@ -12,7 +12,7 @@ import Link from "next/link";
 
 const Hero = () => {
   return (
-    <main className="container my-20 flex h-full max-h-[900px] items-center lg:mt-24">
+    <main className="container my-20 flex h-full max-h-[900px] items-center ">
       <section className="mt-24 flex flex-col pl-5 max-[500px]:pl-0 sm:mt-40 sm:flex-row lg:mt-44">
         <div className="pb-10 min-[500px]:pt-10 sm:block sm:pb-20">
           <div className="flex flex-row items-start gap-8 sm:w-24 sm:flex-col md:w-32 lg:w-40">

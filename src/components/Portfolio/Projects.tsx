@@ -60,27 +60,16 @@ const projects: ProjectType[] = [
     ],
     thumbnail: "",
   },
-  // {
-  //   title: 'Real-time chat system',
-  //   link: '',
-  //   tags: [
-  //     'nest.js',
-  //     'passport js',
-  //     'typescript',
-  //     'typeorm',
-  //     'sqlite3',
-  //     'redis',
-  //     'graphql apollo',
-  //   ],
-  //   thumbnail: '',
-  // },
 ];
 
 interface Props {
   projects: ProjectType[];
 }
 const Projects: React.FC<Props> = memo(() => {
+  // const { data } = api.project.getAll.useQuery();
+
   const [activeTab, setActiveTab] = useState<string | null>(null);
+
   return (
     <>
       <div className="flex flex-wrap justify-center gap-y-4 gap-x-5 font-medium">

@@ -66,6 +66,7 @@ export const createTRPCContext = async (opts: CreateNextContextOptions) => {
  */
 import { initTRPC, TRPCError } from "@trpc/server";
 import superjson from "superjson";
+import { Role } from "src/types/next-auth.d";
 
 const t = initTRPC
   .context<Awaited<ReturnType<typeof createTRPCContext>>>()
@@ -106,8 +107,15 @@ const enforceUserIsAuthed = t.middleware(({ ctx, next }) => {
   if (!ctx.session || !ctx.session.user) {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
+  const checkAdmin = () => {
+    if (ctx.session?.user?.role !== Role.ADMIN) {
+      throw new TRPCError({ code: "FORBIDDEN" });
+    }
+  };
+
   return next({
     ctx: {
+      checkAdmin,
       // infers the `session` as non-nullable
       session: { ...ctx.session, user: ctx.session.user },
     },

@@ -1,16 +1,18 @@
+import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import overlay from "./overlay";
 
-interface Props {
-  children: React.ReactNode | string;
+type Div = DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>;
+interface Props extends Div {
   onClose?: () => void;
-  className?: string;
+  root?: Div;
 }
 
 const Modal = (
-  { children, onClose = () => null, className = "" }: Props,
+  { children, onClose = () => null, className = "", root = {}, ...rest }: Props,
   ref: React.Ref<unknown> | null
 ) => {
+  const { className: rootClassName = "", ...rootRestProps } = root;
   const [isOpened, setOpened] = useState(false);
 
   const bodyScroll = (open: boolean) => {
@@ -39,13 +41,17 @@ const Modal = (
   if (!isOpened) return null;
 
   return (
-    <div className="fixed inset-0 isolate z-50 h-screen overflow-y-auto px-4 pt-20 pb-10 md:pt-24">
+    <div
+      {...rootRestProps}
+      className={`fixed inset-0 isolate !z-50 h-screen overflow-y-auto px-4 pt-20 pb-10 md:pt-24 ${rootClassName}`}
+    >
       <div onClick={close}>{overlay}</div>
-      <section
-        className={`b mx-auto h-[50vh] max-w-screen-md rounded-2xl p-10 ${className}`}
+      <div
+        {...rest}
+        className={`b relative mx-auto h-[50vh] max-w-screen-md rounded-2xl p-10 ${className}`}
       >
         {children}
-      </section>
+      </div>
     </div>
   );
 };

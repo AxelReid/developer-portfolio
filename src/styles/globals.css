@@ -45,10 +45,10 @@
     @apply bg-white dark:bg-zinc-900;
   }
   .br {
-    @apply border border-zinc-200 dark:border-zinc-700/50;
+    @apply border border-[rgba(193,191,185,.6)] dark:border-zinc-700/70;
   }
   .bb {
-    @apply border border-zinc-200 bg-white dark:border-zinc-700/50 dark:bg-zinc-900;
+    @apply br b border;
   }
   .c-secondary {
     @apply text-zinc-500 dark:text-zinc-400;
@@ -71,8 +71,9 @@
   }
   button,
   input,
+  select,
   textarea {
-    @apply ring-zinc-200/50 focus:ring-4 dark:ring-zinc-700/50;
+    @apply rounded-lg !ring-zinc-200/50 focus:!ring-4 dark:!ring-zinc-700/50;
   }
   button {
     @apply rounded-lg
@@ -97,8 +98,8 @@
     @apply btn-dark dark:bg-zinc-700 dark:hover:bg-zinc-600;
   }
 
-  input,
+  /* input,
   textarea {
     @apply rounded-xl border-2 border-zinc-300 bg-transparent py-4 px-5 outline-none dark:border-zinc-700;
-  }
+  } */
 }
