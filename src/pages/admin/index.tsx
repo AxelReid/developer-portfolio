@@ -1,13 +1,9 @@
-import CreateProject from "@components/Admin/CreateProject";
-import Header from "@components/Header";
+import AdminWrapper from "@components/Admin/AdminWrapper";
 
 const AdminPage = () => {
   return (
     <>
-      <Header />
-      <div className="container mt-5">
-        <CreateProject />
-      </div>
+      <AdminWrapper>hello</AdminWrapper>
     </>
   );
 };

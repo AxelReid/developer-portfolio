@@ -16,3 +16,11 @@ export const appRouter = createTRPCRouter({
 
 // export type definition of API
 export type AppRouter = typeof appRouter;
+
+export const handleAsyncErr = (error: any) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+  if (error?.message?.includes("Unique")) {
+    throw new Error("Already exists!");
+  }
+  throw new Error("Something went wrong");
+};

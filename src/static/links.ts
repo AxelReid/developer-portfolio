@@ -1,37 +1,37 @@
 export const menus = [
   {
-    name: 'Home',
-    link: '/',
+    name: "Home",
+    link: "/",
   },
   {
-    name: 'About Me',
-    link: '#about-me',
+    name: "About Me",
+    link: "#about-me",
   },
   {
-    name: 'Skills',
-    link: '/#skills',
+    name: "Skills",
+    link: "/#skills",
   },
   {
-    name: 'Portfolio',
-    link: '/#portfolio',
+    name: "Portfolio",
+    link: "/#portfolio",
   },
-  {
-    name: 'Get In Touch',
-    link: '/#get-in-touch',
-  },
-]
+  // {
+  //   name: 'Get In Touch',
+  //   link: '/#get-in-touch',
+  // },
+];
 
 export const footerLinks = [
   {
-    name: 'About',
-    link: '/#about-me',
+    name: "About",
+    link: "/#about-me",
   },
   {
-    name: 'Portfolio',
-    link: '/#portfolio',
+    name: "Portfolio",
+    link: "/#portfolio",
   },
   {
-    name: 'Services',
-    link: '/#services',
+    name: "Services",
+    link: "/#services",
   },
-]
+];

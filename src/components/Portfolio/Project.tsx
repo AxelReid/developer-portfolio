@@ -1,7 +1,7 @@
 import type { ProjectType } from "src/types/project";
 import Tag from "./Tag";
 
-const Project: React.FC<ProjectType> = ({ title, tags, link, thumbnail }) => {
+const Project: React.FC<ProjectType> = ({ title, tags, link }) => {
   return (
     <div
       id="hover-card"

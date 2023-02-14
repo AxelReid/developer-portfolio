@@ -1,25 +1,50 @@
 import Title from "@components/Title";
 import { handleHoverEffect } from "@utils/hoverCardEffect";
+import { useState } from "react";
+import type { SkillType } from "src/types";
 import Skill from "./Skill";
-import skills from "./skills";
+import type { SkillTabType } from "./skills";
+import { descriptions } from "./skills";
+import { groupBy } from "./skills";
+import { skillsTab } from "./skills";
 
 const Skills = () => {
   // TODO skills and stacks tabs
+  const [activeTab, setActiveTab] = useState<SkillTabType>("stacks");
+
   return (
     <section id="skills" className="section overflow-hidden">
       <div className="container">
         <Title title="Skills" desc="My technical level" />
-        <div onMouseMove={handleHoverEffect} id="hover-cards">
-          {skills.map((sk, i) => (
-            <div key={i}>
-              <p className="mb-4 mt-10 text-lg font-medium">{sk[0]}</p>
-              <div className="flex flex-wrap gap-2 md:gap-4">
-                {sk[1].map((s, ii) => (
-                  <Skill {...s} key={ii} />
-                ))}
-              </div>
-            </div>
+        <div className="flex gap-4">
+          {skillsTab.map((tab, i) => (
+            <button
+              onClick={() => setActiveTab(tab.id)}
+              className={`btn ${tab.id === activeTab ? "btn-darker" : ""} px-3`}
+              key={i}
+            >
+              {tab.name}
+            </button>
           ))}
+        </div>
+        <div onMouseMove={handleHoverEffect} id="hover-cards">
+          {Object.entries(groupBy(activeTab)).map((sk, i) => {
+            const desc = descriptions?.find((d) => d.key === sk[0])?.value;
+
+            return (
+              <div key={i}>
+                <div className="mb-4 mt-10">
+                  <p className="text-lg font-medium">{sk[0]}</p>
+                  {desc && <p className="c-secondary my-1 text-sm">{desc}</p>}
+                </div>
+                <div className="flex flex-wrap gap-2 md:gap-4">
+                  {(sk[1] as SkillType[]).map((s, ii) => (
+                    <Skill {...s} key={ii} />
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

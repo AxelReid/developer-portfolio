@@ -67,7 +67,6 @@ interface Props {
 }
 const Projects: React.FC<Props> = memo(() => {
   // const { data } = api.project.getAll.useQuery();
-
   const [activeTab, setActiveTab] = useState<string | null>(null);
 
   return (
@@ -78,7 +77,7 @@ const Projects: React.FC<Props> = memo(() => {
             key={i}
             onClick={() => setActiveTab(tab.value)}
             className={`btn ${
-              tab.value === activeTab ? "btn-dark btn-darker" : ""
+              tab.value === activeTab ? "btn-darker" : ""
             } py-2 px-4`}
           >
             {tab.name}

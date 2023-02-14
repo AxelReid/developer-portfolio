@@ -73,13 +73,31 @@ const About = () => {
               </div>
             ))}
           </div>
-          <p className="c-secondary my-10 text-xl">
-            I build web in javascript ecosystem, since 2019. Worked massively on
-            UI/UX design using tons of libraries. I convert Figma designs into
-            code with an eye of an eagle to pixel perfection. I&rsquo;m always
-            up to date with latest technologies. I write clean, re-usable,
-            scalable and performant code.
-          </p>
+          <div className="c-secondary my-10 text-xl leading-loose tracking-wide">
+            I have been building web in javascript ecosystem{" "}
+            <b className="text-zinc-700 dark:text-zinc-200">since 2019</b>.
+            Initially, worked massively on{" "}
+            <b className="bg-gradient-to-tr from-pink-500 to-blue-500 bg-clip-text text-transparent">
+              UI/UX design
+            </b>{" "}
+            using tons of popular js, react ui libraries with Figma designs and
+            own <b>creativeness</b>. Most of my experience is frontend with{" "}
+            <b className="text-[#61DAFB]">Reactjs</b> and{" "}
+            <b className="text-zinc-700 dark:text-zinc-200">Nextjs</b>.
+            I&rsquo;m a big{" "}
+            <b className="text-yellow-500">javascript enthusiast</b> and am
+            always up to date with what&rsquo;s happing around it. I&rsquo;m so
+            picky about what technologies i use and choose the best, most
+            popular, modern and the ones that give the best{" "}
+            <b className="text-zinc-600 dark:text-zinc-300">DX</b> and great
+            performance. So in my main gear, I have{" "}
+            <b className="text-[#007acc]">Typescript</b>,{" "}
+            <b className="text-zinc-700 dark:text-zinc-200">Nextjs</b>,{" "}
+            <b className="text-[#DF234F]">Nestjs</b>,{" "}
+            <b className="text-[#E434AA]">Graphql</b> by these factors.
+            I&rsquo;m always mastering these skills to be better dev that
+            yesterday.
+          </div>
           <a href={resume} target="_blank" rel="noreferrer">
             <button className="btn btn-dark flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
               <span className="whitespace-nowrap">View Resume</span>

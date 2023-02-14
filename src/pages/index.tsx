@@ -6,11 +6,11 @@ import Header from "src/components/Header";
 import Hero from "src/components/Hero";
 const About = dynamic(() => import("src/components/About"));
 const Skills = dynamic(() => import("src/components/Skills"));
-const Services = dynamic(() => import("src/components/Services"));
+// const Services = dynamic(() => import("src/components/Services"));
 const Qualification = dynamic(() => import("src/components/Qualification"));
 const Portfolio = dynamic(() => import("src/components/Portfolio"));
 const Testimonial = dynamic(() => import("src/components/Testimonial"));
-const ContactMe = dynamic(() => import("src/components/ContactMe"));
+// const ContactMe = dynamic(() => import("src/components/ContactMe"));
 const Footer = dynamic(() => import("@components/Footer"));
 
 const Home: NextPage = () => {
@@ -21,11 +21,11 @@ const Home: NextPage = () => {
       <Hero />
       <About />
       <Skills />
-      <Services />
-      <Qualification />
+      {/* <Services /> */}
       <Portfolio />
+      <Qualification />
       <Testimonial />
-      <ContactMe />
+      {/* <ContactMe /> */}
       <Footer />
     </>
   );

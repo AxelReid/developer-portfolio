@@ -7,4 +7,11 @@ export interface SkillType {
   name: string;
   level: SkillLevel;
   icon: JSX.Element;
+  category: string;
+  stacks: Stacks[];
+}
+export enum Stacks {
+  Hyperbeast = "Hyperbeast Stack",
+  T3 = "T3 Stack",
+  MERN = "MERN Stack",
 }
