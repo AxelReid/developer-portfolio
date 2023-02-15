@@ -1,6 +1,7 @@
 import { GithubSvg, googleSvg } from "@components/icons";
 import type { BuiltInProviderType } from "next-auth/providers";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 const providers = [
   {
@@ -37,11 +38,21 @@ const providers = [
   // },
 ] as const;
 
-const Content = () => {
+interface Props {
+  clearQuery: () => void;
+}
+
+const Content: React.FC<Props> = ({ clearQuery }) => {
+  const { query } = useRouter();
+  const { status } = useSession();
+
   const login = (provider: BuiltInProviderType) => () => {
-    signIn(provider, { redirect: false })
-      .then((res) => {
-        console.log(res);
+    signIn(provider, {
+      redirect: false,
+      callbackUrl: (query?.authTo as string) || "/dashboard",
+    })
+      .then(() => {
+        clearQuery();
       })
       .catch((err) => console.log(err));
   };
@@ -49,6 +60,13 @@ const Content = () => {
   return (
     <>
       <h1 className="text-xl font-medium">Login</h1>
+      {query?.authTo && (
+        <p className="mt-2 text-red-500">
+          {status === "authenticated"
+            ? "Login with an admin account!"
+            : "Login to enter!"}
+        </p>
+      )}
       <div className="mt-10 flex flex-col gap-4">
         {providers.map((p) => (
           <button

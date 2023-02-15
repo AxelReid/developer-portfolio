@@ -1,9 +1,9 @@
 import type { NextPage } from "next";
-import AdminWrapper from "@components/Admin/AdminWrapper";
+import DashboardWrapper from "@components/Dashboard/DashboardWrapper";
 import { PlusIcon } from "@heroicons/react/24/outline";
-import Tags from "@components/Admin/Tags";
+import Tags from "@components/Dashboard/Tags";
 import { api } from "@utils/api";
-import Categories from "@components/Admin/Categories";
+import Categories from "@components/Dashboard/Categories";
 
 const ManageProjects: NextPage = () => {
   const categories = api.category.getAll.useQuery();
@@ -11,7 +11,7 @@ const ManageProjects: NextPage = () => {
 
   return (
     <>
-      <AdminWrapper>
+      <DashboardWrapper>
         <section className="space-y-7">
           <div className="br border-0 border-b pb-10">
             <h1 className="mb-4 text-xl">Manage projects</h1>
@@ -40,7 +40,7 @@ const ManageProjects: NextPage = () => {
             <Tags tags={tags.data} refetch={tags.refetch as () => void} />
           </div>
         </section>
-      </AdminWrapper>
+      </DashboardWrapper>
     </>
   );
 };

@@ -1,9 +1,10 @@
-type ModalRefTypes<O> = {
-  open: (args?: O) => void
-  close: () => void
-  opened: boolean
-} | null
+type ModalRefTypes<O, C> = {
+  open: (args?: O) => void;
+  close: (args?: C) => void;
+  opened: boolean;
+} | null;
 
-export type ModalMutableRefProps<O = undefined> = React.MutableRefObject<
-  ModalRefTypes<O>
->
+export type ModalMutableRefProps<
+  O = undefined,
+  C = undefined
+> = React.MutableRefObject<ModalRefTypes<O, C>>;

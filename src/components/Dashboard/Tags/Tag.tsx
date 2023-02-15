@@ -27,7 +27,7 @@ const Tag: React.FC<Props> = ({
     >
       <p className={`pl-3`}>{name}</p>
       <span className="pr-1 text-xs">({_count.projects})</span>
-      <button
+      <div
         className={`border border-transparent ${
           isEdit || isRm ? "" : "btn btn-dark"
         } p-2`}
@@ -43,7 +43,7 @@ const Tag: React.FC<Props> = ({
         ) : (
           <PencilSquareIcon className="w-4 text-blue-500" />
         )}
-      </button>
+      </div>
     </button>
   );
 };

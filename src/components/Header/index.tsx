@@ -1,17 +1,17 @@
 "use client";
 
-import type { LegacyRef } from "react";
-import { useMemo, useRef, useState, memo } from "react";
-import Link from "next/link";
-import ThemeSwitcher from "@components/ThemeSwitcher";
-import { menus } from "@static/links";
-import { XMarkIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import AuthModal from "@components/Modal/AuthModal";
-import type { ModalMutableRefProps } from "src/types/modalRef";
+import ThemeSwitcher from "@components/ThemeSwitcher";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import { menus } from "@static/links";
 import { useSession } from "next-auth/react";
+import Link from "next/link";
+import type { LegacyRef } from "react";
+import { memo, useMemo, useRef, useState } from "react";
+import type { ModalMutableRefProps } from "src/types/modalRef";
 
 const Header = memo(() => {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
 
   const modalRef: ModalMutableRefProps = useRef(null);
   const ref: LegacyRef<HTMLUListElement> | null = useRef(null);
@@ -29,7 +29,7 @@ const Header = memo(() => {
 
   const actionbtns = (
     <div className="flex items-center space-x-4">
-      {!session ? (
+      {status === "unauthenticated" ? (
         <button
           onClick={() => modalRef.current?.open()}
           className="btn-darker py-2 px-4 font-medium"
@@ -37,9 +37,9 @@ const Header = memo(() => {
           Login
         </button>
       ) : (
-        <Link href="/admin" className="h-10 w-10">
+        <Link href="/dashboard" className="h-10 w-10">
           <button className="btn btn-darker relative h-10 w-10 overflow-hidden border-0 p-0 font-medium uppercase">
-            {session.user?.image ? (
+            {session?.user?.image ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={session.user.image}

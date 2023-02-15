@@ -1,5 +1,4 @@
 import Stars from "@components/Stars";
-import React from "react";
 import type { ReviewType } from "src/types/review";
 
 const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {

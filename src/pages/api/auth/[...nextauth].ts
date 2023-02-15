@@ -13,11 +13,9 @@ import { Role } from "src/types/next-auth.d";
 const canBeAdmin = ["mr.webdevsemail@gmail.com"];
 
 export const authOptions: NextAuthOptions = {
-  // Include user.id on session
+  secret: env.NEXTAUTH_SECRET,
   callbacks: {
     async signIn({ user, account }) {
-      console.log("running signIn");
-
       const { email, image, name } = user;
       try {
         const userExist = await prisma.user.findUnique({
@@ -56,19 +54,23 @@ export const authOptions: NextAuthOptions = {
       }
     },
     session({ session, token }) {
-      console.log("hello session -----------");
-
       return {
         ...session,
-        role: token.role,
+        role: token.role as Role,
       };
     },
-    jwt({ token }) {
-      const role = "USER";
-      return {
-        ...token,
-        role,
-      };
+    async jwt({ token }) {
+      if (token.email) {
+        const user = await prisma.user.findUnique({
+          where: { email: token.email },
+          select: { role: true },
+        });
+        return {
+          ...token,
+          role: user?.role,
+        };
+      }
+      return {};
     },
   },
   // Configure one or more authentication providers

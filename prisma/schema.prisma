@@ -48,15 +48,27 @@ model ProjectCategory {
   projectIds String[]  @db.ObjectId
 }
 
+model Feedback {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  review    String
+  rating    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User?
+  userId    String   @unique @db.ObjectId
+}
+
 /////////////////////////////////////////////////////////////////////////////////
 
 model User {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  id        String    @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
-  email     String?  @unique
+  bio       String?
+  email     String?   @unique
   image     String?
-  role      Role     @default(USER)
+  role      Role      @default(USER)
   providers String[]
+  feedback  Feedback? @relation(fields: [id], references: [userId])
 }
 
 enum Role {
