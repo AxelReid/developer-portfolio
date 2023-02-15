@@ -62,9 +62,9 @@ const Header = memo(() => {
   return (
     <>
       <header
-        className={`br fixed left-0 right-0 top-0 isolate
-      z-40 border-b bg-white/70
-      backdrop-blur-xl dark:bg-black/40 md:border-0`}
+        className={`br fixed left-0 right-0 top-0 isolate z-40 border-0
+      bg-white/70  backdrop-blur-xl
+      dark:bg-black/40 max-md:border-b `}
       >
         <div className="container flex flex-col overflow-hidden md:flex-row md:items-center md:justify-between">
           <div className="flex h-20 w-full items-center justify-between md:w-fit lg:h-24">
