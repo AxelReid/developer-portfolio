@@ -1,4 +1,5 @@
 import { MinusCircleIcon } from "@heroicons/react/24/outline";
+import { signOut } from "next-auth/react";
 import MenuItem from "./MenuItem";
 import { menus } from "./menus";
 
@@ -25,6 +26,8 @@ const Sidebar = () => {
           ))}
         </div>
         <MenuItem
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onClick={() => signOut()}
           icon={MinusCircleIcon}
           name="Log out"
           className="bg-red-500/10 text-red-500 dark:bg-red-500/20"

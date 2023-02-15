@@ -11,7 +11,7 @@ import type { ModalMutableRefProps } from "src/types/modalRef";
 import { useSession } from "next-auth/react";
 
 const Header = memo(() => {
-  const { data } = useSession();
+  const { data: session } = useSession();
 
   const modalRef: ModalMutableRefProps = useRef(null);
   const ref: LegacyRef<HTMLUListElement> | null = useRef(null);
@@ -29,7 +29,7 @@ const Header = memo(() => {
 
   const actionbtns = (
     <div className="flex items-center space-x-4">
-      {!data ? (
+      {!session ? (
         <button
           onClick={() => modalRef.current?.open()}
           className="btn-darker py-2 px-4 font-medium"
@@ -37,8 +37,19 @@ const Header = memo(() => {
           Login
         </button>
       ) : (
-        <Link href="/admin">
-          <button className="btn btn-darker h-10 w-10 font-medium">A</button>
+        <Link href="/admin" className="h-10 w-10">
+          <button className="btn btn-darker relative h-10 w-10 overflow-hidden border-0 p-0 font-medium uppercase">
+            {session.user?.image ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={session.user.image}
+                className="h-full w-full rounded-[inherit]"
+                alt=""
+              />
+            ) : (
+              session?.user?.name?.charAt(0)
+            )}
+          </button>
         </Link>
       )}
       <ThemeSwitcher />

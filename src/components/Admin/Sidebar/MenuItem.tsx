@@ -11,7 +11,7 @@ const MenuItem: React.FC<
       HTMLButtonElement
     >
 > = (props) => {
-  const { path, name, className = "", icon } = props;
+  const { path, name, className = "", icon, ...rest } = props;
   const router = useRouter();
 
   const btn = (
@@ -23,6 +23,7 @@ const MenuItem: React.FC<
       } flex h-[42px] w-[42px] items-center gap-3 p-2 font-medium
         max-md:justify-center md:w-52
         ${className}`}
+      {...rest}
     >
       <props.icon className="w-5 flex-shrink-0" />
       <span className="max-md:hidden ">{name}</span>

@@ -1,4 +1,4 @@
-import { DiscordSvg, GithubSvg, googleSvg, RedditSvg } from "@components/icons";
+import { GithubSvg, googleSvg } from "@components/icons";
 import type { BuiltInProviderType } from "next-auth/providers";
 import { signIn } from "next-auth/react";
 
@@ -21,30 +21,29 @@ const providers = [
     btnCN: "btn-dark",
     txtCN: "!text-white",
   },
-  {
-    name: "Twitter",
-    provider: "twitter",
-    icon: <RedditSvg className="h-6 w-6 !fill-white" />,
-    btnCN: "btn-dark !bg-[#00acee]",
-    txtCN: "!text-white",
-  },
-  {
-    name: "Discord",
-    provider: "discord",
-    icon: <DiscordSvg className="h-6 w-6 !fill-white" />,
-    btnCN: "btn-dark !bg-[#7289da]",
-    txtCN: "!text-white",
-  },
+  // {
+  //   name: "Twitter",
+  //   provider: "twitter",
+  //   icon: <RedditSvg className="h-6 w-6 !fill-white" />,
+  //   btnCN: "btn-dark !bg-[#00acee]",
+  //   txtCN: "!text-white",
+  // },
+  // {
+  //   name: "Discord",
+  //   provider: "discord",
+  //   icon: <DiscordSvg className="h-6 w-6 !fill-white" />,
+  //   btnCN: "btn-dark !bg-[#7289da]",
+  //   txtCN: "!text-white",
+  // },
 ] as const;
 
 const Content = () => {
-  const login = (provider: BuiltInProviderType) => async () => {
-    // try {
-    //   const res = await signIn(provider, { redirect: false });
-    //   console.log(res);
-    // } catch (error) {
-    //   console.error(error);
-    // }
+  const login = (provider: BuiltInProviderType) => () => {
+    signIn(provider, { redirect: false })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

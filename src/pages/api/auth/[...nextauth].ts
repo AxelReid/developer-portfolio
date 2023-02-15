@@ -1,26 +1,78 @@
 import NextAuth, { type NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GithubProvider from "next-auth/providers/github";
-import TwitterProvider from "next-auth/providers/twitter";
-import DiscordProvider from "next-auth/providers/discord";
-import LinkedInProvider from "next-auth/providers/linkedin";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
+// import TwitterProvider from "next-auth/providers/twitter";
+// import DiscordProvider from "next-auth/providers/discord";
+// import LinkedInProvider from "next-auth/providers/linkedin";
+// import { PrismaAdapter } from "@next-auth/prisma-adapter";
 
 import { env } from "../../../env/server.mjs";
 import { prisma } from "../../../server/db";
+import { Role } from "src/types/next-auth.d";
+
+const canBeAdmin = ["mr.webdevsemail@gmail.com"];
 
 export const authOptions: NextAuthOptions = {
   // Include user.id on session
   callbacks: {
-    session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id;
+    async signIn({ user, account }) {
+      console.log("running signIn");
+
+      const { email, image, name } = user;
+      try {
+        const userExist = await prisma.user.findUnique({
+          where: { email: user?.email as string },
+        });
+
+        if (!userExist) {
+          await prisma.user.create({
+            data: {
+              email,
+              image,
+              name,
+              role: canBeAdmin.includes(email as string)
+                ? Role.ADMIN
+                : Role.USER,
+              providers: account?.provider ? [account?.provider] : [],
+            },
+          });
+        } else if (
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+          !userExist.providers?.includes(account?.provider as string)
+        ) {
+          await prisma.user.update({
+            where: { email: userExist.email as string },
+            data: {
+              providers: [
+                account?.provider as string,
+                ...((userExist.providers || []) as []),
+              ],
+            },
+          });
+        }
+        return true;
+      } catch (error) {
+        return false;
       }
-      return session;
+    },
+    session({ session, token }) {
+      console.log("hello session -----------");
+
+      return {
+        ...session,
+        role: token.role,
+      };
+    },
+    jwt({ token }) {
+      const role = "USER";
+      return {
+        ...token,
+        role,
+      };
     },
   },
   // Configure one or more authentication providers
-  adapter: PrismaAdapter(prisma),
+  // adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
       clientId: env.GOOGLE_CLIENT_ID,
@@ -30,18 +82,18 @@ export const authOptions: NextAuthOptions = {
       clientId: env.GITHUB_CLIENT_ID,
       clientSecret: env.GITHUB_CLIENT_SECRET,
     }),
-    TwitterProvider({
-      clientId: env.GITHUB_CLIENT_ID,
-      clientSecret: env.GITHUB_CLIENT_SECRET,
-    }),
-    DiscordProvider({
-      clientId: env.DISCORD_CLIENT_ID,
-      clientSecret: env.DISCORD_CLIENT_SECRET,
-    }),
-    LinkedInProvider({
-      clientId: env.LINKEDIN_CLIENT_ID,
-      clientSecret: env.LINKEDIN_CLIENT_SECRET,
-    }),
+    // TwitterProvider({
+    //   clientId: env.GITHUB_CLIENT_ID,
+    //   clientSecret: env.GITHUB_CLIENT_SECRET,
+    // }),
+    // DiscordProvider({
+    //   clientId: env.DISCORD_CLIENT_ID,
+    //   clientSecret: env.DISCORD_CLIENT_SECRET,
+    // }),
+    // LinkedInProvider({
+    //   clientId: env.LINKEDIN_CLIENT_ID,
+    //   clientSecret: env.LINKEDIN_CLIENT_SECRET,
+    // }),
     /**
      * ...add more providers here
      *
@@ -52,6 +104,7 @@ export const authOptions: NextAuthOptions = {
      * @see https://next-auth.js.org/providers/github
      */
   ],
+  session: { strategy: "jwt" },
 };
 
 export default NextAuth(authOptions);
