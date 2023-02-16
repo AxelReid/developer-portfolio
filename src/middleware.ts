@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
-import { Role } from "./types/next-auth.d";
+import type { Role } from "./types/next-auth.d";
+import { menus } from "@components/Dashboard/Sidebar/menus";
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
@@ -20,21 +21,15 @@ export async function middleware(req: NextRequest) {
     return NextResponse.redirect(redirectUrl);
   }
 
-  if (token?.role === Role.ADMIN) {
-    if (usersOnly.includes(cur)) return NextResponse.redirect(redirectUrl);
-    return NextResponse.next();
-  }
-  if (adminsOnly.includes(cur)) return NextResponse.redirect(redirectUrl);
+  const notAllowed =
+    menus.findIndex(
+      (m) => m.path === cur && m.permissions.includes(token?.role as Role)
+    ) === -1;
+  if (notAllowed) return NextResponse.redirect(redirectUrl);
 
   return NextResponse.next();
 }
 
-const adminsOnly = [
-  "/dashboard/manage-reviews",
-  "/dashboard/manage-users",
-  "/dashboard/manage-projects",
-];
-const usersOnly = ["/dashboard/give-a-feedback"];
 export const config = {
   matcher: ["/dashboard/:path*"],
 };

@@ -10,6 +10,7 @@ export interface SkillType {
   category: string;
   stacks: Stacks[];
 }
+
 export enum Stacks {
   Hyperbeast = "Hyperbeast Stack",
   T3 = "T3 Stack",

@@ -1,5 +1,5 @@
-export const googleSvg = (
-  <svg viewBox="0 0 24 24">
+export const GoogleSvg = ({ className = "" }: { className?: string }) => (
+  <svg viewBox="0 0 24 24" className={`${className}`}>
     <g clipPath="url(#clip0_1256_130940)">
       <path
         d="M23.766 12.2764C23.766 11.4607 23.6999 10.6406 23.5588 9.83807H12.24V14.4591H18.7217C18.4528 15.9494 17.5885 17.2678 16.323 18.1056V21.1039H20.19C22.4608 19.0139 23.766 15.9274 23.766 12.2764Z"

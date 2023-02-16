@@ -43,7 +43,7 @@ const Modal = (
   return (
     <div
       {...rootRestProps}
-      className={`fixed inset-0 isolate !z-50 h-screen overflow-y-auto px-4 pt-20 pb-10 md:pt-24 ${rootClassName}`}
+      className={`fixed inset-0 isolate !z-50 overflow-y-scroll px-4 pt-20 pb-10 md:pt-24 ${rootClassName}`}
     >
       <div onClick={close}>{overlay}</div>
       <div

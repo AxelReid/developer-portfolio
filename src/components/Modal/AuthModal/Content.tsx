@@ -1,4 +1,4 @@
-import { GithubSvg, googleSvg } from "@components/icons";
+import { GithubSvg, GoogleSvg } from "@components/icons";
 import type { BuiltInProviderType } from "next-auth/providers";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -7,18 +7,14 @@ const providers = [
   {
     name: "Google",
     provider: "google",
-    icon: (
-      <div className="h-6 w-6" key="icon">
-        {googleSvg}
-      </div>
-    ),
+    icon: <GoogleSvg className="h-6 w-6" key="google" />,
     btnCN: "btn-light",
     txtCN: "",
   },
   {
     name: "Github",
     provider: "github",
-    icon: <GithubSvg className="h-6 w-6 rounded-full invert " key="icon" />,
+    icon: <GithubSvg className="h-6 w-6 rounded-full invert " key="github" />,
     btnCN: "btn-dark",
     txtCN: "!text-white",
   },
@@ -77,7 +73,7 @@ const Content: React.FC<Props> = ({ clearQuery }) => {
           >
             <div className="flex items-center gap-3">
               {p.icon}
-              <span className={`${p.txtCN}`}>Continue with {p.name}</span>
+              <span className={` ${p.txtCN}`}>Signin with {p.name}</span>
             </div>
           </button>
         ))}

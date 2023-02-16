@@ -1,27 +1,33 @@
-import { StarIcon, UserIcon } from "@heroicons/react/24/outline";
+import {
+  StarIcon,
+  UserGroupIcon,
+  UserCircleIcon,
+  ArchiveBoxIcon,
+  ChatBubbleBottomCenterTextIcon,
+} from "@heroicons/react/24/outline";
 import { Role } from "src/types/next-auth.d";
 
 export const menus = [
   {
-    icon: UserIcon,
+    icon: UserCircleIcon,
     name: "Profile",
     path: "/dashboard",
     permissions: [Role.USER, Role.ADMIN],
   },
   {
-    icon: UserIcon,
+    icon: ArchiveBoxIcon,
     name: "Projects",
     path: "/dashboard/manage-projects",
     permissions: [Role.ADMIN],
   },
   {
-    icon: UserIcon,
+    icon: UserGroupIcon,
     name: "Users",
     path: "/dashboard/manage-users",
     permissions: [Role.ADMIN],
   },
   {
-    icon: UserIcon,
+    icon: ChatBubbleBottomCenterTextIcon,
     name: "Reviews",
     path: "/dashboard/manage-reviews",
     permissions: [Role.ADMIN],
