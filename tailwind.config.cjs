@@ -7,6 +7,15 @@ module.exports = {
       fontFamily: {
         sans: ["var(--font-default)"],
       },
+      colors: {
+        js: "#F0DB4F",
+        css: "#1572B6",
+        ts: "#007acc",
+        nestjs: "#DF234F",
+        gql: "#E434AA",
+        nodejs: "#83CD29",
+        mongodb: "#439934",
+      },
       backgroundImage: {
         // overlay bg
         "radial-before": `radial-gradient(

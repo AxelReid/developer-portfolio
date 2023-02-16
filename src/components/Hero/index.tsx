@@ -3,7 +3,7 @@ import StackOverflow from "@components/icons/StackOverflow";
 import Telegram from "@components/icons/Telegram";
 // import LinkedIn from '@components/icons/LinkedIn'
 // import Twitter from '@components/icons/Twitter'
-import { resume } from "src/static/social";
+import { resume, telegram_link } from "src/static/social";
 import {
   ChatBubbleOvalLeftEllipsisIcon,
   DocumentTextIcon,
@@ -39,7 +39,7 @@ const Hero = () => {
             years working with Next.js
           </p>
           <div className="mt-10 flex gap-3 text-sm min-[500px]:gap-5 sm:mt-11 sm:text-base">
-            <Link href="/#get-in-touch">
+            <Link href={telegram_link} target="_blank">
               <button
                 className="btn btn-dark flex items-center space-x-3
               rounded-2xl py-6

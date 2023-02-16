@@ -15,10 +15,10 @@ export const menus = [
     name: "Portfolio",
     link: "/#portfolio",
   },
-  // {
-  //   name: 'Get In Touch',
-  //   link: '/#get-in-touch',
-  // },
+  {
+    name: "Feedback",
+    link: "/#testimonial",
+  },
 ];
 
 export const footerLinks = [
@@ -31,7 +31,7 @@ export const footerLinks = [
     link: "/#portfolio",
   },
   {
-    name: "Services",
-    link: "/#services",
+    name: "Skills",
+    link: "/#skills",
   },
 ];

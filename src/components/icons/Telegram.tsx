@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { telegram_link } from "src/static/social";
 
 const Telegram = ({
@@ -10,7 +11,7 @@ const Telegram = ({
   className?: string;
 }) => {
   return (
-    <a href={telegram_link} target="_blank" rel="noreferrer">
+    <Link href={telegram_link} target="_blank">
       <button
         className={`btn ${
           unstyled ? "" : "bg-cyan-300/10 text-cyan-600"
@@ -18,7 +19,7 @@ const Telegram = ({
       >
         <TelegramSVG className="h-[26px] w-[26px]" />
       </button>
-    </a>
+    </Link>
   );
 };
 
