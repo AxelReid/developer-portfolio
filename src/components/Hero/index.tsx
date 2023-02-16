@@ -39,26 +39,22 @@ const Hero = () => {
             years working with Next.js
           </p>
           <div className="mt-10 flex gap-3 text-sm min-[500px]:gap-5 sm:mt-11 sm:text-base">
-            <Link href={telegram_link} target="_blank">
-              <button
-                className="btn btn-dark flex items-center space-x-3
-              rounded-2xl py-6
-              px-8 font-medium max-[500px]:rounded-xl max-[500px]:p-5"
-              >
+            <Link
+              href={telegram_link}
+              target="_blank"
+              className="max-sm:flex-1"
+            >
+              <button className="btn btn-darker flex w-full items-center justify-center space-x-3 rounded-2xl py-6 font-medium max-[500px]:rounded-xl max-[500px]:py-5 min-[500px]:px-8">
                 <span className="whitespace-nowrap">Got A Project?</span>
-                <ChatBubbleOvalLeftEllipsisIcon className="w-6 -translate-y-1" />
+                <ChatBubbleOvalLeftEllipsisIcon className="w-6 -translate-y-0.5" />
               </button>
             </Link>
-            <a href={resume} target="_blank" rel="noreferrer">
-              <button
-                className="btn flex items-center space-x-3
-                rounded-2xl py-6
-              px-8 font-medium max-[500px]:rounded-xl max-[500px]:p-5"
-              >
+            <Link href={resume} target="_blank" className="max-sm:flex-1">
+              <button className="btn flex w-full items-center justify-center space-x-3 rounded-2xl py-6 font-medium max-[500px]:rounded-xl max-[500px]:py-5 min-[500px]:px-8">
                 <span className="whitespace-nowrap">View Resume</span>
-                <DocumentTextIcon className="w-6 -translate-y-1" />
+                <DocumentTextIcon className="w-6 -translate-y-px" />
               </button>
-            </a>
+            </Link>
           </div>
           <div className="mt-20 flex md:mt-48">
             <p className="c-secondary text-base sm:text-lg">
