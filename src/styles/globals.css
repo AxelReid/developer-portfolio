@@ -48,7 +48,7 @@
     @apply bg-white dark:bg-zinc-900;
   }
   .br {
-    @apply border border-[rgba(193,191,185,.6)] dark:border-zinc-700/70;
+    @apply border border-zinc-200 dark:border-zinc-700/50;
   }
   .bb {
     @apply br b border;
@@ -56,21 +56,11 @@
   .c-secondary {
     @apply text-zinc-500 dark:text-zinc-400;
   }
-  .link {
-    @apply rounded-lg py-2 px-4 font-medium
-          text-gray-700 transition-[background]
-          duration-150 
-          hover:bg-zinc-200/50
-          hover:text-gray-900
-          dark:text-gray-300
-          dark:hover:bg-zinc-800/80
-          dark:hover:text-white;
-  }
   .text-gradient {
     @apply bg-gradient-to-r 
-            from-zinc-700 to-zinc-400 
-            bg-clip-text text-transparent 
-            dark:from-zinc-400 dark:to-zinc-600;
+    from-zinc-700 to-zinc-400 
+    bg-clip-text text-transparent 
+    dark:from-zinc-400 dark:to-zinc-600;
   }
   button,
   input,
@@ -86,9 +76,9 @@
   .btn {
     @apply bb
     rounded-lg 
-    border-[rgba(193,191,185,.6)]
+    border-gray-300/90
     p-2
-    dark:border-gray-700/70
+    dark:border-gray-700/60
     dark:hover:bg-zinc-800/60;
   }
   .btn-dark {

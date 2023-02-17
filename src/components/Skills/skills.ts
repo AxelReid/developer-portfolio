@@ -258,24 +258,19 @@ export const skills: SkillType[] = [
 
 export const skillsTab: { id: SkillTabType; name: string }[] = [
   { id: "stacks", name: "Stacks" },
-  { id: "category", name: "Categoy" },
+  { id: "category", name: "Technologies" },
 ];
 export type SkillTabType = "category" | "stacks";
 export const descriptions = [
   {
     key: Stacks.Hyperbeast,
     value:
-      "This is my main stack for middle to big projects. Business logic for backend is written in Nest.js which is a Nodejs framework on top of Expressjs with all the necessary built-in features. For api and database integration i useally use below listed techs but i can use different techs based on preferences and requirements.",
+      "My main full stack. Depending on project requirements or preferences i change or add others tools.",
   },
   {
     key: Stacks.T3,
     value:
-      "One of the best full stack techs set. This is a monorepo stack and it's best for its full type safety between client and server. It's so fast to get started and has all the features that ful stack app needed configured out of box. I use this for side and small to middle projects but doesn't mean can't be used for bigs projects.",
-  },
-  {
-    key: Stacks.MERN,
-    value:
-      "As my preference, I use Hyperbeast stack rather than plain Node, Express but i'm listing this because it's in my skill set. preferably. For api and database integration i useally use below listed techs but i can use different techs based on preference.",
+      "My favourite set of tools to built full stack apps with the best DX every.",
   },
 ] as const;
 

@@ -21,7 +21,7 @@ const MenuItem: React.FC<
           ? "btn-darker"
           : "hover:bg-black/5 dark:hover:bg-white/5"
       } flex h-[42px] w-[42px] items-center gap-3 p-2 font-medium
-        max-md:justify-center md:w-52
+        max-md:justify-center md:w-44 lg:w-52
         ${className}`}
       {...rest}
     >
