@@ -16,6 +16,9 @@ module.exports = {
         nodejs: "#83CD29",
         mongodb: "#439934",
       },
+      screens: {
+        "2md": "850px",
+      },
       backgroundImage: {
         // overlay bg
         "radial-before": `radial-gradient(

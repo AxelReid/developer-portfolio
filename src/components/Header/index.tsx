@@ -3,18 +3,17 @@
 import AuthModal from "@components/Modal/AuthModal";
 import ThemeSwitcher from "@components/ThemeSwitcher";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-import { menus } from "@static/links";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import type { LegacyRef } from "react";
 import { memo, useMemo, useRef, useState } from "react";
 import type { ModalMutableRefProps } from "src/types/modalRef";
+import Links from "./Links";
 
 const Header = () => {
   const { data: session, status } = useSession();
 
   const modalRef: ModalMutableRefProps = useRef(null);
-  const animatedBgRef: LegacyRef<HTMLSpanElement> = useRef(null);
   const ref: LegacyRef<HTMLUListElement> | null = useRef(null);
   const [open, setOpen] = useState(false);
 
@@ -66,15 +65,15 @@ const Header = () => {
         className={`br fixed left-0 right-0 top-0 isolate z-40 
       border-0 bg-white/70 backdrop-blur-xl dark:bg-black/40 max-md:border-b`}
       >
-        <div className="container flex flex-col overflow-hidden md:flex-row md:items-center md:justify-between">
-          <div className="flex h-20 w-full items-center justify-between md:w-fit lg:h-24">
+        <div className="container flex flex-col overflow-hidden 2md:flex-row 2md:items-center 2md:justify-between">
+          <div className="flex h-20 w-full items-center justify-between 2md:w-fit lg:h-24">
             <Link
               href="/"
               className="hover:text-gradient text-xl font-semibold"
             >
               HYPERBEAST
             </Link>
-            <div className="md:hidden">{actionbtns}</div>
+            <div className="2md:hidden">{actionbtns}</div>
           </div>
           <nav
             style={{
@@ -84,39 +83,12 @@ const Header = () => {
           >
             <ul
               ref={ref}
-              className={`group relative flex flex-col items-center space-y-2 pb-6 transition-[transform,opacity] duration-300 max-sm:pt-3 sm:flex-row sm:space-y-0 sm:pb-1 md:p-0 lg:space-x-6
+              className={`group relative flex flex-col items-center space-y-2 pb-6 transition-[transform,opacity] duration-300 max-sm:mx-auto max-sm:w-fit max-sm:pt-3 sm:flex-row sm:space-y-0 sm:pb-1 md:p-0 lg:space-x-6
               ${open ? "" : "max-sm:translate-y-5 max-sm:opacity-0"}`}
             >
-              <span
-                ref={animatedBgRef}
-                id="animated-bg"
-                className="absolute left-0 top-0 -z-[1] scale-0 rounded-lg bg-zinc-200/70 transition-transform group-hover:scale-100 dark:bg-zinc-700"
-              />
-              {menus.map((menu, i) => (
-                <Link
-                  onMouseEnter={(e) => {
-                    const { offsetLeft, offsetTop, offsetWidth, offsetHeight } =
-                      e.currentTarget;
-                    animatedBgRef?.current?.animate(
-                      {
-                        left: `${offsetLeft}px`,
-                        top: `${offsetTop}px`,
-                        height: `${offsetHeight}px`,
-                        width: `${offsetWidth}px`,
-                      },
-                      { duration: 250, fill: "forwards" }
-                    );
-                  }}
-                  href={menu.link}
-                  onClick={() => handleOpen(false)}
-                  key={i}
-                  className="rounded-lg py-2 px-4 font-medium text-gray-700 hover:text-gray-900 group-hover:transition-colors dark:text-gray-300 dark:hover:text-white"
-                >
-                  {menu.name}
-                </Link>
-              ))}
+              <Links closeMenu={() => handleOpen(false)} />
             </ul>
-            <div className="max-md:hidden">{actionbtns}</div>
+            <div className="max-2md:hidden">{actionbtns}</div>
           </nav>
         </div>
       </header>
