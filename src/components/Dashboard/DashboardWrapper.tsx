@@ -11,7 +11,7 @@ const DashboardWrapper: React.FC<Props> = ({ children }) => {
       <Header />
       <section className="container flex items-start">
         <Sidebar />
-        <div className="flex-auto p-4 pr-0 sm:p-6">{children}</div>
+        <div className="flex-auto p-4 !pr-0 sm:p-6">{children}</div>
       </section>
     </>
   );

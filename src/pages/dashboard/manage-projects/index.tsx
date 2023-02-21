@@ -4,8 +4,14 @@ import { PlusIcon } from "@heroicons/react/24/outline";
 import Tags from "@components/Dashboard/Tags";
 import { api } from "@utils/api";
 import Categories from "@components/Dashboard/Categories";
+import CreateProjectModal from "@components/Modal/CreateProjectModal";
+import { useRef } from "react";
+import type { ModalMutableRefProps } from "src/types/modalRef";
+import Projects from "@components/Dashboard/Projects";
 
 const ManageProjects: NextPage = () => {
+  const modalRef: ModalMutableRefProps = useRef(null);
+  const projects = api.project.getAll.useQuery();
   const categories = api.category.getAll.useQuery();
   const tags = api.tags.getAll.useQuery();
 
@@ -14,50 +20,20 @@ const ManageProjects: NextPage = () => {
       <DashboardWrapper>
         <section className="space-y-7">
           <div className="br border-0 border-b pb-10">
-            <h1 className="mb-4 text-xl">Manage projects</h1>
-            <button className="btn mb-4 flex items-center gap-3 px-3">
+            <h1 className="mb-4 text-xl">
+              Manage projects
+              <span className="ml-2 text-sm">
+                ({projects.data?.length ?? 0})
+              </span>
+            </h1>
+            <button
+              className="btn mb-4 flex items-center gap-3 px-3"
+              onClick={() => modalRef.current?.open()}
+            >
               <PlusIcon className="w-5" />
               Add a project
             </button>
-            <div className="mt-10 rounded-lg">
-              <table className="w-full table-auto">
-                <thead className="b">
-                  <tr className="text-left">
-                    <th className="py-4 font-semibold">Image</th>
-                    <th className="py-4 font-semibold">Title</th>
-                    <th className="py-4 font-semibold">Links</th>
-                    <th className="py-4 font-semibold">Category</th>
-                    <th className="py-4 font-semibold">Tags</th>
-                    <th className="py-4 font-semibold">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {Array(4)
-                    .fill(null)
-                    .map((_, i) => (
-                      <tr key={i}>
-                        <td>
-                          <div className="aspect-square w-24 rounded-lg bg-black/5"></div>
-                        </td>
-                        <td>
-                          <h2 className="text-lg font-medium">Project title</h2>
-                        </td>
-                        <td>
-                          <p>Github repo</p>
-                          <p>Demo</p>
-                        </td>
-                        <td>
-                          <select name="" id="" className="bb ">
-                            <option value="Full stack">Full stack</option>
-                          </select>
-                        </td>
-                        <td>tags</td>
-                        <td>actions</td>
-                      </tr>
-                    ))}
-                </tbody>
-              </table>
-            </div>
+            <Projects projects={projects.data} />
           </div>
           <div className="br border-0 border-b pb-10">
             <h1 className="mb-4 text-xl">
@@ -80,6 +56,7 @@ const ManageProjects: NextPage = () => {
           </div>
         </section>
       </DashboardWrapper>
+      <CreateProjectModal ref={modalRef} categories={categories} tags={tags} />
     </>
   );
 };

@@ -1,3 +1,4 @@
+import { handleHoverEffect } from "@utils/hoverCardEffect";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import { forwardRef, useImperativeHandle, useState } from "react";
 import overlay from "./overlay";
@@ -42,14 +43,18 @@ const Modal = (
 
   return (
     <div
+      onMouseMove={handleHoverEffect}
+      id="hover-cards"
       {...rootRestProps}
-      className={`fixed inset-0 isolate !z-50 overflow-y-scroll px-4 pt-20 pb-10 md:pt-24 ${rootClassName}`}
+      className={`fixed inset-0 isolate !z-50 overflow-y-auto px-4 pt-20 pb-10 md:pt-24 ${rootClassName}`}
     >
       <div onClick={close}>{overlay}</div>
       <div
         {...rest}
-        className={`b relative mx-auto h-[50vh] max-w-screen-md rounded-2xl p-10 ${className}`}
+        id="hover-card"
+        className={`b relative mx-auto max-w-screen-md rounded-2xl p-10 ${className}`}
       >
+        <span id="hover-card-overlay" />
         {children}
       </div>
     </div>

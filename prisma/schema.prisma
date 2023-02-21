@@ -21,7 +21,7 @@ model Project {
   categoryIds String[]          @db.ObjectId
   image       String?
   demo_link   String?
-  code_link   String?
+  source_link String?
 }
 
 model Tag {

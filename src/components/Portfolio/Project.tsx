@@ -1,7 +1,13 @@
-import type { ProjectType } from "src/types/project";
+import Link from "next/link";
+import type { ProjectType } from "src/types/infer";
 import Tag from "./Tag";
 
-const Project: React.FC<ProjectType> = ({ title, tags, link }) => {
+const Project: React.FC<ProjectType> = ({
+  title,
+  tags,
+  demo_link,
+  source_link,
+}) => {
   return (
     <div
       id="hover-card"
@@ -13,27 +19,30 @@ const Project: React.FC<ProjectType> = ({ title, tags, link }) => {
         <h3 className="mt-7 text-xl font-medium">{title}</h3>
         <div className="my-5 flex flex-wrap gap-1.5">
           {tags?.map((tag, i) => (
-            <Tag key={i} name={tag} />
+            <Tag key={i} name={tag.name} />
           ))}
         </div>
       </div>
       <div className="flex space-x-10 text-sm">
-        <a
-          href={link}
-          target="_blank"
-          rel="noreferrer"
-          className="c-secondary hover:text-current"
-        >
-          Github Repo
-        </a>
-        <a
-          href={link}
-          target="_blank"
-          rel="noreferrer"
-          className="c-secondary hover:text-current"
-        >
-          View Demo
-        </a>
+        {source_link && (
+          <Link
+            href={source_link}
+            target="_blank"
+            className="c-secondary hover:text-current"
+          >
+            Github Repo
+          </Link>
+        )}
+        {demo_link && (
+          <Link
+            href={demo_link}
+            target="_blank"
+            rel="noreferrer"
+            className="c-secondary hover:text-current"
+          >
+            View Demo
+          </Link>
+        )}
       </div>
     </div>
   );

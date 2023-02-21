@@ -1,9 +1,13 @@
-const Tag: React.FC<{ name: string }> = ({ name }) => {
-  return (
-    <div className='text-xs text-zinc-50 bg-zinc-700 rounded py-1 px-2'>
-      {name}
-    </div>
-  )
+interface Props {
+  name: string;
 }
 
-export default Tag
+const Tag: React.FC<Props> = ({ name }) => {
+  return (
+    <div className="rounded bg-zinc-700 py-1 px-2 text-xs text-zinc-50">
+      {name}
+    </div>
+  );
+};
+
+export default Tag;

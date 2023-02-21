@@ -1,4 +1,3 @@
-import { handleHoverEffect } from "@utils/hoverCardEffect";
 import { useRouter } from "next/router";
 import {
   forwardRef,
@@ -35,12 +34,9 @@ const AuthModal = ({}, ref: React.Ref<unknown>) => {
   return (
     <Modal
       onClose={clearQuery}
-      root={{ onMouseMove: handleHoverEffect, id: "hover-cards" }}
       ref={modalRef}
-      id="hover-card"
       className="h-auto max-w-[400px] "
     >
-      <span id="hover-card-overlay" />
       <Content clearQuery={clearQuery} />
     </Modal>
   );

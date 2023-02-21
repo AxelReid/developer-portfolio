@@ -83,7 +83,7 @@ const Header = () => {
           >
             <ul
               ref={ref}
-              className={`group relative flex flex-col items-center space-y-2 pb-6 transition-[transform,opacity] duration-300 max-sm:mx-auto max-sm:w-fit max-sm:pt-3 sm:flex-row sm:space-y-0 sm:pb-1 md:p-0 lg:space-x-6
+              className={`group relative flex flex-col items-center space-y-2 pb-6 transition-[transform,opacity] duration-300 max-sm:mx-auto max-sm:w-fit max-sm:pt-3 sm:flex-row sm:space-y-0 sm:pb-1 2md:p-0 lg:space-x-6
               ${open ? "" : "max-sm:translate-y-5 max-sm:opacity-0"}`}
             >
               <Links closeMenu={() => handleOpen(false)} />
@@ -92,7 +92,7 @@ const Header = () => {
           </nav>
         </div>
       </header>
-      <div className="h-20 sm:h-[124px] md:h-20 lg:h-24" />
+      <div className="h-20 sm:h-[124px] md:h-[120px] 2md:h-20 lg:h-24" />
       <AuthModal ref={modalRef} />
     </>
   );

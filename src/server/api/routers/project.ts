@@ -9,9 +9,9 @@ export const projectRouter = createTRPCRouter({
         title: z.string(),
         tagIds: z.array(z.string()),
         categoryIds: z.array(z.string()),
-        image: z.string(),
+        image: z.string().optional(),
         demo_link: z.string().optional(),
-        code_link: z.string().optional(),
+        source_link: z.string().optional(),
       })
     )
     .mutation(({ input, ctx }) => {
@@ -25,12 +25,28 @@ export const projectRouter = createTRPCRouter({
       });
     }),
 
-  getAll: publicProcedure.query(({ ctx }) => {
-    return ctx.prisma.project.findMany({
-      include: {
-        categories: { select: { id: true } },
-        tags: { select: { name: true } },
-      },
-    });
-  }),
+  getAll: publicProcedure
+    .input(z.object({ categoryId: z.string().optional() }).optional())
+    .query(({ ctx, input }) => {
+      const where = input?.categoryId
+        ? { categoryIds: { hasSome: input?.categoryId } }
+        : {};
+      return ctx.prisma.project.findMany({
+        where,
+        include: {
+          categories: { select: { name: true, id: true } },
+          tags: { select: { name: true, id: true } },
+        },
+      });
+    }),
+  remove: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+      })
+    )
+    .mutation(({ ctx, input }) => {
+      ctx.checkAdmin();
+      return ctx.prisma.project.delete({ where: { id: input.id } });
+    }),
 });
