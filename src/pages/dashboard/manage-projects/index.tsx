@@ -8,9 +8,10 @@ import CreateProjectModal from "@components/Modal/CreateProjectModal";
 import { useRef } from "react";
 import type { ModalMutableRefProps } from "src/types/modalRef";
 import Projects from "@components/Dashboard/Projects";
+import type { ProjectType } from "src/types/infer";
 
 const ManageProjects: NextPage = () => {
-  const modalRef: ModalMutableRefProps = useRef(null);
+  const modalRef: ModalMutableRefProps<ProjectType> = useRef(null);
   const projects = api.project.getAll.useQuery();
   const categories = api.category.getAll.useQuery();
   const tags = api.tags.getAll.useQuery();
@@ -33,7 +34,10 @@ const ManageProjects: NextPage = () => {
               <PlusIcon className="w-5" />
               Add a project
             </button>
-            <Projects projects={projects.data} />
+            <Projects
+              projects={projects.data}
+              openEdit={modalRef.current?.open}
+            />
           </div>
           <div className="br border-0 border-b pb-10">
             <h1 className="mb-4 text-xl">

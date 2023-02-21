@@ -24,6 +24,34 @@ export const projectRouter = createTRPCRouter({
         },
       });
     }),
+  update: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        title: z.string(),
+        tagIds: z.array(z.string()),
+        categoryIds: z.array(z.string()),
+        image: z.string().optional(),
+        demo_link: z.string().optional(),
+        source_link: z.string().optional(),
+      })
+    )
+    .mutation(async ({ input, ctx }) => {
+      ctx.checkAdmin();
+      const { id, ...rest } = input;
+
+      const project = await ctx.prisma.project.findUnique({ where: { id } });
+      if (!project) throw new Error("project not found!");
+
+      return ctx.prisma.project.update({
+        where: { id },
+        data: {
+          ...rest,
+          tagIds: input.tagIds,
+          categoryIds: input.categoryIds,
+        },
+      });
+    }),
 
   getAll: publicProcedure
     .input(z.object({ categoryId: z.string().optional() }).optional())

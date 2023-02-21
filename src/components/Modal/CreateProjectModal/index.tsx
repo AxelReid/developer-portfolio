@@ -1,4 +1,5 @@
-import { forwardRef, useImperativeHandle, useRef } from "react";
+import { forwardRef, useImperativeHandle, useRef, useState } from "react";
+import type { ProjectType } from "src/types/infer";
 import type { ModalMutableRefProps } from "src/types/modalRef";
 import Modal from "..";
 import type { CreateProjectProps } from "./Content";
@@ -11,9 +12,13 @@ const CreateProjectModal = (
   ref: React.Ref<unknown>
 ) => {
   const modalRef: ModalMutableRefProps = useRef(null);
+  const [edit, setEdit] = useState<ProjectType | undefined>(undefined);
 
   useImperativeHandle(ref, () => ({
-    open: () => modalRef.current?.open(),
+    open: (project?: ProjectType) => {
+      if (project) setEdit(project);
+      modalRef.current?.open();
+    },
   }));
 
   return (
@@ -22,6 +27,7 @@ const CreateProjectModal = (
         categories={categories}
         tags={tags}
         close={() => modalRef.current?.close()}
+        edit={edit}
       />
     </Modal>
   );

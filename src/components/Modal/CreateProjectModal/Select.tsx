@@ -1,6 +1,7 @@
 import { XMarkIcon } from "@heroicons/react/20/solid";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { memo } from "react";
 import type { CategoriesGetAll, TagsGetAll } from "src/types/infer";
 import type { SelectOption } from "./Content";
 
@@ -70,4 +71,4 @@ const Select: React.FC<Props> = ({
   );
 };
 
-export default Select;
+export default memo(Select);
