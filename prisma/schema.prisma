@@ -31,14 +31,6 @@ model Tag {
   projectIds String[]  @db.ObjectId
 }
 
-model Image {
-  id          String   @id @default(auto()) @map("_id") @db.ObjectId
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  path        String
-  relationIds String[] @db.ObjectId
-}
-
 model ProjectCategory {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   name       String    @unique

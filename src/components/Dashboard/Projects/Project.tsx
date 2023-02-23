@@ -5,6 +5,7 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { api } from "@utils/api";
+import Image from "next/image";
 import type { ProjectType } from "src/types/infer";
 
 interface Props extends ProjectType {
@@ -14,6 +15,7 @@ interface Props extends ProjectType {
 const Project: React.FC<Props> = ({
   id,
   title,
+  image,
   categoryIds,
   tagIds,
   demo_link,
@@ -39,7 +41,9 @@ const Project: React.FC<Props> = ({
         <div className="b absolute inset-0 rounded-[inherit] opacity-70" />
       )}
       <div className="flex gap-4">
-        <div className="br aspect-square h-20 flex-shrink-0 rounded-lg md:h-28"></div>
+        <div className="br relative aspect-square h-20 flex-shrink-0 rounded-lg md:h-28">
+          {image && <Image src={image} fill className="object-cover" alt="" />}
+        </div>
         <div className="flex-1">
           <h2 className="mb-2 text-lg leading-5">{title}</h2>
           <div className="flex items-center space-x-2 text-xs">

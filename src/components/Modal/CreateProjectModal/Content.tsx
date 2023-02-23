@@ -1,5 +1,18 @@
-import { CodeBracketIcon, LinkIcon } from "@heroicons/react/24/outline";
+/* eslint-disable @typescript-eslint/no-floating-promises */
+import Carousel from "@components/Carousel";
+import type { LoadedImg } from "@components/FileUploader";
+import FileUploader from "@components/FileUploader";
+import {
+  ArrowPathRoundedSquareIcon,
+  ArrowUpTrayIcon,
+  CodeBracketIcon,
+  LinkIcon,
+  ViewColumnsIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import { api } from "@utils/api";
+import { uploader } from "@utils/uploader";
+import Image from "next/image";
 import type { FormEvent, ChangeEvent } from "react";
 import { useCallback, useState } from "react";
 import type {
@@ -28,21 +41,18 @@ interface Props extends CreateProjectProps {
 
 const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
   const utils = api.useContext();
-  const add = api.project.create.useMutation({
-    onSuccess: async () => {
-      await utils.project.invalidate();
-      await utils.category.getAll.invalidate();
-      await utils.tags.getAll.invalidate();
-    },
-  });
-  const update = api.project.update.useMutation({
-    onSuccess: async () => {
-      await utils.project.invalidate();
-      await utils.category.getAll.invalidate();
-      await utils.tags.getAll.invalidate();
-    },
-  });
+  const onSuccess = useCallback(() => {
+    utils.project.invalidate();
+    utils.category.getAll.invalidate();
+    utils.tags.getAll.invalidate();
+  }, [utils]);
+  const add = api.project.create.useMutation({ onSuccess });
+  const update = api.project.update.useMutation({ onSuccess });
+  const gallery = api.images.getAll.useQuery(undefined, { enabled: false });
 
+  const [showGallery, setShowGallery] = useState<string | boolean>(false);
+  const [oldImage, setOldImage] = useState<string | null>(edit?.image || null);
+  const [images, setImages] = useState<LoadedImg[]>([]);
   const [selectedCategs, setCategs] = useState<SelectOption[]>(
     edit?.categories || []
   );
@@ -61,6 +71,11 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
     []
   );
 
+  const handleShowGallery = (val: string | boolean) => {
+    if (val) gallery?.refetch();
+    setShowGallery(val);
+  };
+
   const removeSelected = useCallback((id: string, type: WhichSelect) => {
     if (type === "tags") setTags((prev) => prev.filter((p) => p.id !== id));
     else if (type === "categs")
@@ -73,32 +88,121 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
     else if (type === "categs") setCategs((prev) => [option, ...prev]);
   }, []);
 
-  const submit = useCallback(
-    async (e: FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
 
-      const obj: CreateProjectInput = {
-        ...form,
-        categoryIds: selectedCategs.map(({ id }) => id),
-        tagIds: selectedTags.map(({ id }) => id),
-      };
-      try {
-        if (edit?.id) await update.mutateAsync({ ...obj, id: edit.id });
-        else await add.mutateAsync(obj);
-        close();
-      } catch (error) {}
-    },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [form, selectedCategs, selectedTags]
-  );
+    let image: string | undefined = oldImage || undefined;
+    if (images.length && typeof images[0]?.size === "number") {
+      const imgRes = await uploader(images);
+      image = imgRes.data?.files[0];
+    }
+
+    const obj: CreateProjectInput = {
+      ...form,
+      image,
+      categoryIds: selectedCategs.map(({ id }) => id),
+      tagIds: selectedTags.map(({ id }) => id),
+    };
+    console.log(obj);
+    try {
+      if (edit?.id) await update.mutateAsync({ ...obj, id: edit.id });
+      else await add.mutateAsync(obj);
+      close();
+    } catch (error) {}
+  };
 
   return (
     <div>
       <h3 className="mb-6 text-lg font-medium">
         {edit?.id ? "Update" : "Create"} project
       </h3>
+      <div className="flex items-stretch gap-4">
+        {images.length || oldImage ? (
+          <div className="relative isolate flex aspect-video w-full items-end justify-end p-3">
+            <Image
+              fill
+              src={oldImage || images[0]?.preview || ""}
+              alt=""
+              className="bb -z-[1] rounded-lg object-cover"
+              onLoad={() => {
+                !oldImage && URL.revokeObjectURL(images[0]?.preview || "");
+              }}
+            />
+          </div>
+        ) : showGallery ? (
+          <div className="relative w-full overflow-hidden rounded-lg">
+            {gallery?.isRefetching ? (
+              <div className="flex h-36 w-full items-center justify-center rounded-lg p-5 sm:h-48">
+                <span className="c-secondary text-center">Fetching...</span>
+              </div>
+            ) : (
+              gallery.data && (
+                <Carousel className="h-36 gap-4 sm:h-48">
+                  <>
+                    {gallery.data.map((img) => (
+                      <button
+                        onDoubleClick={() => setOldImage(img)}
+                        key={img}
+                        className="embla__slide bb relative flex-[85%] flex-shrink-0 rounded-lg"
+                      >
+                        <Image
+                          src={img}
+                          fill
+                          className="rounded-[inherit] object-cover"
+                          alt=""
+                          sizes="400px"
+                        />
+                      </button>
+                    ))}
+                  </>
+                </Carousel>
+              )
+            )}
+          </div>
+        ) : (
+          <FileUploader
+            images={images}
+            setImages={setImages}
+            className="bb c-secondary flex w-full flex-col items-center justify-between rounded-lg py-6 px-4"
+          >
+            <ArrowUpTrayIcon className="w-7" strokeWidth={1} />
+            <span className="mt-3 text-sm">Drag & Drop or Click</span>
+          </FileUploader>
+        )}
+        <div className="flex w-[42px] flex-shrink-0 flex-col justify-end gap-4">
+          {edit?.image && !oldImage && !images.length && !showGallery && (
+            <button
+              onClick={() => {
+                setOldImage(edit.image);
+              }}
+              className="flex h-[42px] w-[42px] items-center justify-center bg-orange-500/10 text-orange-500 dark:bg-orange-500/20"
+            >
+              <ArrowPathRoundedSquareIcon className="w-5" />
+            </button>
+          )}
+          {images.length || oldImage || showGallery ? (
+            <button
+              onClick={() => {
+                setOldImage(null);
+                setShowGallery(false);
+                setImages([]);
+              }}
+              className="flex h-[42px] w-[42px] items-center justify-center bg-red-500/10 text-red-500 dark:bg-red-500/20"
+            >
+              <XMarkIcon className="w-4" />
+            </button>
+          ) : (
+            <button
+              onClick={() => handleShowGallery(true)}
+              className="flex h-[42px] w-[42px] items-center justify-center bg-blue-500/10 text-blue-500 dark:bg-blue-500/20"
+            >
+              <ViewColumnsIcon className="w-5" />
+            </button>
+          )}
+        </div>
+      </div>
       {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-      <form className="flex flex-col gap-4" onSubmit={submit}>
+      <form className="mt-4 flex flex-col gap-4" onSubmit={submit}>
         <input
           placeholder="Project title"
           type="text"

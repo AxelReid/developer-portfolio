@@ -38,7 +38,7 @@ export const projectRouter = createTRPCRouter({
     )
     .mutation(async ({ input, ctx }) => {
       ctx.checkAdmin();
-      const { id, ...rest } = input;
+      const { id, image, ...rest } = input;
 
       const project = await ctx.prisma.project.findUnique({ where: { id } });
       if (!project) throw new Error("project not found!");
@@ -47,6 +47,7 @@ export const projectRouter = createTRPCRouter({
         where: { id },
         data: {
           ...rest,
+          image: image || null,
           tagIds: input.tagIds,
           categoryIds: input.categoryIds,
         },
