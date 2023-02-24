@@ -1,7 +1,7 @@
 import type { LoadedImg } from "@components/FileUploader";
 import type { AxiosRequestConfig } from "axios";
 import axios from "axios";
-import type { UploadResponse } from "src/pages/api/upload";
+import type { UploadResponse } from "@components/upload";
 
 const config: AxiosRequestConfig<FormData> = {
   headers: { "content-type": "multipart/form-data" },
