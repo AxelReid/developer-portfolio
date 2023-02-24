@@ -13,13 +13,13 @@
 //   size: number; // 7211
 // };
 
-// export interface UploadResponse {
-//   data?: {
-//     message: string;
-//     files: string[];
-//   } | null;
-//   error?: string | null;
-// }
+export interface UploadResponse {
+  data?: {
+    message: string;
+    files: string[];
+  } | null;
+  error?: string | null;
+}
 
 // const apiRoute = nextConnect({
 //   // Handle any other HTTP method
@@ -69,4 +69,3 @@
 //     bodyParser: false,
 //   },
 // };
-export const nothing = undefined;
