@@ -16,3 +16,10 @@ export enum Stacks {
   T3 = "T3 Stack",
   MERN = "MERN Stack",
 }
+export interface UploadResponse {
+  data?: {
+    message: string;
+    files: string[];
+  } | null;
+  error?: string | null;
+}
