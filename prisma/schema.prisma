@@ -42,8 +42,10 @@ model ProjectCategory {
 
 model Feedback {
   id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  review    String
-  rating    Int
+  feedback  String
+  bio       String
+  rating    Int?
+  published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   user      User?

@@ -24,7 +24,7 @@ const Sidebar = () => {
       >
         <div className="relative flex flex-col gap-2">
           {menus
-            .filter((m) => m.permissions.includes(session?.role as Role))
+            // .filter((m) => m.permissions.includes(session?.user?.role as Role))
             .map((menu, i) => (
               <MenuItem key={i} {...menu} />
             ))}

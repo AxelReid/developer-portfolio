@@ -39,13 +39,15 @@ interface Props {
 }
 
 const Content: React.FC<Props> = ({ clearQuery }) => {
-  const { query } = useRouter();
+  const { query, pathname } = useRouter();
   const { status } = useSession();
 
   const login = (provider: BuiltInProviderType) => () => {
     signIn(provider, {
       redirect: false,
-      callbackUrl: (query?.authTo as string) || "/dashboard",
+      callbackUrl: pathname.includes("dashboard")
+        ? undefined
+        : (query?.authTo as string) || "/dashboard",
     })
       .then(() => {
         clearQuery();

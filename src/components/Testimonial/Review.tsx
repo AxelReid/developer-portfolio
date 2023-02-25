@@ -16,7 +16,7 @@ const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {
     >
       <span id="hover-card-overlay" />
       <div className="flex items-center space-x-5">
-        <div className="relative h-[60px] w-[60px] rounded-full bg-black/5 dark:bg-white/5">
+        <div className="relative h-[60px] w-[60px] overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={avatar} alt="" className="absolute inset-0 object-cover" />
         </div>

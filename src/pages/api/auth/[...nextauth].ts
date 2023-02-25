@@ -53,18 +53,11 @@ export const authOptions: NextAuthOptions = {
         return false;
       }
     },
-    session({ session, token }) {
-      return {
-        ...session,
-        role: token.role as Role,
-        providers: token?.providers as string[],
-      };
-    },
     async jwt({ token }) {
       if (token?.email) {
         const user = await prisma.user.findUnique({
           where: { email: token.email },
-          select: { role: true, providers: true },
+          select: { role: true, id: true },
         });
         if (!user) return {};
         return {
@@ -72,7 +65,17 @@ export const authOptions: NextAuthOptions = {
           ...user,
         };
       }
-      return {};
+      return false;
+    },
+    session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id as string,
+          role: token.role as Role,
+        },
+      };
     },
   },
   // Configure one or more authentication providers

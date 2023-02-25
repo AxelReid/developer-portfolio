@@ -45,7 +45,7 @@ const Testimonial = () => {
         id="hover-cards"
       >
         <Title title="Testimonial" desc="People saying" />
-        {session?.role !== Role.ADMIN && (
+        {session?.user?.role !== Role.ADMIN && (
           <div className="mb-10 w-fit">
             <Link href="/dashboard/give-a-feedback">
               <button className="btn flex items-center gap-2 px-3">
