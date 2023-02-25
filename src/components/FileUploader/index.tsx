@@ -8,6 +8,10 @@ export interface LoadedImg extends File {
 interface Props {
   children?: React.ReactNode;
   className?: string;
+  acceptClass?: string;
+  rejectClass?: string;
+  acceptContent?: React.ReactNode;
+  rejectContent?: React.ReactNode;
   images: LoadedImg[];
   setImages: Dispatch<SetStateAction<LoadedImg[]>>;
   multiple?: boolean;
@@ -15,26 +19,31 @@ interface Props {
 
 const FileUploader: React.FC<Props> = ({
   children,
-  className,
+  className = "",
+  acceptClass = "",
+  rejectClass = "",
+  acceptContent,
+  rejectContent,
   setImages,
   images,
   multiple = false,
 }) => {
-  const { getRootProps, getInputProps } = useDropzone({
-    accept: {
-      "image/*": [],
-    },
-    multiple,
-    onDrop: (acceptedFiles) => {
-      setImages(
-        acceptedFiles.map((file) =>
-          Object.assign(file, {
-            preview: URL.createObjectURL(file),
-          })
-        )
-      );
-    },
-  });
+  const { getRootProps, getInputProps, isDragAccept, isDragReject } =
+    useDropzone({
+      accept: {
+        "image/*": [],
+      },
+      multiple,
+      onDropAccepted: (acceptedFiles) => {
+        setImages(
+          acceptedFiles.map((file) =>
+            Object.assign(file, {
+              preview: URL.createObjectURL(file),
+            })
+          )
+        );
+      },
+    });
 
   useEffect(() => {
     return () =>
@@ -43,9 +52,18 @@ const FileUploader: React.FC<Props> = ({
   }, []);
 
   return (
-    <div {...getRootProps()} className={className}>
+    <div
+      {...getRootProps()}
+      className={`${className} ${isDragAccept ? acceptClass : ""} ${
+        isDragReject ? rejectClass : ""
+      }`}
+    >
       <input {...getInputProps()} />
-      {children}
+      {isDragAccept && acceptContent
+        ? acceptContent
+        : isDragReject && rejectContent
+        ? rejectContent
+        : children}
     </div>
   );
 };

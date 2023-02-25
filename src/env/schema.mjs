@@ -25,14 +25,12 @@ export const serverSchema = z.object({
   GITHUB_CLIENT_ID: z.string(),
   GITHUB_CLIENT_SECRET: z.string(),
 
-  TWITTER_CLIENT_ID: z.string(),
-  TWITTER_CLIENT_SECRET: z.string(),
-
-  DISCORD_CLIENT_ID: z.string(),
-  DISCORD_CLIENT_SECRET: z.string(),
-
-  LINKEDIN_CLIENT_ID: z.string(),
-  LINKEDIN_CLIENT_SECRET: z.string(),
+  API_KEY: z.string(),
+  AUTH_DOMAIN: z.string(),
+  PROJECT_ID: z.string(),
+  STORAGE_BUCKET: z.string(),
+  MESSAGING_SENDER_ID: z.string(),
+  APP_ID: z.string(),
 });
 
 /**

@@ -3,7 +3,8 @@ import { readdirSync } from "fs";
 import { createTRPCRouter, publicProcedure } from "../trpc";
 
 export const imagesRouter = createTRPCRouter({
-  getAll: publicProcedure.query(
-    () => readdirSync(dest).map((name) => imgBase + name) || []
-  ),
+  getAll: publicProcedure.query(() => {
+    const images = readdirSync(dest)?.map((name) => "/images/" + name);
+    return images || [];
+  }),
 });

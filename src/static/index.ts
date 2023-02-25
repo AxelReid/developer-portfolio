@@ -1,2 +1,2 @@
-export const imgBase = "/uploads/";
-export const dest = "public/uploads/";
+export const imgBase = "/images/";
+export const dest = "./images"; //"./images/uploads/"; // "/uploads/";

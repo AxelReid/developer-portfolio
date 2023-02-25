@@ -29,7 +29,7 @@ const ManageProjects: NextPage = () => {
             </h1>
             <button
               className="btn mb-4 flex items-center gap-3 px-3"
-              onClick={() => modalRef.current?.open()}
+              onClick={() => modalRef.current?.open(undefined)}
             >
               <PlusIcon className="w-5" />
               Add a project

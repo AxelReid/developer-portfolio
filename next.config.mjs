@@ -18,5 +18,8 @@ const config = {
       { loader: "@next/font/google", options: { subsets: ["latin"] } },
     ],
   },
+  images: {
+    domains: ["firebasestorage.googleapis.com"],
+  },
 };
 export default config;

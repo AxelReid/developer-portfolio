@@ -5,9 +5,11 @@ import FileUploader from "@components/FileUploader";
 import {
   ArrowPathRoundedSquareIcon,
   ArrowUpTrayIcon,
+  CheckCircleIcon,
   CodeBracketIcon,
   LinkIcon,
   ViewColumnsIcon,
+  XCircleIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { api } from "@utils/api";
@@ -22,6 +24,7 @@ import type {
   TagsGetAll,
 } from "src/types/infer";
 import Select from "./Select";
+
 export interface SelectOption {
   id: string;
   name: string;
@@ -92,9 +95,10 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
     e.preventDefault();
 
     let image: string | undefined = oldImage || undefined;
+
     if (images.length && typeof images[0]?.size === "number") {
-      const imgRes = await uploader(images);
-      image = imgRes.data?.files[0];
+      const imgUrl = await uploader(images[0]);
+      if (imgUrl) image = imgUrl;
     }
 
     const obj: CreateProjectInput = {
@@ -103,7 +107,6 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
       categoryIds: selectedCategs.map(({ id }) => id),
       tagIds: selectedTags.map(({ id }) => id),
     };
-    console.log(obj);
     try {
       if (edit?.id) await update.mutateAsync({ ...obj, id: edit.id });
       else await add.mutateAsync(obj);
@@ -135,35 +138,45 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
               <div className="flex h-36 w-full items-center justify-center rounded-lg p-5 sm:h-48">
                 <span className="c-secondary text-center">Fetching...</span>
               </div>
-            ) : (
-              gallery.data && (
-                <Carousel className="h-36 gap-4 sm:h-48">
-                  <>
-                    {gallery.data.map((img) => (
-                      <button
-                        onDoubleClick={() => setOldImage(img)}
-                        key={img}
-                        className="embla__slide bb relative flex-[85%] flex-shrink-0 rounded-lg"
-                      >
-                        <Image
-                          src={img}
-                          fill
-                          className="rounded-[inherit] object-cover"
-                          alt=""
-                          sizes="400px"
-                        />
-                      </button>
-                    ))}
-                  </>
-                </Carousel>
-              )
-            )}
+            ) : gallery.data?.length ? (
+              <Carousel className="h-36 gap-4 sm:h-48">
+                {gallery.data.map((img) => (
+                  <button
+                    onDoubleClick={() => setOldImage(img)}
+                    key={img}
+                    className="embla__slide bb relative flex-[85%] flex-shrink-0 rounded-lg"
+                  >
+                    <Image
+                      src={img}
+                      fill
+                      className="rounded-[inherit] object-cover"
+                      alt=""
+                      sizes="400px"
+                    />
+                  </button>
+                ))}
+              </Carousel>
+            ) : null}
           </div>
         ) : (
           <FileUploader
             images={images}
             setImages={setImages}
             className="bb c-secondary flex w-full flex-col items-center justify-between rounded-lg py-6 px-4"
+            acceptClass="!border-green-500 !text-green-500 shadow-lg shadow-green-500/10"
+            rejectClass="!border-red-500 !text-red-500 shadow-lg shadow-red-500/10"
+            acceptContent={
+              <>
+                <CheckCircleIcon className="w-7" />
+                <span className="mt-3 text-sm">Release it!</span>
+              </>
+            }
+            rejectContent={
+              <>
+                <XCircleIcon className="w-7" />
+                <span className="mt-3 text-sm">Not accepted!</span>
+              </>
+            }
           >
             <ArrowUpTrayIcon className="w-7" strokeWidth={1} />
             <span className="mt-3 text-sm">Drag & Drop or Click</span>

@@ -1,27 +1,25 @@
 import type { LoadedImg } from "@components/FileUploader";
-import type { AxiosRequestConfig } from "axios";
 import axios from "axios";
-import type { UploadResponse } from "src/types";
 
-const config: AxiosRequestConfig<FormData> = {
-  headers: { "content-type": "multipart/form-data" },
-  onUploadProgress: (event) => {
-    console.log(
-      `Current progress:`,
-      Math.round((event.loaded * 100) / (event?.total || 1))
-    );
-  },
-};
+// const config: AxiosRequestConfig<FormData> = {
+//   headers: { "content-type": "multipart/form-data" },
+//   onUploadProgress: (event) => {
+//     console.log(
+//       `Current progress:`,
+//       Math.round((event.loaded * 100) / (event?.total || 1))
+//     );
+//   },
+// };
 
-export const uploader = async (files: LoadedImg[] = []) => {
+export const uploader = async (file: LoadedImg) => {
   try {
     const formData = new FormData();
-    for (const file of files) {
-      formData.append("file", file);
-    }
-    const res = await axios.post("/api/upload", formData, config);
-    return res.data as UploadResponse;
+    formData.append("file", file);
+    const res = await axios.post("/api/upload", formData);
+    console.log(res);
+
+    return (res.data as { data: { url: string } })?.data.url;
   } catch (error) {
-    return (error as { response: { data: UploadResponse } })?.response?.data;
+    return null;
   }
 };

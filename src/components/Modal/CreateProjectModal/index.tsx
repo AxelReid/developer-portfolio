@@ -17,6 +17,7 @@ const CreateProjectModal = (
   useImperativeHandle(ref, () => ({
     open: (project?: ProjectType) => {
       if (project) setEdit(project);
+      else if (edit) setEdit(undefined);
       modalRef.current?.open();
     },
   }));
