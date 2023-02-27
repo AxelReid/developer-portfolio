@@ -72,7 +72,7 @@ const Tags: React.FC<Props> = ({ tags, refetch }) => {
         setEdit(null);
         refetch();
       }
-      e.currentTarget?.reset();
+      (e.target as HTMLFormElement)?.reset();
     } catch (error) {}
   };
 
@@ -91,7 +91,7 @@ const Tags: React.FC<Props> = ({ tags, refetch }) => {
             <div className="flex items-stretch gap-2 max-[415px]:flex-col">
               <input
                 name="newName"
-                defaultValue={edit?.id}
+                defaultValue={edit?.name}
                 placeholder={isAdd ? "Tag name" : "Update tag"}
                 type="text"
                 className="bb w-full rounded-md min-[500px]:max-w-[200px]"

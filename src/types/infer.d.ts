@@ -15,6 +15,7 @@ export type CategoryType = RouterOutput["category"]["getAll"][0];
 
 export type ProjectsGetAll = RouterOutput["project"]["getAll"];
 export type ProjectType = RouterOutput["project"]["getAll"][0];
+export type FeedbackType = RouterOutput["feedbacks"]["getAll"][0];
 
 export type ImageType = RouterOutput["images"]["getAll"][0];
 

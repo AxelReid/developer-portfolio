@@ -29,10 +29,29 @@ export const feedbacksRouter = createTRPCRouter({
   publish: protectedProcedure
     .input(z.object({ id: z.string(), published: z.boolean() }))
     .mutation(({ ctx, input }) =>
-      ctx.prisma.feedback.update({
-        where: { id: input.id },
-        data: { published: input.published },
+      ctx.prisma.feedback
+        .update({
+          where: { id: input.id },
+          data: { published: input.published },
+        })
+        .then((data) => data.published)
+    ),
+  edit: protectedProcedure
+    .input(
+      z.object({
+        id: z.string(),
+        feedback: z.string(),
       })
+    )
+    .mutation(async ({ ctx, input }) =>
+      ctx.prisma.feedback
+        .update({
+          where: { id: input.id },
+          data: {
+            feedback: input.feedback,
+          },
+        })
+        .then((data) => data.feedback)
     ),
   getAll: publicProcedure
     .input(
@@ -46,7 +65,18 @@ export const feedbacksRouter = createTRPCRouter({
         : {};
       return ctx.prisma.feedback.findMany({
         where,
-        orderBy: { createdAt: "asc" },
+        orderBy: { createdAt: "desc" },
+        select: {
+          id: true,
+          bio: true,
+          createdAt: true,
+          published: true,
+          feedback: true,
+          rating: true,
+          user: {
+            select: { name: true, image: true },
+          },
+        },
       });
     }),
   getMine: protectedProcedure.query(({ ctx }) => {

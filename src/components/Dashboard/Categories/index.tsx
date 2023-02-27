@@ -42,10 +42,8 @@ const Categories: React.FC<Props> = ({ categories, refetch }) => {
         await put.mutateAsync({ id, name: newValue });
         refetch();
       }
-    } catch (error) {
-    } finally {
-      e.currentTarget?.reset();
-    }
+      (e.target as HTMLFormElement)?.reset();
+    } catch (error) {}
   };
 
   return (

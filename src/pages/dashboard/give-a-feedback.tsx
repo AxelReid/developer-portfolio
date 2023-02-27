@@ -25,8 +25,7 @@ const GiveAFeedback: NextPage = () => {
     e.preventDefault();
     try {
       if (!input.bio || !input.feedback) return;
-      const res = await give.mutateAsync(input);
-      console.log(res);
+      await give.mutateAsync(input);
     } catch (error) {}
   };
 
@@ -34,10 +33,11 @@ const GiveAFeedback: NextPage = () => {
     <DashboardWrapper>
       {feedback.isLoading ? (
         "Loading..."
-      ) : feedback.data ? (
-        "You already gave a feedback"
       ) : (
         <div className="max-w-sm">
+          {feedback.data && (
+            <h2 className="mb-10 text-xl font-medium">Your feedback</h2>
+          )}
           <div className="flex items-center space-x-5">
             {session?.user?.image && (
               <div className="relative h-[60px] w-[60px] flex-shrink-0 overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
@@ -51,31 +51,42 @@ const GiveAFeedback: NextPage = () => {
             )}
             <div>
               <h3 className="text-xl font-medium leading-tight">
-                {session?.user?.name || "Asilbek"}
+                {session?.user?.name}
               </h3>
-              <p className="c-secondary text-sm">{input.bio}</p>
+              <p className="c-secondary text-sm">
+                {feedback.data?.bio || input.bio}
+              </p>
             </div>
           </div>
-          {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
-          <form onSubmit={submit} className="mt-5 flex flex-col">
-            <input
-              type="text"
-              name="bio"
-              placeholder="Bio"
-              className="bb rounded-md text-sm"
-              onChange={(e) => handleInput(e.target)}
-            />
-            <textarea
-              name="feedback"
-              placeholder="Feedback"
-              className="bb mt-2 rounded-md"
-              rows={3}
-              onChange={(e) => handleInput(e.target)}
-            />
-            <button className="btn btn-darker mt-3 w-fit px-3 font-medium">
-              Send feedback
-            </button>
-          </form>
+          {feedback.data ? (
+            <div className="mt-5">
+              <p>{feedback.data.feedback}</p>
+              <div className="c-secondary mt-2 text-sm italic">
+                {feedback.data.createdAt.toDateString()}
+              </div>
+            </div>
+          ) : (
+            /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
+            <form onSubmit={submit} className="mt-5 flex flex-col">
+              <input
+                type="text"
+                name="bio"
+                placeholder="Bio"
+                className="bb rounded-md text-sm"
+                onChange={(e) => handleInput(e.target)}
+              />
+              <textarea
+                name="feedback"
+                placeholder="Feedback"
+                className="bb mt-2 rounded-md"
+                rows={3}
+                onChange={(e) => handleInput(e.target)}
+              />
+              <button className="btn btn-darker mt-3 w-fit px-3 font-medium">
+                Send feedback
+              </button>
+            </form>
+          )}
         </div>
       )}
     </DashboardWrapper>
