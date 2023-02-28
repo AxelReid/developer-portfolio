@@ -41,28 +41,32 @@ model ProjectCategory {
 }
 
 model Feedback {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  feedback  String
-  bio       String
-  rating    Int?
+  id   String @id @default(auto()) @map("_id") @db.ObjectId
+  user User?  @relation(fields: [userId], references: [id])
+
+  feedback String
+  bio      String
+  rating   Int?
+  avatar   String?
+  name     String?
+
   published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  user      User?
-  userId    String   @unique @db.ObjectId
+  userId    String?  @db.ObjectId
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 
 model User {
-  id        String    @id @default(auto()) @map("_id") @db.ObjectId
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
   name      String?
   bio       String?
-  email     String?   @unique
+  email     String?    @unique
   image     String?
-  role      Role      @default(USER)
+  role      Role       @default(USER)
   providers String[]
-  feedback  Feedback? @relation(fields: [id], references: [userId])
+  feedbacks Feedback[]
 }
 
 enum Role {

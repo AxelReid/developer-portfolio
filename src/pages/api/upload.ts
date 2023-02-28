@@ -3,6 +3,7 @@ import multer from "multer";
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { UploadResponse } from "src/types";
 import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import firebase from "@utils/firebase";
 
 // type MulterArrayFile = {
 //   fieldname: string; //'file',
@@ -34,7 +35,7 @@ const apiRoute = nextConnect({
   },
 });
 
-const storage = getStorage();
+const storage = getStorage(firebase);
 const upload = multer({ storage: multer.memoryStorage() });
 
 // Adds the middleware to Next-Connect

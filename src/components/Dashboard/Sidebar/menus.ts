@@ -36,7 +36,7 @@ export const menus = [
     icon: StarIcon,
     name: "Give a feedback",
     path: "/dashboard/give-a-feedback",
-    permissions: [Role.USER, Role.ADMIN],
+    permissions: [Role.USER],
   },
 ];
 

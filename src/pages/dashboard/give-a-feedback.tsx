@@ -82,7 +82,10 @@ const GiveAFeedback: NextPage = () => {
                 rows={3}
                 onChange={(e) => handleInput(e.target)}
               />
-              <button className="btn btn-darker mt-3 w-fit px-3 font-medium">
+              <button
+                type="submit"
+                className="btn btn-darker mt-3 w-fit px-3 font-medium"
+              >
                 Send feedback
               </button>
             </form>

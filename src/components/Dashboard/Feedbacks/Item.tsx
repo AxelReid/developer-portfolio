@@ -46,7 +46,7 @@ const Item: React.FC<Props> = ({
   }, [publish.data, published]);
 
   return (
-    <div className="bb rounded-lg p-4">
+    <div className="bb h-fit rounded-lg p-4">
       <div className="flex items-center gap-4">
         <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
           {user?.image && (

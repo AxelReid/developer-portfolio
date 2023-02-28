@@ -21,3 +21,4 @@ export type ImageType = RouterOutput["images"]["getAll"][0];
 
 // input types
 export type CreateProjectInput = RouterInput["project"]["create"];
+export type FeedbackAddManualInput = RouterInput["feedbacks"]["addManual"];
