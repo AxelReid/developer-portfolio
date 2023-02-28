@@ -9,7 +9,7 @@ export const projectRouter = createTRPCRouter({
         title: z.string(),
         tagIds: z.array(z.string()),
         categoryIds: z.array(z.string()),
-        image: z.string().optional(),
+        imageId: z.string().optional(),
         demo_link: z.string().optional(),
         source_link: z.string().optional(),
       })
@@ -31,14 +31,14 @@ export const projectRouter = createTRPCRouter({
         title: z.string(),
         tagIds: z.array(z.string()),
         categoryIds: z.array(z.string()),
-        image: z.string().optional(),
+        imageId: z.string().optional(),
         demo_link: z.string().optional(),
         source_link: z.string().optional(),
       })
     )
     .mutation(async ({ input, ctx }) => {
       ctx.checkAdmin();
-      const { id, image, ...rest } = input;
+      const { id, imageId, ...rest } = input;
 
       const project = await ctx.prisma.project.findUnique({ where: { id } });
       if (!project) throw new Error("project not found!");
@@ -47,7 +47,7 @@ export const projectRouter = createTRPCRouter({
         where: { id },
         data: {
           ...rest,
-          image: image || null,
+          imageId: imageId || (project.imageId as string),
           tagIds: input.tagIds,
           categoryIds: input.categoryIds,
         },
@@ -65,6 +65,7 @@ export const projectRouter = createTRPCRouter({
         include: {
           categories: { select: { name: true, id: true } },
           tags: { select: { name: true, id: true } },
+          image: { select: { url: true } },
         },
       });
     }),

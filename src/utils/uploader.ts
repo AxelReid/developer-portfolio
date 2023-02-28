@@ -16,9 +16,8 @@ export const uploader = async (file: LoadedImg) => {
     const formData = new FormData();
     formData.append("file", file);
     const res = await axios.post("/api/upload", formData);
-    console.log(res);
 
-    return (res.data as { data: { url: string } })?.data.url;
+    return (res.data as { data: { imageId: string } })?.data.imageId;
   } catch (error) {
     return null;
   }

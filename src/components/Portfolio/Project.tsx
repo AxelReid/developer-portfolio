@@ -18,14 +18,25 @@ const Project: React.FC<ProjectType> = ({
       <span id="hover-card-overlay" />
       <div>
         <div className="relative aspect-[9/6] rounded-2xl bg-black/5 dark:bg-zinc-700">
-          {image && <Image src={image} fill className="object-cover" alt="" />}
+          {image?.url && (
+            <Image
+              src={image.url}
+              fill
+              className="rounded-[inherit] object-cover"
+              alt=""
+            />
+          )}
         </div>
         <h3 className="mt-7 text-xl font-medium">{title}</h3>
-        <div className="my-5 flex flex-wrap gap-1.5">
-          {tags?.map((tag, i) => (
-            <Tag key={i} name={tag.name} />
-          ))}
-        </div>
+        {(tags as [])?.length > 0 ? (
+          <div className="my-5 flex flex-wrap gap-1.5">
+            {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */}
+            {tags.map((tag, i) => (
+              // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+              <Tag key={i} name={tag.name} />
+            ))}
+          </div>
+        ) : null}
       </div>
       <div className="flex space-x-10 text-sm">
         {source_link && (

@@ -42,7 +42,14 @@ const Project: React.FC<Props> = ({
       )}
       <div className="flex gap-4">
         <div className="br relative aspect-square h-20 flex-shrink-0 rounded-lg md:h-28">
-          {image && <Image src={image} fill className="object-cover" alt="" />}
+          {image?.url && (
+            <Image
+              src={image.url}
+              fill
+              className="rounded-[inherit] object-cover"
+              alt=""
+            />
+          )}
         </div>
         <div className="flex-1">
           <h2 className="mb-2 text-lg leading-5">{title}</h2>

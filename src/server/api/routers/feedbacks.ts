@@ -35,7 +35,7 @@ export const feedbacksRouter = createTRPCRouter({
         feedback: z.string(),
         rating: z.number().optional(),
         name: z.string(),
-        avatar: z.string(),
+        imageId: z.string(),
       })
     )
     .mutation(async ({ ctx, input }) => {
@@ -102,7 +102,8 @@ export const feedbacksRouter = createTRPCRouter({
           ...rest,
           user: {
             name: (name as string) || (user as { name: string })?.name,
-            image: (avatar as string) || (user as { image: string })?.image,
+            image:
+              (avatar?.url as string) || (user as { image: string })?.image,
           },
         };
       });

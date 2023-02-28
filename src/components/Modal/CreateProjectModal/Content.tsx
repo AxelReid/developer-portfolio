@@ -54,12 +54,19 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
   const gallery = api.images.getAll.useQuery(undefined, { enabled: false });
 
   const [showGallery, setShowGallery] = useState<string | boolean>(false);
-  const [oldImage, setOldImage] = useState<string | null>(edit?.image || null);
+  const [oldImage, setOldImage] = useState<{
+    id: string | null;
+    url: string | null;
+  } | null>(
+    edit?.imageId ? { id: edit.imageId, url: edit.image?.url as string } : null
+  );
   const [images, setImages] = useState<LoadedImg[]>([]);
   const [selectedCategs, setCategs] = useState<SelectOption[]>(
-    edit?.categories || []
+    (edit?.categories as []) || []
   );
-  const [selectedTags, setTags] = useState<SelectOption[]>(edit?.tags || []);
+  const [selectedTags, setTags] = useState<SelectOption[]>(
+    (edit?.tags as []) || []
+  );
   const [form, setForm] = useState<
     Pick<CreateProjectInput, "title" | "demo_link" | "source_link">
   >({
@@ -94,16 +101,16 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    let image: string | undefined = oldImage || undefined;
+    let imageId: string | undefined = oldImage?.id || undefined;
 
     if (images.length && typeof images[0]?.size === "number") {
       const imgUrl = await uploader(images[0]);
-      if (imgUrl) image = imgUrl;
+      if (imgUrl) imageId = imgUrl;
     }
 
     const obj: CreateProjectInput = {
       ...form,
-      image,
+      imageId,
       categoryIds: selectedCategs.map(({ id }) => id),
       tagIds: selectedTags.map(({ id }) => id),
     };
@@ -124,7 +131,7 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
           <div className="relative isolate flex aspect-video w-full items-end justify-end p-3">
             <Image
               fill
-              src={oldImage || images[0]?.preview || ""}
+              src={oldImage?.url || images[0]?.preview || ""}
               alt=""
               className="bb -z-[1] rounded-lg object-cover"
               onLoad={() => {
@@ -143,11 +150,11 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
                 {gallery.data.map((img) => (
                   <button
                     onDoubleClick={() => setOldImage(img)}
-                    key={img}
+                    key={img.id}
                     className="embla__slide bb relative flex-[85%] flex-shrink-0 rounded-lg"
                   >
                     <Image
-                      src={img}
+                      src={img.url}
                       fill
                       className="rounded-[inherit] object-cover"
                       alt=""
@@ -186,7 +193,10 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
           {edit?.image && !oldImage && !images.length && !showGallery && (
             <button
               onClick={() => {
-                setOldImage(edit.image);
+                setOldImage({
+                  id: edit.imageId as string,
+                  url: edit.image?.url as string,
+                });
               }}
               className="flex h-[42px] w-[42px] items-center justify-center bg-orange-500/10 text-orange-500 dark:bg-orange-500/20"
             >

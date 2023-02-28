@@ -19,7 +19,7 @@ export enum Stacks {
 export interface UploadResponse {
   data?: {
     message: string;
-    url: string;
+    imageId: string | undefined;
   } | null;
   error?: string | null;
 }

@@ -1,9 +1,11 @@
-import FileUploader, { LoadedImg } from "@components/FileUploader";
+import type { LoadedImg } from "@components/FileUploader";
+import FileUploader from "@components/FileUploader";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { api } from "@utils/api";
 import { uploader } from "@utils/uploader";
-import { LegacyRef, memo, useRef, useState } from "react";
-import { FeedbackAddManualInput } from "src/types/infer";
+import type { LegacyRef } from "react";
+import { memo, useRef, useState } from "react";
+import type { FeedbackAddManualInput } from "src/types/infer";
 
 const placeholder = {
   name: "Name",
@@ -34,7 +36,7 @@ const AddManual: React.FC<Props> = ({ refetch }) => {
       const imgUrl = await uploader(avatar[0] as LoadedImg);
       if (!imgUrl) return;
       const data: FeedbackAddManualInput = {
-        avatar: imgUrl,
+        imageId: imgUrl,
         bio,
         feedback,
         name,
