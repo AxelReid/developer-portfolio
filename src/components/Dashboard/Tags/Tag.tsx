@@ -19,7 +19,7 @@ const Tag: React.FC<Props> = ({
   return (
     <button
       onDoubleClick={dbClickBtn}
-      className={`flex items-center gap-1 rounded-lg p-1 ${
+      className={`flex items-center gap-1 rounded-lg py-0.5 ${
         isEdit || isRm ? "!bg-black" : "bg-zinc-700"
       }
       ${isEdit ? "text-blue-500" : isRm ? "text-red-500" : "text-zinc-100"}

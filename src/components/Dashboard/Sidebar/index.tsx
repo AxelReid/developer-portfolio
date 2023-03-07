@@ -8,7 +8,7 @@ import { menus } from "./menus";
 const Sidebar = () => {
   const { data: session } = useSession();
   return (
-    <div className="br sticky top-20 border-0 max-md:border-r sm:top-[124px] md:top-[120px] 2md:top-20 lg:top-24">
+    <div className="stickToHeader br border-0 max-md:border-r">
       <span className="absolute top-0 bottom-0 right-full flex w-screen bg-white/70 dark:bg-black/40" />
       <aside
         className="relative

@@ -10,9 +10,6 @@ export type ReactQueryOptions = inferReactQueryProcedureOptions<AppRouter>;
 export type TagsGetAll = RouterOutput["tags"]["getAll"];
 export type TagType = RouterOutput["tags"]["getAll"][0];
 
-export type CategoriesGetAll = RouterOutput["category"]["getAll"];
-export type CategoryType = RouterOutput["category"]["getAll"][0];
-
 export type ProjectsGetAll = RouterOutput["project"]["getAll"];
 export type ProjectType = RouterOutput["project"]["getAll"][0];
 export type FeedbackType = RouterOutput["feedbacks"]["getAll"][0];

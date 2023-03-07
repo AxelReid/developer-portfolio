@@ -11,33 +11,22 @@ datasource db {
 }
 
 model Project {
-  id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
   demo_link   String?
   source_link String?
-  published   Boolean           @default(false)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-  tags        Tag[]             @relation(fields: [tagIds], references: [id])
-  tagIds      String[]          @db.ObjectId
-  categories  ProjectCategory[] @relation(fields: [categoryIds], references: [id])
-  categoryIds String[]          @db.ObjectId
-  image       Image?            @relation(fields: [imageId], references: [id])
-  imageId     String?           @db.ObjectId
+  published   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  tags        Tag[]    @relation(fields: [tagIds], references: [id])
+  tagIds      String[] @db.ObjectId
+  image       Image?   @relation(fields: [imageId], references: [id])
+  imageId     String?  @db.ObjectId
 }
 
 model Tag {
   id         String    @id @default(auto()) @map("_id") @db.ObjectId
   name       String
-  projects   Project[] @relation(fields: [projectIds], references: [id])
-  projectIds String[]  @db.ObjectId
-}
-
-model ProjectCategory {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  name       String    @unique
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @updatedAt
   projects   Project[] @relation(fields: [projectIds], references: [id])
   projectIds String[]  @db.ObjectId
 }
@@ -67,8 +56,6 @@ model Image {
   Feedback  Feedback[]
   Project   Project[]
 }
-
-/////////////////////////////////////////////////////////////////////////////////
 
 model User {
   id        String     @id @default(auto()) @map("_id") @db.ObjectId

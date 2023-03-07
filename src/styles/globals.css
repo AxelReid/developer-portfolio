@@ -90,6 +90,9 @@
   .btn-darker {
     @apply btn-dark dark:bg-zinc-700 dark:hover:bg-zinc-600;
   }
+  .stickToHeader {
+    @apply sticky top-20 sm:top-[124px] md:top-[120px] 2md:top-20 lg:top-24;
+  }
 
   /* input,
   textarea {

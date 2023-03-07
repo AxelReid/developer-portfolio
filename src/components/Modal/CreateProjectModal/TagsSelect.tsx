@@ -2,18 +2,18 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { memo } from "react";
-import type { CategoriesGetAll, TagsGetAll } from "src/types/infer";
+import type { TagsGetAll } from "src/types/infer";
 import type { SelectOption } from "./Content";
 
 interface Props {
   title: string;
-  data?: CategoriesGetAll | TagsGetAll;
+  data?: TagsGetAll;
   selected: SelectOption[];
   onSelect: (option: SelectOption) => void;
   remove: (optioId: string) => void;
 }
 
-const Select: React.FC<Props> = ({
+const TagsSelect: React.FC<Props> = ({
   data,
   selected,
   title,
@@ -71,4 +71,4 @@ const Select: React.FC<Props> = ({
   );
 };
 
-export default memo(Select);
+export default memo(TagsSelect);

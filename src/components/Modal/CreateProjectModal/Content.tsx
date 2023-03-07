@@ -18,23 +18,17 @@ import Image from "next/image";
 import type { FormEvent, ChangeEvent } from "react";
 import { useCallback, useState } from "react";
 import type {
-  CategoriesGetAll,
   CreateProjectInput,
   ProjectType,
   TagsGetAll,
 } from "src/types/infer";
-import Select from "./Select";
+import TagsSelect from "./TagsSelect";
 
 export interface SelectOption {
   id: string;
   name: string;
 }
-type WhichSelect = "tags" | "categs";
 export interface CreateProjectProps {
-  categories: {
-    data?: CategoriesGetAll;
-    isFetching: boolean;
-  };
   tags: { data?: TagsGetAll; isFetching: boolean };
 }
 interface Props extends CreateProjectProps {
@@ -42,11 +36,10 @@ interface Props extends CreateProjectProps {
   edit?: ProjectType;
 }
 
-const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
+const Content: React.FC<Props> = ({ tags, edit, close }) => {
   const utils = api.useContext();
   const onSuccess = useCallback(() => {
     utils.project.invalidate();
-    utils.category.getAll.invalidate();
     utils.tags.getAll.invalidate();
   }, [utils]);
   const add = api.project.create.useMutation({ onSuccess });
@@ -62,9 +55,6 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
   );
   const [image, setImage] = useState<LoadedImg>();
 
-  const [selectedCategs, setCategs] = useState<SelectOption[]>(
-    (edit?.categories as []) || []
-  );
   const [selectedTags, setTags] = useState<SelectOption[]>(
     (edit?.tags as []) || []
   );
@@ -87,16 +77,13 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
     setShowGallery(val);
   };
 
-  const removeSelected = useCallback((id: string, type: WhichSelect) => {
-    if (type === "tags") setTags((prev) => prev.filter((p) => p.id !== id));
-    else if (type === "categs")
-      setCategs((prev) => prev.filter((p) => p.id !== id));
+  const removeSelected = useCallback((id: string) => {
+    setTags((prev) => prev.filter((p) => p.id !== id));
   }, []);
 
-  const onSelect = useCallback((option: SelectOption, type: WhichSelect) => {
+  const onSelect = useCallback((option: SelectOption) => {
     if (!option.id || !option.name) return;
-    if (type === "tags") setTags((prev) => [option, ...prev]);
-    else if (type === "categs") setCategs((prev) => [option, ...prev]);
+    setTags((prev) => [option, ...prev]);
   }, []);
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
@@ -112,7 +99,6 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
     const obj: CreateProjectInput = {
       ...form,
       imageId,
-      categoryIds: selectedCategs.map(({ id }) => id),
       tagIds: selectedTags.map(({ id }) => id),
     };
     try {
@@ -261,21 +247,13 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
             <CodeBracketIcon className="h-5 w-5 flex-shrink-0" />
           </div>
         </div>
-        <Select
-          title="Categories"
-          data={categories.data}
-          selected={selectedCategs}
-          remove={(id) => removeSelected(id, "categs")}
-          onSelect={(values) => onSelect(values, "categs")}
-        />
-        <Select
+        <TagsSelect
           title="Tags"
           data={tags.data}
           selected={selectedTags}
-          remove={(id) => removeSelected(id, "tags")}
-          onSelect={(values) => onSelect(values, "tags")}
+          remove={(id) => removeSelected(id)}
+          onSelect={(values) => onSelect(values)}
         />
-
         <div className="flex justify-end gap-4 pt-6">
           <button
             disabled={add.isLoading || update.isLoading}

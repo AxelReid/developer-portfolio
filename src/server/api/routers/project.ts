@@ -8,7 +8,6 @@ export const projectRouter = createTRPCRouter({
       z.object({
         title: z.string(),
         tagIds: z.array(z.string()),
-        categoryIds: z.array(z.string()),
         imageId: z.string().optional(),
         demo_link: z.string().optional(),
         source_link: z.string().optional(),
@@ -20,7 +19,6 @@ export const projectRouter = createTRPCRouter({
         data: {
           ...input,
           tagIds: { set: input.tagIds },
-          categoryIds: { set: input.categoryIds },
         },
       });
     }),
@@ -30,7 +28,6 @@ export const projectRouter = createTRPCRouter({
         id: z.string(),
         title: z.string(),
         tagIds: z.array(z.string()),
-        categoryIds: z.array(z.string()),
         imageId: z.string().optional(),
         demo_link: z.string().optional(),
         source_link: z.string().optional(),
@@ -49,7 +46,6 @@ export const projectRouter = createTRPCRouter({
           ...rest,
           imageId: imageId || (project.imageId as string),
           tagIds: input.tagIds,
-          categoryIds: input.categoryIds,
         },
       });
     }),
@@ -58,7 +54,6 @@ export const projectRouter = createTRPCRouter({
     .input(
       z
         .object({
-          categoryId: z.string().optional(),
           includeUnPublished: z.boolean().default(false),
         })
         .optional()
@@ -66,13 +61,9 @@ export const projectRouter = createTRPCRouter({
     .query(({ ctx, input }) => {
       return ctx.prisma.project.findMany({
         where: {
-          ...(input?.categoryId
-            ? { categoryIds: { hasSome: input.categoryId } }
-            : {}),
           ...(!input?.includeUnPublished ? { published: true } : {}),
         },
         include: {
-          categories: { select: { name: true, id: true } },
           tags: { select: { name: true, id: true } },
           image: { select: { url: true } },
         },

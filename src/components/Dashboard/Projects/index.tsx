@@ -8,7 +8,7 @@ interface Props {
 
 const Projects: React.FC<Props> = ({ projects, openEdit }) => {
   return (
-    <div className="mt-10 grid grid-cols-1 gap-4 rounded-lg lg:grid-cols-2 xl:grid-cols-3">
+    <div className="mt-10 grid grid-cols-1 gap-4 rounded-lg min-[900px]:grid-cols-2 xl:grid-cols-3">
       {projects?.map((p) => (
         <Project
           key={p.id}

@@ -7,10 +7,7 @@ import Content from "./Content";
 
 type Props = CreateProjectProps;
 
-const CreateProjectModal = (
-  { categories, tags }: Props,
-  ref: React.Ref<unknown>
-) => {
+const CreateProjectModal = ({ tags }: Props, ref: React.Ref<unknown>) => {
   const modalRef: ModalMutableRefProps = useRef(null);
   const [edit, setEdit] = useState<ProjectType | undefined>(undefined);
 
@@ -25,7 +22,6 @@ const CreateProjectModal = (
   return (
     <Modal ref={modalRef} className="max-w-[550px]">
       <Content
-        categories={categories}
         tags={tags}
         close={() => modalRef.current?.close()}
         edit={edit}

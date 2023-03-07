@@ -3,7 +3,6 @@ import DashboardWrapper from "@components/Dashboard/DashboardWrapper";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import Tags from "@components/Dashboard/Tags";
 import { api } from "@utils/api";
-import Categories from "@components/Dashboard/Categories";
 import CreateProjectModal from "@components/Modal/CreateProjectModal";
 import { useRef } from "react";
 import type { ModalMutableRefProps } from "src/types/modalRef";
@@ -13,7 +12,6 @@ import type { ProjectType } from "src/types/infer";
 const ManageProjects: NextPage = () => {
   const modalRef: ModalMutableRefProps<ProjectType> = useRef(null);
   const projects = api.project.getAll.useQuery({ includeUnPublished: true });
-  const categories = api.category.getAll.useQuery();
   const tags = api.tags.getAll.useQuery();
 
   return (
@@ -39,18 +37,6 @@ const ManageProjects: NextPage = () => {
               openEdit={modalRef.current?.open}
             />
           </div>
-          <div className="br border-0 border-b pb-10">
-            <h1 className="mb-4 text-xl">
-              Manage categories
-              <span className="ml-2 text-sm">
-                ({categories.data?.length ?? 0})
-              </span>
-            </h1>
-            <Categories
-              categories={categories.data}
-              refetch={categories.refetch as () => void}
-            />
-          </div>
           <div>
             <h1 className="mb-4 text-xl">
               Manage tags
@@ -60,7 +46,7 @@ const ManageProjects: NextPage = () => {
           </div>
         </section>
       </DashboardWrapper>
-      <CreateProjectModal ref={modalRef} categories={categories} tags={tags} />
+      <CreateProjectModal ref={modalRef} tags={tags} />
     </>
   );
 };

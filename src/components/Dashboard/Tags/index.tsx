@@ -160,7 +160,7 @@ const Tags: React.FC<Props> = ({ tags, refetch }) => {
           </div>
         )}
       </div>
-      <div className="mt-10 flex flex-wrap gap-2 pb-10 md:gap-3">
+      <div className="mt-10 flex flex-wrap gap-2 pb-10 ">
         {tags?.map((tag) => {
           const isEdit = edit?.id === tag.id;
           const isRm = selected.includes(tag.id);

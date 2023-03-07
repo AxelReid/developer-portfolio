@@ -22,6 +22,7 @@ const Project: React.FC<ProjectType> = ({
             <Image
               src={image.url}
               fill
+              sizes="500px"
               className="rounded-[inherit] object-cover"
               alt=""
             />
