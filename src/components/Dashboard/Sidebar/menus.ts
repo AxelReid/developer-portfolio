@@ -5,6 +5,7 @@ import {
   ArchiveBoxIcon,
   ChatBubbleBottomCenterTextIcon,
   ArrowUpTrayIcon,
+  TrophyIcon,
 } from "@heroicons/react/24/outline";
 import { Role } from "src/types/next-auth.d";
 
@@ -43,6 +44,12 @@ export const menus = [
     icon: ArrowUpTrayIcon,
     name: "Uploads",
     path: "/dashboard/manage-uploads",
+    permissions: [Role.ADMIN],
+  },
+  {
+    icon: TrophyIcon,
+    name: "Certificates",
+    path: "/dashboard/manage-certificates",
     permissions: [Role.ADMIN],
   },
 ];
