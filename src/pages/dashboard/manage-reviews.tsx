@@ -23,7 +23,8 @@ const ManageReviews: NextPage = () => {
         {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
         <AddManual refetch={refetch} />
         {data?.map((feed) => (
-          <Item key={feed.id} {...feed} />
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          <Item key={feed.id} {...feed} refetch={refetch} />
         ))}
       </div>
     </DashboardWrapper>

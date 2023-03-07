@@ -1,32 +1,34 @@
-import type { Dispatch, SetStateAction } from "react";
 import { memo, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 
 export interface LoadedImg extends File {
   preview: string;
 }
-interface Props {
+
+export interface FileUploadProps {
   children?: React.ReactNode;
   className?: string;
   acceptClass?: string;
   rejectClass?: string;
   acceptContent?: React.ReactNode;
   rejectContent?: React.ReactNode;
-  images: LoadedImg[];
-  setImages: Dispatch<SetStateAction<LoadedImg[]>>;
   multiple?: boolean;
+  images: LoadedImg[];
+  getImages: (imgs: LoadedImg[]) => void;
+  onSuccess?: () => void;
 }
 
-const FileUploader: React.FC<Props> = ({
+const FileUploader: React.FC<FileUploadProps> = ({
   children,
   className = "",
   acceptClass = "",
   rejectClass = "",
   acceptContent,
   rejectContent,
-  setImages,
-  images,
   multiple = false,
+  images,
+  getImages,
+  onSuccess,
 }) => {
   const { getRootProps, getInputProps, isDragAccept, isDragReject } =
     useDropzone({
@@ -35,13 +37,14 @@ const FileUploader: React.FC<Props> = ({
       },
       multiple,
       onDropAccepted: (acceptedFiles) => {
-        setImages(
+        getImages(
           acceptedFiles.map((file) =>
             Object.assign(file, {
               preview: URL.createObjectURL(file),
             })
           )
         );
+        if (typeof onSuccess === "function") onSuccess();
       },
     });
 

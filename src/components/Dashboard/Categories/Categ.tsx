@@ -13,7 +13,6 @@ interface Props extends CategoryType {
 }
 
 const Categ: React.FC<Props> = ({ id, name, _count, update, remove }) => {
-  // const {} = api.category
   const [isEdit, setEdit] = useState(false);
   const toggleEdit = (open?: boolean) => setEdit((prev) => open ?? !prev);
 

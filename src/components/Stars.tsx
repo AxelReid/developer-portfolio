@@ -1,17 +1,22 @@
 import { useCallback } from "react";
 import type { RatingType } from "src/types/review";
 
-const Stars: React.FC<{ rating: RatingType }> = ({ rating }) => {
+interface Props {
+  rating: RatingType;
+  setRating?: (rate: RatingType) => void;
+}
+const Stars: React.FC<Props> = ({ rating, setRating }) => {
   const star = useCallback(
     (rate: RatingType) => {
       return (
         <svg
+          onClick={() => (setRating ? setRating(rate) : {})}
           aria-hidden="true"
           className={`h-5 w-5 ${
             rate <= rating
               ? "text-yellow-500"
               : "text-zinc-200 dark:text-zinc-700"
-          }`}
+          } ${typeof setRating === "function" ? "cursor-pointer" : ""}`}
           fill="currentColor"
           viewBox="0 0 20 20"
           xmlns="http://www.w3.org/2000/svg"
@@ -20,7 +25,7 @@ const Stars: React.FC<{ rating: RatingType }> = ({ rating }) => {
         </svg>
       );
     },
-    [rating]
+    [rating, setRating]
   );
   return (
     <div className="flex items-center">

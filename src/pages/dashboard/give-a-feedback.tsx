@@ -1,9 +1,14 @@
 import DashboardWrapper from "@components/Dashboard/DashboardWrapper";
+import { Spinner } from "@components/Overlay/Loading";
+import Stars from "@components/Stars";
+import { XMarkIcon } from "@heroicons/react/20/solid";
 import { api } from "@utils/api";
 import type { NextPage } from "next";
 import { useSession } from "next-auth/react";
 import type { FormEvent } from "react";
 import { useState } from "react";
+import type { FeedbackAddInput } from "src/types/infer";
+import type { RatingType } from "src/types/review";
 
 const GiveAFeedback: NextPage = () => {
   const { data: session } = useSession();
@@ -12,19 +17,24 @@ const GiveAFeedback: NextPage = () => {
     onSuccess: () => feedback.refetch(),
   });
 
-  const [input, setInput] = useState({
+  const [input, setInput] = useState<FeedbackAddInput>({
     bio: "",
     feedback: "",
     rating: undefined,
   });
 
-  const handleInput = ({ name, value }: { name: string; value: string }) =>
-    setInput((prev) => ({ ...prev, [name]: value }));
+  const handleInput = ({
+    name,
+    value,
+  }: {
+    name: string;
+    value: string | number | undefined;
+  }) => setInput((prev) => ({ ...prev, [name]: value }));
 
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      if (!input.bio || !input.feedback) return;
+      if (!input.feedback) return;
       await give.mutateAsync(input);
     } catch (error) {}
   };
@@ -58,8 +68,32 @@ const GiveAFeedback: NextPage = () => {
               </p>
             </div>
           </div>
+          {feedback.data && !feedback.data.rating ? null : (
+            <div className="mt-3 flex items-center space-x-2">
+              <Stars
+                rating={(feedback.data?.rating || input.rating) as RatingType}
+                setRating={
+                  !feedback.data
+                    ? (rate) => handleInput({ name: "rating", value: rate })
+                    : undefined
+                }
+              />
+              {!feedback.data && (
+                <span className="c-secondary text-xs">(optional)</span>
+              )}
+              {!feedback.data && !!input.rating && (
+                <button
+                  onClick={() =>
+                    handleInput({ name: "rating", value: undefined })
+                  }
+                >
+                  <XMarkIcon className="h-5 w-5 text-red-500" />
+                </button>
+              )}
+            </div>
+          )}
           {feedback.data ? (
-            <div className="mt-5">
+            <div className="mt-2">
               <p>{feedback.data.feedback}</p>
               <div className="c-secondary mt-2 text-sm italic">
                 {feedback.data.createdAt.toDateString()}
@@ -67,11 +101,11 @@ const GiveAFeedback: NextPage = () => {
             </div>
           ) : (
             /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
-            <form onSubmit={submit} className="mt-5 flex flex-col">
+            <form onSubmit={submit} className="mt-2 flex flex-col">
               <input
                 type="text"
                 name="bio"
-                placeholder="Bio"
+                placeholder="Bio (optional)"
                 className="bb rounded-md text-sm"
                 onChange={(e) => handleInput(e.target)}
               />
@@ -84,9 +118,12 @@ const GiveAFeedback: NextPage = () => {
               />
               <button
                 type="submit"
-                className="btn btn-darker mt-3 w-fit px-3 font-medium"
+                className="btn btn-darker relative mt-3 flex w-fit items-center justify-center px-3 font-medium"
               >
-                Send feedback
+                <span className={`${give.isLoading ? "opacity-20" : ""}`}>
+                  Send feedback
+                </span>
+                {give.isLoading && <Spinner className="absolute !h-6 !w-6" />}
               </button>
             </form>
           )}

@@ -60,7 +60,8 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
   } | null>(
     edit?.imageId ? { id: edit.imageId, url: edit.image?.url as string } : null
   );
-  const [images, setImages] = useState<LoadedImg[]>([]);
+  const [image, setImage] = useState<LoadedImg>();
+
   const [selectedCategs, setCategs] = useState<SelectOption[]>(
     (edit?.categories as []) || []
   );
@@ -103,8 +104,8 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
 
     let imageId: string | undefined = oldImage?.id || undefined;
 
-    if (images.length && typeof images[0]?.size === "number") {
-      const imgUrl = await uploader(images[0]);
+    if (image && typeof image?.size === "number") {
+      const imgUrl = await uploader(image);
       if (imgUrl) imageId = imgUrl;
     }
 
@@ -127,15 +128,15 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
         {edit?.id ? "Update" : "Create"} project
       </h3>
       <div className="flex items-stretch gap-4">
-        {images.length || oldImage ? (
+        {image || oldImage ? (
           <div className="relative isolate flex aspect-video w-full items-end justify-end p-3">
             <Image
               fill
-              src={oldImage?.url || images[0]?.preview || ""}
+              src={oldImage?.url || image?.preview || ""}
               alt=""
               className="bb -z-[1] rounded-lg object-cover"
               onLoad={() => {
-                !oldImage && URL.revokeObjectURL(images[0]?.preview || "");
+                !oldImage && URL.revokeObjectURL(image?.preview || "");
               }}
             />
           </div>
@@ -167,8 +168,8 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
           </div>
         ) : (
           <FileUploader
-            images={images}
-            setImages={setImages}
+            images={image ? [image] : []}
+            getImages={(imgs) => setImage(imgs[0])}
             className="bb c-secondary flex w-full flex-col items-center justify-between rounded-lg py-6 px-4"
             acceptClass="!border-green-500 !text-green-500 shadow-lg shadow-green-500/10"
             rejectClass="!border-red-500 !text-red-500 shadow-lg shadow-red-500/10"
@@ -190,7 +191,7 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
           </FileUploader>
         )}
         <div className="flex w-[42px] flex-shrink-0 flex-col justify-end gap-4">
-          {edit?.image && !oldImage && !images.length && !showGallery && (
+          {edit?.image && !oldImage && !image && !showGallery && (
             <button
               onClick={() => {
                 setOldImage({
@@ -203,12 +204,12 @@ const Content: React.FC<Props> = ({ categories, tags, edit, close }) => {
               <ArrowPathRoundedSquareIcon className="w-5" />
             </button>
           )}
-          {images.length || oldImage || showGallery ? (
+          {image || oldImage || showGallery ? (
             <button
               onClick={() => {
                 setOldImage(null);
                 setShowGallery(false);
-                setImages([]);
+                setImage(undefined);
               }}
               className="flex h-[42px] w-[42px] items-center justify-center bg-red-500/10 text-red-500 dark:bg-red-500/20"
             >

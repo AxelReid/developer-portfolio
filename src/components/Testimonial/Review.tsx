@@ -1,7 +1,8 @@
 import Stars from "@components/Stars";
-import type { ReviewType } from "src/types/review";
+import type { FeedbackType } from "src/types/infer";
+import type { RatingType } from "src/types/review";
 
-const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {
+const Review: React.FC<FeedbackType> = ({ rating, feedback, bio, user }) => {
   return (
     <div
       id="hover-card"
@@ -16,16 +17,36 @@ const Review: React.FC<ReviewType> = ({ name, avatar, review, rating }) => {
     >
       <span id="hover-card-overlay" />
       <div className="flex items-center space-x-5">
-        <div className="relative h-[60px] w-[60px] overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={avatar} alt="" className="absolute inset-0 object-cover" />
+        <div
+          className={`relative h-[60px] w-[60px] overflow-hidden rounded-full ${
+            user.image ? "" : "bg-black/5 dark:bg-white/5"
+          }`}
+        >
+          {user.image && (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={user.image}
+              alt=""
+              className="absolute top-0 left-0 h-full w-full object-cover"
+            />
+          )}
         </div>
         <div>
-          <h3 className="mb-1 text-xl font-medium">{name}</h3>
-          {rating ? <Stars rating={rating} /> : null}
+          <h3 className="mb-1 text-xl font-medium leading-none">{user.name}</h3>
+          <p className="c-secondary text-sm">{bio}</p>
         </div>
       </div>
-      <p className="c-secondary text-md mt-5 md:text-lg">{review}</p>
+      {rating ? (
+        <div className="mt-4">
+          <Stars rating={rating as RatingType} />
+        </div>
+      ) : null}
+
+      <p
+        className={`c-secondary text-md md:text-lg ${rating ? "mt-4" : "mt-5"}`}
+      >
+        {feedback}
+      </p>
     </div>
   );
 };

@@ -55,19 +55,38 @@ export const projectRouter = createTRPCRouter({
     }),
 
   getAll: publicProcedure
-    .input(z.object({ categoryId: z.string().optional() }).optional())
+    .input(
+      z
+        .object({
+          categoryId: z.string().optional(),
+          includeUnPublished: z.boolean().default(false),
+        })
+        .optional()
+    )
     .query(({ ctx, input }) => {
-      const where = input?.categoryId
-        ? { categoryIds: { hasSome: input?.categoryId } }
-        : {};
       return ctx.prisma.project.findMany({
-        where,
+        where: {
+          ...(input?.categoryId
+            ? { categoryIds: { hasSome: input.categoryId } }
+            : {}),
+          ...(!input?.includeUnPublished ? { published: true } : {}),
+        },
         include: {
           categories: { select: { name: true, id: true } },
           tags: { select: { name: true, id: true } },
           image: { select: { url: true } },
         },
       });
+    }),
+  publish: protectedProcedure
+    .input(z.object({ id: z.string(), published: z.boolean() }))
+    .mutation(async ({ ctx, input }) => {
+      ctx.checkAdmin();
+      const data = await ctx.prisma.project.update({
+        where: { id: input.id },
+        data: { published: input.published },
+      });
+      return data.published;
     }),
   remove: protectedProcedure
     .input(

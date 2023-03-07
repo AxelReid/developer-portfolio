@@ -12,7 +12,7 @@ import type { ProjectType } from "src/types/infer";
 
 const ManageProjects: NextPage = () => {
   const modalRef: ModalMutableRefProps<ProjectType> = useRef(null);
-  const projects = api.project.getAll.useQuery();
+  const projects = api.project.getAll.useQuery({ includeUnPublished: true });
   const categories = api.category.getAll.useQuery();
   const tags = api.tags.getAll.useQuery();
 

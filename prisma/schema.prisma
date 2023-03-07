@@ -12,16 +12,17 @@ datasource db {
 
 model Project {
   id          String            @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  demo_link   String?
+  source_link String?
+  published   Boolean           @default(false)
   createdAt   DateTime          @default(now())
   updatedAt   DateTime          @updatedAt
-  title       String
   tags        Tag[]             @relation(fields: [tagIds], references: [id])
   tagIds      String[]          @db.ObjectId
   categories  ProjectCategory[] @relation(fields: [categoryIds], references: [id])
   categoryIds String[]          @db.ObjectId
   image       Image?            @relation(fields: [imageId], references: [id])
-  demo_link   String?
-  source_link String?
   imageId     String?           @db.ObjectId
 }
 
@@ -46,7 +47,7 @@ model Feedback {
   user User?  @relation(fields: [userId], references: [id])
 
   feedback String
-  bio      String
+  bio      String?
   rating   Int?
   name     String?
   avatar   Image?  @relation(fields: [imageId], references: [id])

@@ -1,10 +1,18 @@
-import { CheckIcon, PencilSquareIcon } from "@heroicons/react/24/outline";
+import LoadingOverlay from "@components/Overlay/Loading";
+import { StarIcon } from "@heroicons/react/20/solid";
+import {
+  CheckIcon,
+  PencilSquareIcon,
+  TrashIcon,
+} from "@heroicons/react/24/outline";
 import { api } from "@utils/api";
 import type { LegacyRef } from "react";
 import { useEffect, useRef, useState } from "react";
 import type { FeedbackType } from "src/types/infer";
 
-type Props = FeedbackType;
+interface Props extends FeedbackType {
+  refetch: () => void;
+}
 
 const Item: React.FC<Props> = ({
   id,
@@ -13,14 +21,17 @@ const Item: React.FC<Props> = ({
   createdAt,
   bio,
   published,
+  rating,
+  refetch,
 }) => {
   const publish = api.feedbacks.publish.useMutation();
   const edit = api.feedbacks.edit.useMutation();
+  const dl = api.feedbacks.delete.useMutation();
 
   const editRef: LegacyRef<HTMLTextAreaElement> = useRef(null);
-  const [checked, setCheck] = useState(false);
   const [isEdit, setEdit] = useState(false);
   const [review, setReview] = useState(feedback);
+  const loading = publish.isLoading || edit.isLoading || dl.isLoading;
 
   const handleEdit = async () => {
     if (!isEdit) {
@@ -35,37 +46,50 @@ const Item: React.FC<Props> = ({
     } catch (error) {}
   };
 
+  const handleDelete = async () => {
+    try {
+      const rs = await dl.mutateAsync({ id });
+      if (rs) refetch();
+    } catch (error) {}
+  };
+
   useEffect(() => {
     if (edit.data) setReview(edit.data);
     else setReview(feedback);
   }, [edit.data, feedback]);
 
-  useEffect(() => {
-    if (typeof publish.data === "boolean") setCheck(publish.data);
-    else setCheck(published);
-  }, [publish.data, published]);
-
   return (
-    <div className="bb h-fit rounded-lg p-4">
+    <div className="bb relative h-fit rounded-lg p-4">
+      {loading && <LoadingOverlay />}
       <div className="flex items-center gap-4">
-        <div className="relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
+        <div
+          className={`relative h-12 w-12 flex-shrink-0 overflow-hidden rounded-full ${
+            user.image ? "" : "bg-black/5 dark:bg-white/5"
+          }`}
+        >
           {user?.image && (
             /* eslint-disable-next-line @next/next/no-img-element */
             <img
               src={user?.image || ""}
               alt=""
-              className="absolute inset-0 object-cover"
+              className="absolute top-0 left-0 h-full w-full object-cover"
             />
           )}
         </div>
-        <div>
+        <div className="flex-1">
           <h3 className="mt-2 font-medium leading-none">{user?.name}</h3>
           <p className="c-secondary mt-0.5 text-sm">{bio}</p>
         </div>
+        {rating && (
+          <div className="flex items-center space-x-1">
+            <span className="mt-0.5 text-sm font-medium">{rating}</span>
+            <StarIcon className="h-5 w-5 fill-yellow-500" />
+          </div>
+        )}
       </div>
       {isEdit ? (
         <textarea
-          disabled={edit.isLoading}
+          disabled={loading}
           ref={editRef}
           defaultValue={review}
           className="bb my-3 w-full px-2 py-1"
@@ -78,13 +102,13 @@ const Item: React.FC<Props> = ({
       <div className="flex items-center justify-between">
         <label
           className={`relative inline-flex cursor-pointer items-center ${
-            publish.isLoading ? "opacity-50" : ""
+            loading ? "opacity-50" : ""
           }`}
         >
           <input
-            disabled={publish.isLoading}
+            disabled={loading}
             type="checkbox"
-            checked={checked}
+            checked={publish.data ?? published}
             className="peer sr-only"
             onChange={(e) =>
               publish.mutate({ id, published: e.target.checked })
@@ -95,7 +119,7 @@ const Item: React.FC<Props> = ({
         </label>
         <div className="flex items-center space-x-2">
           <button
-            disabled={edit.isLoading}
+            disabled={loading}
             className="p-1"
             /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
             onClick={handleEdit}
@@ -105,6 +129,14 @@ const Item: React.FC<Props> = ({
             ) : (
               <PencilSquareIcon className="h-4 w-4 text-blue-500" />
             )}
+          </button>
+          <button
+            disabled={loading}
+            className="p-1"
+            /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
+            onClick={handleDelete}
+          >
+            <TrashIcon className="h-4 w-4 text-red-500" />
           </button>
         </div>
       </div>

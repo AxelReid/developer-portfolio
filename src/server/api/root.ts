@@ -2,7 +2,7 @@ import { createTRPCRouter } from "./trpc";
 import { projectRouter } from "./routers/project";
 import { category } from "./routers/category";
 import { tags } from "./routers/tags";
-import { imagesRouter } from "./routers/image";
+import { imagesRouter } from "./routers/images";
 import { feedbacksRouter } from "./routers/feedbacks";
 import { usersRouter } from "./routers/users";
 

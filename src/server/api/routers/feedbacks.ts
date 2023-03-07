@@ -5,7 +5,7 @@ export const feedbacksRouter = createTRPCRouter({
   add: protectedProcedure
     .input(
       z.object({
-        bio: z.string(),
+        bio: z.string().optional(),
         feedback: z.string(),
         rating: z.number().optional(),
       })
@@ -31,17 +31,17 @@ export const feedbacksRouter = createTRPCRouter({
   addManual: protectedProcedure
     .input(
       z.object({
-        bio: z.string(),
+        bio: z.string().optional(),
         feedback: z.string(),
         rating: z.number().optional(),
         name: z.string(),
-        imageId: z.string(),
+        imageId: z.string().optional(),
       })
     )
     .mutation(async ({ ctx, input }) => {
       ctx.checkAdmin();
       return await ctx.prisma.feedback.create({
-        data: { ...input, userId: ctx.session.user.id },
+        data: input,
       });
     }),
   edit: protectedProcedure
@@ -70,12 +70,19 @@ export const feedbacksRouter = createTRPCRouter({
       });
       return data.published;
     }),
+  delete: protectedProcedure
+    .input(z.object({ id: z.string() }))
+    .mutation(async ({ ctx, input }) => {
+      ctx.checkAdmin();
+      const dl = await ctx.prisma.feedback.delete({ where: { id: input.id } });
+      return dl.id ? true : false;
+    }),
   getAll: publicProcedure
     .input(
       z.object({ includeUnPublished: z.boolean().optional().default(false) })
     )
     .query(async ({ ctx, input }) => {
-      const where = !input.includeUnPublished
+      const where = !input?.includeUnPublished
         ? {
             published: true,
           }
