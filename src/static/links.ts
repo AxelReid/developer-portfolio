@@ -12,8 +12,8 @@ export const menus = [
     link: "/#skills",
   },
   {
-    name: "Portfolio",
-    link: "/#portfolio",
+    name: "Qualification",
+    link: "/#qualification",
   },
   {
     name: "Feedback",

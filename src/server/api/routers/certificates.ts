@@ -15,8 +15,12 @@ export const certificatesRouter = createTRPCRouter({
         where: {
           ...(!input?.includeUnPublished ? { published: true } : {}),
         },
-        include: {
-          image: { select: { url: true } },
+        select: {
+          id: true,
+          url: true,
+          image: { select: { id: true, url: true } },
+          published: true,
+          createdAt: true,
         },
       });
     }),

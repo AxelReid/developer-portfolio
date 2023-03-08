@@ -1,4 +1,8 @@
 import Title from "@components/Title";
+import { LinkIcon } from "@heroicons/react/20/solid";
+import { api } from "@utils/api";
+import Image from "next/image";
+import Link from "next/link";
 import Divider from "./Divider";
 import Work from "./Work";
 
@@ -40,6 +44,7 @@ const experience = [
 ];
 
 const Qualification = () => {
+  const certificates = api.certificate.getAll.useQuery();
   return (
     <section id="qualification" className="section overflow-hidden">
       <div className="container">
@@ -67,6 +72,27 @@ const Qualification = () => {
               </div>
             );
           })}
+        </div>
+        <div className="mt-24 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {certificates.data?.map((cert) => (
+            <div key={cert.id} className={`relative aspect-[9/6] rounded-lg`}>
+              <Image
+                src={cert.image?.url || ""}
+                fill
+                className="rounded-[inherit] object-cover"
+                alt=""
+                sizes="400px"
+              />
+              {cert.url && (
+                <Link
+                  className="bg hover:c-secondary absolute bottom-0 left-0 px-2 py-1 text-sm underline underline-offset-2 md:text-base"
+                  href={cert.url}
+                >
+                  Proof of completion
+                </Link>
+              )}
+            </div>
+          ))}
         </div>
         {/* <div className="mt-20 border-l-4 border-black">
           <Carousel>
