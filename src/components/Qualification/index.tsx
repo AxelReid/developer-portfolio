@@ -1,5 +1,4 @@
 import Title from "@components/Title";
-import { LinkIcon } from "@heroicons/react/20/solid";
 import { api } from "@utils/api";
 import Image from "next/image";
 import Link from "next/link";
