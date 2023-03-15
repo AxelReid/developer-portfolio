@@ -44,6 +44,7 @@ const experience = [
 
 const Qualification = () => {
   const certificates = api.certificate.getAll.useQuery();
+
   return (
     <section id="qualification" className="section overflow-hidden">
       <div className="container">
@@ -74,13 +75,14 @@ const Qualification = () => {
         </div>
         <div className="mt-24 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {certificates.data?.map((cert) => (
-            <div key={cert.id} className={`relative aspect-[9/6] rounded-lg`}>
+            <div key={cert.id} className={`relative rounded-lg`}>
               <Image
                 src={cert.image?.url || ""}
-                fill
-                className="rounded-[inherit] object-cover"
-                alt=""
+                className="rounded-[inherit]"
+                width={500}
+                height={450}
                 sizes="400px"
+                alt=""
               />
               {cert.url && (
                 <Link

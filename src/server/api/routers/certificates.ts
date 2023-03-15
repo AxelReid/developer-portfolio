@@ -22,6 +22,7 @@ export const certificatesRouter = createTRPCRouter({
           published: true,
           createdAt: true,
         },
+        orderBy: { createdAt: "desc" },
       });
     }),
   publish: protectedProcedure
