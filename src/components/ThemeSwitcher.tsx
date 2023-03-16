@@ -4,17 +4,12 @@ import { useLocalStorage } from "usehooks-ts";
 
 const themeInitial = (): "dark" | "light" => {
   if (typeof window === "undefined") return "dark";
-  if (
-    !localStorage.theme ||
-    localStorage.theme === "dark" ||
-    (!("theme" in localStorage) &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches)
-  ) {
+  const themeInLocalstorage = localStorage.getItem("theme");
+
+  if (!themeInLocalstorage || themeInLocalstorage.includes("dark")) {
     document.documentElement.classList.add("dark");
     return "dark";
-  }
-  {
-    localStorage.removeItem("theme");
+  } else {
     return "light";
   }
 };
