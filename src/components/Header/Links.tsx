@@ -14,7 +14,7 @@ const Links: React.FC<Props> = ({ closeMenu }) => {
       <span
         ref={animatedBgRef}
         id="animated-bg"
-        className="absolute left-0 top-0 -z-[1] scale-0 rounded-lg bg-black/10 transition-transform group-hover:scale-100 dark:bg-white/20"
+        className="absolute left-0 top-0 -z-[1] rounded-lg bg-black/10 opacity-0 transition-opacity group-hover:opacity-100 dark:bg-white/20"
       />
       {menus.map((menu, i) => (
         <Link

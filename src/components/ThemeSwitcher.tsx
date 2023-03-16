@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
-import { getCookie } from "cookies-next";
 
 const themeInitial = (): "dark" | "light" => {
   if (
@@ -18,7 +17,7 @@ const themeInitial = (): "dark" | "light" => {
 };
 
 const ThemeSwitcher = () => {
-  const [theme, setTheme] = useState(getCookie("theme") ?? "dark");
+  const [theme, setTheme] = useState("dark");
 
   useEffect(() => {
     setTheme(themeInitial());

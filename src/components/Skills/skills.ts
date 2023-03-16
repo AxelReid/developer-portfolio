@@ -281,6 +281,7 @@ export const descriptions = [
 ] as const;
 
 export const groupBy = (key: SkillTabType) =>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   skills.reduce((prev: { [key: string]: any }, cur: { [key: string]: any }) => {
     const kk = cur[key] as string | string[];
 

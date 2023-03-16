@@ -1,7 +1,12 @@
-import Title from "@components/Title";
 import { resume } from "src/static/social";
 import { BriefcaseIcon, DocumentTextIcon } from "@heroicons/react/24/outline";
 import { handleHoverEffect } from "@utils/hoverCardEffect";
+import { useMediaQuery } from "react-responsive";
+import dynamic from "next/dynamic";
+import { useEffect, useState } from "react";
+const ComputersCanvas = dynamic(() => import("@components/canvas/Computers"), {
+  ssr: false,
+});
 
 const cards = [
   {
@@ -53,19 +58,29 @@ const cards = [
 ];
 
 const About = () => {
+  const [showIt, setShowIt] = useState(false);
+  const isMatch = useMediaQuery({ maxWidth: 1280 });
+  useEffect(() => {
+    setShowIt(isMatch);
+  }, [isMatch]);
   return (
-    <section id="about-me" className="sTo section container max-w-5xl">
+    <section className="section container max-w-[1208px] !pt-0 xl:mt-36">
       <div>
-        <Title title="About Me" desc="My introduction" />
+        {/* <Title title="About Me" desc="My introduction" /> */}
         {/* <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20"> */}
         {/* <div className="bb flex items-center justify-center rounded-2xl p-10">
             <Image className="object-contain" src={Anim} alt="" />
           </div> */}
         <div>
+          {showIt && (
+            <div className="aspect-[9/4.5] w-full md:-mt-10">
+              <ComputersCanvas />
+            </div>
+          )}
           <div
             id="hover-cards"
             onMouseMove={handleHoverEffect}
-            className="flex flex-wrap gap-4"
+            className="mt-2 flex flex-wrap gap-4"
           >
             {cards.map((card, i) => (
               <div
@@ -80,8 +95,8 @@ const About = () => {
               </div>
             ))}
           </div>
-          <div className="c-secondary my-10 text-xl leading-loose tracking-wide">
-            Initially, my journey started{" "}
+          <div className="c-secondary my-10 text-justify text-xl leading-loose tracking-wide">
+            My journey started{" "}
             <b className="text-zinc-700 dark:text-zinc-200">in 2019</b> with
             learning <b className="text-orange-500">html</b>{" "}
             <b className="text-css">css</b>{" "}
@@ -106,13 +121,14 @@ const About = () => {
             <div className="h-7" />
             I&rsquo;m a big{" "}
             <b className="text-yellow-500">javascript enthusiast</b> and built
-            my skills around it. I always try to be up-to-date with what&rsquo;s
-            happening in its <b className="text-yellow-500">ecosystem</b>. I
-            explore & try new features, technologies that looks interesting and
-            helpful. If i find a technology that feels futuristic and introduces
-            better solutions for common problems, most importantly gives the
-            best <b className="text-zinc-600 dark:text-zinc-300">DX</b> and
-            great performance, I just learn and add it to skillset.
+            my skills on top of it. I always try to be up-to-date with
+            what&rsquo;s happening in its{" "}
+            <b className="text-yellow-500">ecosystem</b>. I explore & try new
+            features, technologies that looks interesting and helpful. If i find
+            a technology that feels futuristic and introduces better solutions
+            for common problems, most importantly gives the best{" "}
+            <b className="text-zinc-600 dark:text-zinc-300">DX</b> and great
+            performance, I get so passionate to learn and extend my skillset.
             <br />
             So far in my main gear, I have <b className="text-ts">Typescript</b>
             , <b className="text-zinc-700 dark:text-zinc-200">Nextjs</b>,{" "}
@@ -129,12 +145,14 @@ const About = () => {
             </span>{" "}
             better than yesterday.
           </div>
-          <a href={resume} target="_blank" rel="noreferrer">
-            <button className="btn btn-dark flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
-              <span className="whitespace-nowrap">View Resume</span>
-              <DocumentTextIcon className="w-6 -translate-y-1" />
-            </button>
-          </a>
+          <div className="flex justify-start">
+            <a href={resume} target="_blank" rel="noreferrer" className="w-fit">
+              <button className="btn btn-dark flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
+                <span className="whitespace-nowrap">View Resume</span>
+                <DocumentTextIcon className="w-6 -translate-y-1" />
+              </button>
+            </a>
+          </div>
         </div>
         {/* </div> */}
       </div>

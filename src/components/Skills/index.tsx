@@ -1,4 +1,3 @@
-import Title from "@components/Title";
 import { handleHoverEffect } from "@utils/hoverCardEffect";
 import { useState } from "react";
 import type { SkillType } from "src/types";
@@ -9,12 +8,14 @@ import { groupBy } from "./skills";
 import { skillsTab } from "./skills";
 
 const Skills = () => {
-  // TODO skills and stacks tabs
   const [activeTab, setActiveTab] = useState<SkillTabType>("stacks");
 
   return (
-    <section id="skills" className="sTo section container">
-      <Title title="Skills" desc="My technical level" />
+    <section
+      id="skills"
+      className="section container max-w-[1208px] scroll-mt-32 !pt-0"
+    >
+      {/* <Title title="Skills" desc="My technical level" /> */}
       <div className="flex gap-4">
         {skillsTab.map((tab, i) => (
           <button
