@@ -38,15 +38,15 @@ const Testimonial = () => {
             </Link>
           </div>
         )}
-        <div className="embla pr-4 xl:pr-0" ref={emblaRef}>
-          <div className="embla__container flex items-stretch space-x-5 xl:space-x-10">
-            {feedbacks.isLoading ? (
-              <div></div>
-            ) : (
-              feedbacks.data?.map((feed, i) => <Review key={i} {...feed} />)
-            )}
+        {!feedbacks.isLoading && (
+          <div className="embla pr-4 xl:pr-0" ref={emblaRef}>
+            <div className="embla__container flex items-stretch space-x-5 xl:space-x-10">
+              {feedbacks.data?.map((feed, i) => (
+                <Review key={i} {...feed} />
+              ))}
+            </div>
           </div>
-        </div>
+        )}
         {feedbacks?.data && (
           <Dots length={feedbacks.data?.length} emblaApi={emblaApi} />
         )}

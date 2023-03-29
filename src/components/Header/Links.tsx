@@ -28,7 +28,7 @@ const Links: React.FC<Props> = ({ closeMenu }) => {
                 height: `${offsetHeight}px`,
                 width: `${offsetWidth}px`,
               },
-              { duration: 250, fill: "forwards" }
+              { duration: 200, fill: "forwards" }
             );
           }}
           href={menu.link}

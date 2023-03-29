@@ -1,4 +1,3 @@
-import EarthCanvas from "@components/canvas/Earth";
 import AuthModal from "@components/Modal/AuthModal";
 import ThemeSwitcher from "@components/ThemeSwitcher";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
@@ -66,15 +65,15 @@ const Header = () => {
       >
         <div className="container flex flex-col overflow-hidden 2md:flex-row 2md:items-center 2md:justify-between">
           <div className="flex h-20 w-full items-center justify-between 2md:w-fit lg:h-24">
-            {/* <Link
+            <Link
               href="/"
-              // className="hover:text-gradient text-xl font-semibold"
+              className="hover:text-gradient text-xl font-semibold"
             >
               HYPERBEAST
-            </Link> */}
-            <div className="relative aspect-square h-full">
+            </Link>
+            {/* <div className="relative aspect-square h-full">
               <EarthCanvas />
-            </div>
+            </div> */}
             <div className="2md:hidden">{actionbtns}</div>
           </div>
           <nav
