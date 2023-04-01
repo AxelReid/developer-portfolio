@@ -73,7 +73,7 @@ const About = () => {
           </div> */}
         <div>
           {showIt && (
-            <div className="aspect-[9/4.5] w-full md:-mt-10">
+            <div className="aspect-[9/4.7] w-full md:-mt-10">
               <ComputersCanvas />
             </div>
           )}

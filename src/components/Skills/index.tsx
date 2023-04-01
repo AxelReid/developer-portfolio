@@ -8,7 +8,7 @@ import { groupBy } from "./skills";
 import { skillsTab } from "./skills";
 
 const Skills = () => {
-  const [activeTab, setActiveTab] = useState<SkillTabType>("stacks");
+  const [activeTab, setActiveTab] = useState<SkillTabType>("category");
 
   return (
     <section

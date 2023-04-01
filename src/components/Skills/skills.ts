@@ -12,6 +12,7 @@ import {
   nestjs,
   nodejs,
   nxtjs,
+  pglogo,
   prsm,
   psprtjs,
   rcnative,
@@ -21,6 +22,7 @@ import {
   restapi,
   rquery,
   sqlite,
+  strapi,
   swgr,
   swr,
   tauri,
@@ -113,6 +115,13 @@ export const skills: SkillType[] = [
   //   category: Categories["Backend libraries & frameworks"],
   //   stacks: [Stacks.Hyperbeast],
   // },
+  {
+    name: "Strapi CMS",
+    level: SkillLevel.Intermediate,
+    icon: strapi,
+    category: Categories["Backend libraries & frameworks"],
+    stacks: [],
+  },
   {
     name: "tRPC",
     level: SkillLevel.Intermediate,
@@ -260,11 +269,18 @@ export const skills: SkillType[] = [
     category: Categories.Databases,
     stacks: [],
   },
+  {
+    name: "Postgresql",
+    level: SkillLevel.Intermediate,
+    icon: pglogo,
+    category: Categories.Databases,
+    stacks: [Stacks.Hyperbeast],
+  },
 ];
 
 export const skillsTab: { id: SkillTabType; name: string }[] = [
-  { id: "stacks", name: "Stacks" },
   { id: "category", name: "Technologies" },
+  { id: "stacks", name: "Stacks" },
 ];
 export type SkillTabType = "category" | "stacks";
 export const descriptions = [

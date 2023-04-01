@@ -10,6 +10,7 @@ import {
 } from "@heroicons/react/24/outline";
 import LoadingOverlay from "@components/Overlay/Loading";
 import Link from "next/link";
+import Switcher from "@components/Switcher";
 
 const CloseIcon = ({ click }: { click: () => void }) => (
   <button
@@ -179,23 +180,15 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
       </div>
       {data && (
         <div className="mt-4 flex items-center justify-between">
-          <label
-            className={`relative inline-flex cursor-pointer items-center ${
-              loading ? "opacity-50" : ""
-            }`}
-          >
-            <input
-              disabled={loading}
-              type="checkbox"
-              checked={publish.data ?? data.published}
-              className="peer sr-only"
-              onChange={(e) =>
-                publish.mutate({ id: data.id, published: e.target.checked })
-              }
-            />
-            <div className="peer h-5 w-9 rounded-full bg-zinc-200 after:absolute after:top-[2px] after:left-[2px] after:h-4 after:w-4 after:rounded-full  after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full dark:bg-zinc-700"></div>
-            <span className="ml-3 text-sm font-medium">Published</span>
-          </label>
+          <Switcher
+            size="small"
+            checked={publish.data ?? data.published}
+            loading={loading}
+            onChange={(checked) =>
+              publish.mutate({ id: data.id, published: checked })
+            }
+            label="Published"
+          />
           <div className="flex items-center space-x-2">
             <button
               disabled={loading}

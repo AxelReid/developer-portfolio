@@ -5,9 +5,28 @@ import Link from "next/link";
 import Divider from "./Divider";
 import Work from "./Work";
 
-const experience = [
+export type WorkType = {
+  title: string;
+  company: string;
+  desc?: string;
+  site?: string;
+  date: {
+    start: string;
+    end: string;
+  };
+};
+
+const experience: WorkType[] = [
   {
-    title: "Fullstack Web Developer",
+    title: "Full-Stack Web Developer",
+    company: "UNIIT Slovakia, Remote full-time",
+    date: {
+      start: "2023 Apr",
+      end: "Present",
+    },
+  },
+  {
+    title: "Full-Stack Web Developer",
     company: "Freelancing",
     date: {
       start: "2022 Oct",

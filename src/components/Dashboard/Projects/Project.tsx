@@ -1,4 +1,5 @@
 import LoadingOverlay from "@components/Overlay/Loading";
+import Switcher from "@components/Switcher";
 import {
   CodeBracketIcon,
   LinkIcon,
@@ -61,22 +62,12 @@ const Project: React.FC<Props> = ({
             </div>
           </div>
           <div className="mt-2 flex items-center justify-end space-x-2">
-            <label
-              className={`relative inline-flex cursor-pointer items-center ${
-                loading ? "opacity-50" : ""
-              }`}
-            >
-              <input
-                disabled={loading}
-                type="checkbox"
-                checked={publish.data ?? published}
-                className="peer sr-only"
-                onChange={(e) =>
-                  publish.mutate({ id, published: e.target.checked })
-                }
-              />
-              <div className="peer h-4 w-7 rounded-full bg-zinc-200 after:absolute after:top-[2px] after:left-[2px] after:h-3 after:w-3 after:rounded-full  after:border-zinc-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-blue-600 peer-checked:after:translate-x-full dark:bg-zinc-700"></div>
-            </label>
+            <Switcher
+              size="small"
+              checked={publish.data ?? published}
+              loading={loading}
+              onChange={(checked) => publish.mutate({ id, published: checked })}
+            />
             {demo_link && (
               <Link href={demo_link} target="_blank" className="p-1">
                 <LinkIcon className="h-4 w-4" />

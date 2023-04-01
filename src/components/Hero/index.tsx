@@ -17,6 +17,7 @@ const ComputersCanvas = dynamic(() => import("@components/canvas/Computers"));
 const Hero = () => {
   const [showIt, setShowIt] = useState(false);
   const isMatch = useMediaQuery({ minWidth: 1280 });
+
   useEffect(() => {
     setShowIt(isMatch);
   }, [isMatch]);
@@ -72,7 +73,7 @@ const Hero = () => {
       </section>
       {showIt && (
         <div
-          className="absolute top-0 bottom-0 right-0 translate-y-24 md:aspect-[9/5]
+          className="absolute top-0 bottom-0 right-0 translate-y-20 md:aspect-[9/5]
         lg:aspect-[9/4.5]"
         >
           <ComputersCanvas />

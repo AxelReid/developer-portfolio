@@ -1,14 +1,8 @@
-import { CalendarDaysIcon } from '@heroicons/react/24/outline'
+import { CalendarDaysIcon } from "@heroicons/react/24/outline";
+import type { WorkType } from ".";
 
-interface Props {
-  title: string
-  company: string
-  site?: string
-  date: {
-    start: string
-    end: string
-  }
-  className?: string
+interface Props extends WorkType {
+  className?: string;
 }
 
 const Work: React.FC<Props> = ({
@@ -16,33 +10,35 @@ const Work: React.FC<Props> = ({
   company,
   site,
   date,
-  className = '',
+  className = "",
+  desc,
 }) => {
   return (
     <div className={`flex flex-col ${className}`}>
-      <h4 className='text-xl md:text-2xl font-medium'>{title}</h4>
-      <div className='flex items-center c-secondary mt-1 mb-4 gap-2 text-sm md:text-base'>
+      <h4 className="text-xl font-medium md:text-2xl">{title}</h4>
+      <div className="c-secondary mt-1 mb-4 flex items-center gap-2 text-sm md:text-base">
         <p>{company}</p>
         {site && (
           <>
             -
             <a
-              href={'https://' + site}
-              target='_blank'
-              rel='noreferrer'
-              className='text-blue-400 hover:underline underline-offset-2'
+              href={"https://" + site}
+              target="_blank"
+              rel="noreferrer"
+              className="text-blue-400 underline-offset-2 hover:underline"
             >
               {site}
             </a>
           </>
         )}
       </div>
-      <div className='flex items-center c-secondary gap-1.5 text-sm md:text-base'>
-        <CalendarDaysIcon className='w-5 h-5 -mt-0.5' />
+      {/* <p className="mb-2 italic">{desc}</p> */}
+      <div className="c-secondary flex items-center gap-1.5 text-sm md:text-base">
+        <CalendarDaysIcon className="-mt-0.5 h-5 w-5" />
         <p>{date.start}</p>-<p>{date.end}</p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Work
+export default Work;
