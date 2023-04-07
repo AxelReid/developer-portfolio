@@ -147,7 +147,7 @@ const About = () => {
           </div>
           <div className="flex justify-start">
             <a href={resume} target="_blank" rel="noreferrer" className="w-fit">
-              <button className="btn btn-dark flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
+              <button className="btn btn-darker flex items-center space-x-3 rounded-2xl py-6 px-8 font-medium">
                 <span className="whitespace-nowrap">View Resume</span>
                 <DocumentTextIcon className="w-6 -translate-y-1" />
               </button>
