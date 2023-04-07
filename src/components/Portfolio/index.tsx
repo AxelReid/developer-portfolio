@@ -3,7 +3,7 @@ import Projects from "./Projects";
 
 const Qualification = () => {
   return (
-    <section id="projects" className="sTo section container">
+    <section id="projects" className="sTo section">
       <Title title="Projects" desc="Most recent work" />
       <Projects />
     </section>

@@ -13,11 +13,11 @@ const Project: React.FC<ProjectType> = ({
   return (
     <div
       id="hover-card"
-      className="flex flex-col justify-between rounded-2xl p-6"
+      className="flex flex-col justify-between rounded-xl p-5"
     >
       <span id="hover-card-overlay" />
       <div>
-        <div className="relative aspect-[9/6] rounded-2xl bg-black/5 dark:bg-zinc-700">
+        <div className="relative aspect-[9/6] rounded-xl bg-black/5 dark:bg-zinc-700">
           {image?.url && (
             <Image
               src={image.url}
@@ -28,9 +28,9 @@ const Project: React.FC<ProjectType> = ({
             />
           )}
         </div>
-        <h3 className="mt-7 text-xl font-medium">{title}</h3>
+        <h3 className="mt-5 text-xl font-medium">{title}</h3>
         {(tags as [])?.length > 0 ? (
-          <div className="my-5 flex flex-wrap gap-1.5">
+          <div className="my-4 flex flex-wrap gap-1.5">
             {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call */}
             {tags.map((tag, i) => (
               // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access

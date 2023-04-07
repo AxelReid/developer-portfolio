@@ -92,7 +92,7 @@ const Qualification = () => {
             );
           })}
         </div>
-        <div className="mt-24 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-24 grid grid-cols-1 gap-4 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
           {certificates.data?.map((cert) => (
             <div key={cert.id} className={`relative rounded-lg`}>
               <Image

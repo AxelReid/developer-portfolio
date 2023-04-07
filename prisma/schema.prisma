@@ -10,6 +10,22 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  name      String?
+  bio       String?
+  email     String?    @unique
+  image     String?
+  role      Role       @default(USER)
+  providers String[]
+  feedbacks Feedback[]
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
 model Project {
   id          String   @id @default(auto()) @map("_id") @db.ObjectId
   title       String
@@ -66,20 +82,45 @@ model Image {
   Feedback    Feedback[]
   Project     Project[]
   Certificate Certificate[]
+  Technology  Technology[]
+  types       ImageType[]   @relation(fields: [typeIds], references: [id])
+  typeIds     String[]      @db.ObjectId
 }
 
-model User {
-  id        String     @id @default(auto()) @map("_id") @db.ObjectId
-  name      String?
-  bio       String?
-  email     String?    @unique
-  image     String?
-  role      Role       @default(USER)
-  providers String[]
-  feedbacks Feedback[]
+model ImageType {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  name      String
+  images    Image[]  @relation(fields: [imageIds], references: [id])
+  imageIds  String[] @db.ObjectId
 }
 
-enum Role {
-  USER
-  ADMIN
+model Technology {
+  id          String               @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt   DateTime             @default(now())
+  updatedAt   DateTime             @updatedAt
+  name        String
+  image       Image?               @relation(fields: [imageId], references: [id])
+  imageId     String               @db.ObjectId
+  level       TechnologyLevel      @relation(fields: [levelId], references: [id])
+  levelId     String               @db.ObjectId
+  categories  TechnologyCatagory[] @relation(fields: [categoryIds], references: [id])
+  categoryIds String[]             @db.ObjectId
+}
+
+model TechnologyLevel {
+  id         String       @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt  DateTime     @default(now())
+  updatedAt  DateTime     @updatedAt
+  name       String
+  technology Technology[]
+}
+
+model TechnologyCatagory {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  technologies Technology[] @relation(fields: [techIds], references: [id])
+  techIds      String[]     @db.ObjectId
 }

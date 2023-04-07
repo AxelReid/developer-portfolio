@@ -21,7 +21,7 @@ const Testimonial = () => {
   const { data: session } = useSession();
 
   return (
-    <section id="testimonial" className="section sTo overflow-hidden">
+    <section id="testimonial" className="sTo overflow-hidden pt-28 pb-28">
       <div
         className="container"
         onMouseMove={handleHoverEffect}
@@ -40,7 +40,7 @@ const Testimonial = () => {
         )}
         {!feedbacks.isLoading && (
           <div className="embla pr-4 xl:pr-0" ref={emblaRef}>
-            <div className="embla__container flex items-stretch space-x-5 xl:space-x-10">
+            <div className="embla__container flex items-stretch space-x-4 ">
               {feedbacks.data?.map((feed, i) => (
                 <Review key={i} {...feed} />
               ))}

@@ -37,7 +37,7 @@ const Skills = () => {
                 <p className="text-lg font-medium">{sk[0]}</p>
                 {desc && <p className="c-secondary my-1 text-sm">{desc}</p>}
               </div>
-              <div className="flex flex-wrap gap-2 md:gap-4">
+              <div className="flex flex-wrap gap-2">
                 {(sk[1] as SkillType[]).map((s, ii) => (
                   <Skill {...s} key={ii} />
                 ))}
