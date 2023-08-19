@@ -80,7 +80,7 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
             />
           </>
         ) : openImgs ? (
-          images.data ? (
+          images.data?.length ? (
             <>
               {<CloseIcon click={() => setOpenImgs(false)} />}
               <Carousel rootClassName="flex-1 h-full" className="h-full gap-4">
