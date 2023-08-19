@@ -7,6 +7,7 @@ import type { LegacyRef } from "react";
 import { memo, useMemo, useRef, useState } from "react";
 import type { ModalMutableRefProps } from "src/types/modalRef";
 import Links from "./Links";
+import Button from "@components/ui/Button";
 
 const Header = () => {
   const { data: session, status } = useSession();
@@ -28,32 +29,48 @@ const Header = () => {
   const actionbtns = (
     <div className="flex items-center space-x-4">
       {status === "unauthenticated" ? (
-        <button
+        <Button
           onClick={() => modalRef.current?.open()}
-          className="btn-darker py-2 px-4 font-medium"
+          size="sm"
+          variant="secondary"
         >
           Login
-        </button>
+        </Button>
       ) : (
         <Link href="/dashboard" className="h-10 w-10">
-          <button className="btn btn-darker relative h-10 w-10 overflow-hidden border-0 p-0 font-medium uppercase">
-            {session?.user?.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={session.user.image}
-                className="h-full w-full rounded-[inherit]"
-                alt=""
-              />
-            ) : (
-              session?.user?.name?.charAt(0)
-            )}
-          </button>
+          <>
+            <Button
+              size={false}
+              variant="secondary"
+              className="h-10 w-10 overflow-hidden"
+            >
+              {session?.user?.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={session.user.image}
+                  className="h-full w-full rounded-[inherit]"
+                  alt=""
+                />
+              ) : (
+                session?.user?.name?.charAt(0) || "A"
+              )}
+            </Button>
+          </>
         </Link>
       )}
       <ThemeSwitcher />
-      <button className="btn h-10 w-10 sm:hidden" onClick={() => handleOpen()}>
-        {open ? <XMarkIcon /> : <Bars3Icon />}
-      </button>
+      <Button
+        onClick={() => handleOpen()}
+        icon={
+          open ? (
+            <XMarkIcon width={22} height={22} />
+          ) : (
+            <Bars3Icon width={22} height={22} />
+          )
+        }
+        size="smSquare"
+        className="sm:hidden"
+      />
     </div>
   );
 
@@ -69,7 +86,7 @@ const Header = () => {
               href="/"
               className="hover:text-gradient text-xl font-semibold"
             >
-              HYPERBEAST
+              ASILBEK
             </Link>
             {/* <div className="relative aspect-square h-full">
               <EarthCanvas />

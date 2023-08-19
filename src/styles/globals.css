@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
 @layer base {
   body {
     @apply bg text-gray-900 dark:text-gray-100;
@@ -29,6 +34,10 @@
   #hover-card-overlay {
     @apply b absolute inset-px -z-[2] rounded-[inherit];
   }
+  /* ui components */
+  .button-ui {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-lg shadow shadow-black/5 disabled:pointer-events-none disabled:opacity-70 disabled:brightness-95 dark:shadow-black/10;
+  }
 }
 
 @layer components {
@@ -51,7 +60,7 @@
     @apply border border-zinc-200 dark:border-zinc-700/50;
   }
   .bb {
-    @apply br b border;
+    @apply br b;
   }
   .c-secondary {
     @apply text-zinc-500 dark:text-zinc-400;
@@ -66,13 +75,13 @@
   input,
   select,
   textarea {
-    @apply rounded-lg !ring-zinc-200/50 focus:!ring-4 dark:!ring-zinc-700/50;
+    @apply rounded-lg !ring-zinc-200/40 focus:!ring-4 dark:!ring-zinc-700/40;
   }
-  button {
+  /* button {
     @apply rounded-lg
     active:ring-zinc-200/70 disabled:cursor-not-allowed
     disabled:opacity-70 dark:active:ring-zinc-800/70;
-  }
+  } */
   .btn {
     @apply bb
     rounded-lg 

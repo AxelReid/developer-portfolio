@@ -1,6 +1,7 @@
 import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
 import { useEffect } from "react";
 import { useLocalStorage } from "usehooks-ts";
+import Button from "./ui/Button";
 
 const themeInitial = (): "dark" | "light" => {
   if (typeof window === "undefined") return "dark";
@@ -34,9 +35,17 @@ const ThemeSwitcher = () => {
   };
 
   return (
-    <button onClick={() => handle()} className="btn h-10 w-10">
-      {theme === "dark" ? <SunIcon /> : <MoonIcon className="p-px" />}
-    </button>
+    <Button
+      onClick={() => handle()}
+      icon={
+        theme === "dark" ? (
+          <SunIcon width={22} height={22} />
+        ) : (
+          <MoonIcon width={22} height={22} />
+        )
+      }
+      size="smSquare"
+    />
   );
 };
 

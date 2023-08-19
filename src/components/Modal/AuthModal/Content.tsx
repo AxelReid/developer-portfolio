@@ -1,4 +1,5 @@
 import { GithubSvg, GoogleSvg } from "@components/icons";
+import Button from "@components/ui/Button";
 import type { BuiltInProviderType } from "next-auth/providers";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/router";
@@ -8,15 +9,15 @@ const providers = [
     name: "Google",
     provider: "google",
     icon: <GoogleSvg className="h-6 w-6" key="google" />,
-    btnCN: "btn-light",
-    txtCN: "",
+    btnVariant: "light",
+    txtCn: "",
   },
   {
     name: "Github",
     provider: "github",
     icon: <GithubSvg className="h-6 w-6 rounded-full invert " key="github" />,
-    btnCN: "btn-dark",
-    txtCN: "!text-white",
+    btnVariant: "dark",
+    txtCn: "text-white",
   },
   // {
   //   name: "Twitter",
@@ -67,17 +68,15 @@ const Content: React.FC<Props> = ({ clearQuery }) => {
       )}
       <div className="mt-10 flex flex-col gap-4">
         {providers.map((p) => (
-          <button
-            key={p.provider}
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          <Button
             onClick={login(p.provider)}
-            className={`btn px-4 py-2.5 text-left font-semibold ${p.btnCN}`}
+            variant={p.btnVariant}
+            key={p.provider}
+            icon={p.icon}
+            className="justify-start gap-3 font-semibold"
           >
-            <div className="flex items-center gap-3">
-              {p.icon}
-              <span className={` ${p.txtCN}`}>Signin with {p.name}</span>
-            </div>
-          </button>
+            <span className={`${p.txtCn}`}>Signin with {p.name}</span>
+          </Button>
         ))}
       </div>
     </>

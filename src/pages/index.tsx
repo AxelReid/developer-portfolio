@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Meta from "src/components/Meta";
 import Header from "src/components/Header";
 import Hero from "src/components/Hero";
+import Button from "@components/ui/Button";
 const About = dynamic(() => import("src/components/About"));
 const Skills = dynamic(() => import("src/components/Skills"));
 const Qualification = dynamic(() => import("src/components/Qualification"));

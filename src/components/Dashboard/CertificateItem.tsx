@@ -8,17 +8,19 @@ import {
   TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import LoadingOverlay from "@components/Overlay/Loading";
 import Link from "next/link";
 import Switcher from "@components/Switcher";
+import Button from "@components/ui/Button";
 
 const CloseIcon = ({ click }: { click: () => void }) => (
-  <button
-    onClick={click}
-    className="b absolute top-2 left-2 z-[1] rounded-full !bg-opacity-60 p-1 hover:!bg-opacity-100"
-  >
-    <XMarkIcon className="w-6" />
-  </button>
+  <>
+    <Button
+      size="smSquare"
+      onClick={click}
+      className="absolute top-2 left-2 z-[1] rounded-full border-0 !bg-opacity-60 p-1 hover:!bg-opacity-100"
+      icon={<XMarkIcon className="w-6" />}
+    />
+  </>
 );
 
 interface Props {
@@ -83,10 +85,10 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
               {<CloseIcon click={() => setOpenImgs(false)} />}
               <Carousel rootClassName="flex-1 h-full" className="h-full gap-4">
                 {images?.data?.map((img) => (
-                  <button
+                  <Button
                     onDoubleClick={() => setImage(img)}
                     key={img.id}
-                    className="embla__slide bb relative h-full flex-[85%] flex-shrink-0 rounded-lg"
+                    className="embla__slide h-full flex-[85%] flex-shrink-0 rounded-lg p-0"
                   >
                     <Image
                       src={img.url}
@@ -95,7 +97,7 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
                       alt=""
                       sizes="400px"
                     />
-                  </button>
+                  </Button>
                 ))}
               </Carousel>
             </>
@@ -106,18 +108,19 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
                   {"Couldn't"} load
                 </span>
               )}
-              <button
+              <Button
                 disabled={images.isFetching}
                 //eslint-disable-next-line @typescript-eslint/no-misused-promises
                 onClick={() => images.refetch()}
                 className="underline"
               >
                 {images.isLoading ? "Fetching..." : "Reload"}
-              </button>
+              </Button>
             </div>
           )
         ) : (
-          <button
+          <Button
+            variant="unstyled"
             onClick={() => {
               setOpenImgs(true);
               // eslint-disable-next-line @typescript-eslint/no-floating-promises
@@ -137,7 +140,7 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
                 Use original
               </div>
             )}
-          </button>
+          </Button>
         )}
       </div>
       <div className="mt-4 flex space-x-3">
@@ -149,22 +152,16 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
               className="btn w-full rounded-lg py-1 text-sm"
               placeholder="Proof link (possibly)"
             />
-            <button
+            <Button
               disabled={loading || !image}
-              className="btn btn-darker relative py-1"
+              isLoading={loading}
+              className="gap-1.5 py-1 px-2.5"
+              variant="secondary"
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={submit}
             >
-              <span className={`${loading ? "opacity-0" : ""}`}>
-                {data ? "Update" : "Add"}
-              </span>
-              {loading && (
-                <LoadingOverlay
-                  root={{ className: "!bg-transparent" }}
-                  spinner={{ className: "w-4" }}
-                />
-              )}
-            </button>
+              {data ? "Update" : "Add"}
+            </Button>
           </>
         ) : (
           <>
@@ -190,8 +187,10 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
             label="Published"
           />
           <div className="flex items-center space-x-2">
-            <button
+            <Button
               disabled={loading}
+              size="smSquare"
+              variant="unstyled"
               className="p-1"
               /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
               onClick={() => setIsEdit((prev) => !prev)}
@@ -201,15 +200,17 @@ const CertificateItem: React.FC<Props> = ({ data }) => {
               ) : (
                 <PencilSquareIcon className="h-4 w-4 text-blue-500" />
               )}
-            </button>
-            <button
+            </Button>
+            <Button
               disabled={loading}
+              size="smSquare"
+              variant="unstyled"
               className="p-1"
               /* eslint-disable-next-line @typescript-eslint/no-misused-promises */
               onClick={() => dl.mutateAsync({ id: data.id })}
             >
               <TrashIcon className="h-4 w-4 text-red-500" />
-            </button>
+            </Button>
           </div>
         </div>
       )}
