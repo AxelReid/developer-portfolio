@@ -28,7 +28,7 @@ const cards = [
       </svg>
     ),
     name: "Experience",
-    value: "2 + Years",
+    value: "4 + Years",
   },
   {
     icon: <BriefcaseIcon strokeWidth={1.25} />,
@@ -97,54 +97,44 @@ const About = () => {
             ))}
           </div>
           <div className="c-secondary my-10 text-justify text-xl leading-loose tracking-wide">
-            My journey started{" "}
-            <b className="text-zinc-700 dark:text-zinc-200">in 2019</b> with
-            learning <b className="text-orange-500">html</b>{" "}
-            <b className="text-css">css</b>{" "}
-            <b className="text-yellow-500">javascript</b> on my own and worked a
-            lot on{" "}
+            I’ve been building full-stack web applications since 2020, using a
+            variety of modern technologies.
+            <br />
+            I’ve worked independently, with teams, and for companies across
+            different countries.
+            <br />
+            <br />
+            My journey started in{" "}
             <b className="bg-gradient-to-tr from-pink-500 to-blue-500 bg-clip-text text-transparent">
               UI/UX design
-            </b>{" "}
-            with <b className="text-gql">scss</b>.
-            <div className="h-7" />
-            <b className="text-zinc-700 dark:text-zinc-200">In 2020</b>, my
-            serious web development career began with{" "}
-            <b className="text-cyan-500">Reactjs</b>,{" "}
-            <b className="text-zinc-700 dark:text-zinc-200">Nextjs</b> and{" "}
-            <b className="text-zinc-700 dark:text-zinc-200">
-              <span className="text-mongodb">M</span>
-              <span className="text-500">E</span>
-              <span className="text-cyan-500">R</span>
-              <span className="text-nodejs">N</span> Stack
             </b>
-            .
-            <div className="h-7" />
-            I&rsquo;m a big{" "}
-            <b className="text-yellow-500">javascript enthusiast</b> and built
-            my skills on top of it. I always try to be up-to-date with
-            what&rsquo;s happening in its{" "}
-            <b className="text-yellow-500">ecosystem</b>. I explore & try new
-            features, technologies that looks interesting and helpful. If i find
-            a technology that feels futuristic and introduces better solutions
-            for common problems, most importantly gives the best{" "}
-            <b className="text-zinc-600 dark:text-zinc-300">DX</b> and great
-            performance, I get so passionate to learn and extend my skillset.
+            — turning design templates into pixel-perfect, responsive web apps.
             <br />
-            So far in my main gear, I have <b className="text-ts">Typescript</b>
-            , <b className="text-zinc-700 dark:text-zinc-200">Nextjs</b>,{" "}
-            <b className="text-nestjs">Nestjs</b>,{" "}
-            <b className="text-gql">Graphql</b> by those factors. I&rsquo;m
-            always exploring and mastering my skills to{" "}
-            <span
-              className="text-zinc-700 
-            [text-shadow:0_0_5px_rgba(0,0,0,0.5)] 
-            dark:text-zinc-100 
-            dark:[text-shadow:0_0_5px_white]"
-            >
-              enjoy developing
-            </span>{" "}
-            better than yesterday.
+            Over time, I transitioned into building and maintaining
+            enterprise-grade applications with clean architecture on both the
+            frontend and backend.
+            <br />
+            <br />I also develop cross-platform mobile apps with{" "}
+            <b className="text-cyan-500">React Native</b> and desktop apps with{" "}
+            <b>Electron.</b>
+            <br />
+            However, I’ve been moving towards native development with{" "}
+            <b>Kotlin, Swift,</b> and{" "}
+            <b className="text-gql">Kotlin Multiplatform (KMP)</b> to build more
+            performant and efficient apps.
+            <br />
+            <br />
+            I’m also deeply interested in <b>AI</b> development, especially{" "}
+            <b>Natural Language Processing (NLP).</b>
+            <br />
+            I’ve worked with pre-trained{" "}
+            <b>Automated Speech Recognition (ASR)</b> models in Python.
+            <br />
+            <br />
+            Right now, my core expertise is in full-stack web development.
+            <br />
+            Mobile and AI development are my secondary focuses — areas I’m
+            actively learning and mastering.
           </div>
           <div className="flex justify-start">
             <a href={resume} target="_blank" rel="noreferrer" className="w-fit">
@@ -157,7 +147,6 @@ const About = () => {
             </a>
           </div>
         </div>
-        {/* </div> */}
       </div>
     </section>
   );

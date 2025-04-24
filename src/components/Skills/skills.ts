@@ -1,313 +1,63 @@
-import {
-  apollo,
-  css,
-  docker,
-  exjs,
-  figma,
-  framermotion,
-  js,
-  jwt,
-  mantinedev,
-  mongodb,
-  nestjs,
-  nodejs,
-  nxtjs,
-  pglogo,
-  prsm,
-  psprtjs,
-  rcnative,
-  rctjs,
-  redis,
-  redux,
-  restapi,
-  rquery,
-  sqlite,
-  strapi,
-  swgr,
-  swr,
-  tauri,
-  tlwncss,
-  trpc,
-  ts,
-  typeorm,
-} from "@components/icons/pl";
-import type { SkillType } from "src/types/index.d";
-import { SkillLevel, Stacks } from "src/types/index.d";
+import * as Icon from "@components/icons/pl";
+import { SkillLevel, SkillType } from "src/types/index.d";
 
-enum Categories {
-  "Programming languages" = "Programming languages",
-  "UI libraries & frameworks" = "UI libraries & frameworks",
-  "Backend libraries & frameworks" = "Backend libraries & frameworks",
-  "Api Integration" = "Api Integration",
-  "Databases" = "Databases",
-  "Design tools" = "Design tools",
-  "Others" = "Others",
-}
+const skill = (
+  name: string,
+  level: SkillLevel,
+  icon: JSX.Element
+): SkillType => ({
+  name,
+  level,
+  icon,
+});
 
-export const skills: SkillType[] = [
-  {
-    name: "Javascript",
-    level: SkillLevel.Advanced,
-    icon: js,
-    category: Categories["Programming languages"],
-    stacks: [],
-  },
-  {
-    name: "Typescript",
-    level: SkillLevel.Advanced,
-    icon: ts,
-    category: Categories["Programming languages"],
-    stacks: [Stacks.Hyperbeast, Stacks.T3, Stacks.MERN],
-  },
-  {
-    name: "React JS",
-    level: SkillLevel.Advanced,
-    icon: rctjs,
-    category: Categories["UI libraries & frameworks"],
-    stacks: [Stacks.MERN],
-  },
-  {
-    name: "Next JS",
-    level: SkillLevel.Advanced,
-    category: Categories["UI libraries & frameworks"],
-    icon: nxtjs,
-    stacks: [Stacks.Hyperbeast, Stacks.T3],
-  },
-  {
-    name: "Next-auth",
-    level: SkillLevel.Intermediate,
-    category: Categories["UI libraries & frameworks"],
-    icon: nxtjs,
-    stacks: [Stacks.T3],
-  },
-  {
-    name: "Redux | Recoil",
-    level: SkillLevel.Intermediate,
-    category: Categories["UI libraries & frameworks"],
-    icon: redux,
-    stacks: [],
-  },
-  {
-    name: "Nest JS",
-    level: SkillLevel.Intermediate,
-    icon: nestjs,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [Stacks.Hyperbeast],
-  },
-  {
-    name: "Node JS",
-    level: SkillLevel.Intermediate,
-    icon: nodejs,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [Stacks.MERN],
-  },
-  {
-    name: "Express JS",
-    level: SkillLevel.Intermediate,
-    icon: exjs,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [Stacks.MERN],
-  },
-  // {
-  //   name: "Graphql",
-  //   level: SkillLevel.Intermediate,
-  //   icon: gql,
-  //   category: Categories["Backend libraries & frameworks"],
-  //   stacks: [Stacks.Hyperbeast],
-  // },
-  {
-    name: "Strapi CMS",
-    level: SkillLevel.Intermediate,
-    icon: strapi,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [],
-  },
-  {
-    name: "tRPC",
-    level: SkillLevel.Intermediate,
-    icon: trpc,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [Stacks.T3],
-  },
-  {
-    name: "Passport Js",
-    level: SkillLevel.Basic,
-    icon: psprtjs,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [],
-  },
-  {
-    name: "JWT",
-    level: SkillLevel.Advanced,
-    icon: jwt,
-    category: Categories["Backend libraries & frameworks"],
-    stacks: [],
-  },
-  {
-    name: "Tailwind CSS",
-    level: SkillLevel.Advanced,
-    icon: tlwncss,
-    category: Categories["Design tools"],
-    stacks: [Stacks.T3],
-  },
-  {
-    name: "Mantine Dev",
-    level: SkillLevel.Advanced,
-    icon: mantinedev,
-    category: Categories["Design tools"],
-    stacks: [Stacks.Hyperbeast],
-  },
-  {
-    name: "Styled | SCSS",
-    level: SkillLevel.Advanced,
-    icon: css,
-    category: Categories["Design tools"],
-    stacks: [],
-  },
-  {
-    name: "Framer Motion",
-    level: SkillLevel.Intermediate,
-    icon: framermotion,
-    category: Categories["Design tools"],
-    stacks: [],
-  },
-  {
-    name: "Figma",
-    level: SkillLevel.Basic,
-    icon: figma,
-    category: Categories["Design tools"],
-    stacks: [],
-  },
-  {
-    name: "Rest API & Axios",
-    level: SkillLevel.Advanced,
-    icon: restapi,
-    category: Categories["Api Integration"],
-    stacks: [],
-  },
-  {
-    name: "SWR",
-    level: SkillLevel.Intermediate,
-    icon: swr,
-    category: Categories["Api Integration"],
-    stacks: [],
-  },
-  {
-    name: "GraphQl Apollo",
-    level: SkillLevel.Intermediate,
-    icon: apollo,
-    category: Categories["Api Integration"],
-    stacks: [Stacks.Hyperbeast],
-  },
-  {
-    name: "React-Query",
-    level: SkillLevel.Intermediate,
-    icon: rquery,
-    category: Categories["Api Integration"],
-    stacks: [],
-  },
-  {
-    name: "Swagger",
-    level: SkillLevel.Intermediate,
-    icon: swgr,
-    category: Categories["Api Integration"],
-    stacks: [],
-  },
-  {
-    name: "Type ORM",
-    level: SkillLevel.Intermediate,
-    icon: typeorm,
-    category: Categories.Databases,
-    stacks: [Stacks.Hyperbeast],
-  },
-  {
-    name: "Prisma",
-    level: SkillLevel.Intermediate,
-    icon: prsm,
-    category: Categories.Databases,
-    stacks: [Stacks.T3],
-  },
-  {
-    name: "MongoDB",
-    level: SkillLevel.Intermediate,
-    icon: mongodb,
-    category: Categories.Databases,
-    stacks: [Stacks.MERN],
-  },
-  {
-    name: "Redis",
-    level: SkillLevel.Basic,
-    icon: redis,
-    category: Categories.Databases,
-    stacks: [],
-  },
-  {
-    name: "React Native",
-    level: SkillLevel.Basic,
-    icon: rcnative,
-    category: Categories.Others,
-    stacks: [],
-  },
-  {
-    name: "Tauri JS",
-    level: SkillLevel.Basic,
-    icon: tauri,
-    category: Categories.Others,
-    stacks: [],
-  },
-  {
-    name: "Docker",
-    level: SkillLevel.Basic,
-    icon: docker,
-    category: Categories.Others,
-    stacks: [],
-  },
-  {
-    name: "Sqlite",
-    level: SkillLevel.Intermediate,
-    icon: sqlite,
-    category: Categories.Databases,
-    stacks: [],
-  },
-  {
-    name: "Postgresql",
-    level: SkillLevel.Intermediate,
-    icon: pglogo,
-    category: Categories.Databases,
-    stacks: [Stacks.Hyperbeast],
-  },
-];
-
-export const skillsTab: { id: SkillTabType; name: string }[] = [
-  { id: "category", name: "Technologies" },
-  { id: "stacks", name: "Stacks" },
-];
-export type SkillTabType = "category" | "stacks";
-export const descriptions = [
-  {
-    key: Stacks.Hyperbeast,
-    value:
-      "My main full stack. Depending on project requirements or preferences i change or add others tools.",
-  },
-  {
-    key: Stacks.T3,
-    value:
-      "My favourite set of tools to built full stack apps with the best DX every.",
-  },
-] as const;
-
-export const groupBy = (key: SkillTabType) =>
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  skills.reduce((prev: { [key: string]: any }, cur: { [key: string]: any }) => {
-    const kk = cur[key] as string | string[];
-
-    const handle = (k: string) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-      prev[k] = prev[k] ? [...prev[k], cur] : [cur];
-    };
-
-    if (typeof kk === "string") handle(kk);
-    else kk.forEach((k) => handle(k));
-
-    return prev;
-  }, {});
+export const skills = {
+  "Programming languages": [
+    skill("Javascript", SkillLevel.Advanced, Icon.js),
+    skill("Typescript", SkillLevel.Advanced, Icon.ts),
+    skill("Python", SkillLevel.Intermediate, Icon.python),
+    skill("Kotlin", SkillLevel.Basic, Icon.kotlin),
+    skill("Swift", SkillLevel.Basic, Icon.swift),
+  ],
+  "Web libraries & frameworks": [
+    skill("React JS", SkillLevel.Advanced, Icon.rctjs),
+    skill("Next JS", SkillLevel.Advanced, Icon.nxtjs),
+    skill("Svelte Kit", SkillLevel.Advanced, Icon.nxtjs),
+  ],
+  "Backend libraries & frameworks": [
+    skill("Node JS", SkillLevel.Advanced, Icon.nodejs),
+    skill("Nest JS", SkillLevel.Advanced, Icon.nestjs),
+    skill("Express JS", SkillLevel.Advanced, Icon.exjs),
+  ],
+  "Web Design tools": [
+    skill("CSS | SCSS | Styled", SkillLevel.Advanced, Icon.css),
+    skill("Tailwind CSS", SkillLevel.Advanced, Icon.tlwncss),
+    skill("Mantine Dev", SkillLevel.Advanced, Icon.mantinedev),
+    skill("Framer Motion", SkillLevel.Advanced, Icon.framermotion),
+    skill("Figma", SkillLevel.Intermediate, Icon.figma),
+  ],
+  Databases: [
+    skill("Postgresql", SkillLevel.Intermediate, Icon.pglogo),
+    skill("Sqlite", SkillLevel.Intermediate, Icon.sqlite),
+    skill("Redis", SkillLevel.Intermediate, Icon.redis),
+    skill("MongoDB", SkillLevel.Advanced, Icon.mongodb),
+    skill("Prisma", SkillLevel.Advanced, Icon.prsm),
+    skill("Type ORM", SkillLevel.Intermediate, Icon.typeorm),
+  ],
+  "API Integration": [
+    skill("Rest API & Axios", SkillLevel.Advanced, Icon.restapi),
+    skill("GraphQl", SkillLevel.Advanced, Icon.gql),
+    skill("tRPC", SkillLevel.Advanced, Icon.trpc),
+  ],
+  "Mobile development": [
+    skill("React Native", SkillLevel.Intermediate, Icon.rcnative),
+    skill("Jetpack Compose", SkillLevel.Basic, Icon.kotlin),
+    skill("SwiftUI", SkillLevel.Basic, Icon.swift),
+    skill("Kotlin Multiplatform", SkillLevel.Basic, Icon.kotlin),
+  ],
+  "Desktop development": [
+    skill("Electron JS", SkillLevel.Intermediate, Icon.electron),
+    skill("Tauri JS", SkillLevel.Intermediate, Icon.tauri),
+    skill("Compose Multiplatform", SkillLevel.Basic, Icon.cmp),
+  ],
+};

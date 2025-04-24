@@ -1,7 +1,7 @@
 import Github from "@components/icons/Github";
 import StackOverflow from "@components/icons/StackOverflow";
 import Telegram from "@components/icons/Telegram";
-// import LinkedIn from '@components/icons/LinkedIn'
+import LinkedIn from "@components/icons/LinkedIn";
 // import Twitter from '@components/icons/Twitter'
 import { resume, telegram_link } from "src/static/social";
 import {
@@ -28,6 +28,7 @@ const Hero = () => {
         <div className="pb-10 sm:block sm:pt-2">
           <div className="flex flex-row items-start gap-8 sm:w-24 sm:flex-col lg:w-32 ">
             <Telegram />
+            <LinkedIn />
             <StackOverflow />
             <Github />
           </div>
@@ -48,8 +49,8 @@ const Hero = () => {
             </p>
           </div>
           <p className="c-secondary mt-4 max-w-lg text-lg sm:text-xl">
-            I&rsquo;m a self-taught talented and skilled developer, building web
-            in Javascript ecosystem since 2019.
+            Building web since 2020, with expertise in cross-platform and native
+            app development.
           </p>
           <div className="mt-10 flex gap-3 text-sm min-[500px]:gap-5 sm:mt-11 sm:text-base">
             <Link

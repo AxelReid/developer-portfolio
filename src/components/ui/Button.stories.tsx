@@ -10,7 +10,7 @@ type Story = StoryObj<typeof Button>;
 
 export const Primary: Story = {
   args: {
-    variant: "default",
+    variant: undefined,
     children: "Default",
   },
 };
