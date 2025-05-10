@@ -22,7 +22,7 @@ const experience: WorkType[] = [
     company: "UNIIT Slovakia, Remote full-time",
     date: {
       start: "2023 Apr",
-      end: "Present",
+      end: "2025 Jan",
     },
   },
   {
