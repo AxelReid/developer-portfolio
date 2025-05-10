@@ -12,26 +12,11 @@ export const menus = [
     link: "#projects",
   },
   {
-    name: "Qualification",
+    name: "Work history",
     link: "/#qualification",
   },
   {
-    name: "Feedback",
+    name: "Feedbacks",
     link: "/#testimonial",
-  },
-];
-
-export const footerLinks = [
-  {
-    name: "Skills",
-    link: "/#skills",
-  },
-  {
-    name: "Projects",
-    link: "/#projects",
-  },
-  {
-    name: "Qualification",
-    link: "/#qualification",
   },
 ];

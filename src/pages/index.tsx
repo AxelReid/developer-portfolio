@@ -9,7 +9,7 @@ const Skills = dynamic(() => import("src/components/Skills"));
 const Qualification = dynamic(() => import("src/components/Qualification"));
 const Portfolio = dynamic(() => import("src/components/Portfolio"));
 const Testimonial = dynamic(() => import("src/components/Testimonial"));
-const Footer = dynamic(() => import("@components/Footer"));
+//const Footer = dynamic(() => import("@components/Footer"));
 const StarsCanvas = dynamic(() => import("@components/canvas/Stars"), {
   ssr: false,
 });
@@ -26,7 +26,7 @@ const Home: NextPage = () => {
       <Portfolio />
       <Qualification />
       <Testimonial />
-      <Footer />
+      {/*<Footer />*/}
     </>
   );
 };

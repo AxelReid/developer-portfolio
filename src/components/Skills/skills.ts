@@ -22,7 +22,7 @@ export const skills = {
   "Web libraries & frameworks": [
     skill("React JS", SkillLevel.Advanced, Icon.rctjs),
     skill("Next JS", SkillLevel.Advanced, Icon.nxtjs),
-    skill("Svelte Kit", SkillLevel.Advanced, Icon.nxtjs),
+    skill("Svelte Kit", SkillLevel.Advanced, Icon.sv),
   ],
   "Backend libraries & frameworks": [
     skill("Node JS", SkillLevel.Advanced, Icon.nodejs),

@@ -27,34 +27,31 @@ const cards = [
         <path d="M6.802 12.003l-3.4 5.89l3.598 -.233l1.598 3.232l3.4 -5.889"></path>
       </svg>
     ),
-    name: "Experience",
-    value: "4 + Years",
+    name: "Job role",
+    value: "Full stack web, also wants to experience AI and mobile development",
   },
   {
     icon: <BriefcaseIcon strokeWidth={1.25} />,
-    name: "Completed",
-    value: "40 + Projects",
+    name: "Occupation",
+    value: "Full-time, prefers part-time for some time",
   },
   {
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        strokeWidth="1.25"
-        stroke="currentColor"
         fill="none"
+        stroke="currentColor"
+        strokeWidth="1.25"
         strokeLinecap="round"
         strokeLinejoin="round"
       >
-        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-        <rect x="4" y="13" rx="2" width="4" height="6"></rect>
-        <rect x="16" y="13" rx="2" width="4" height="6"></rect>
-        <path d="M4 15v-3a8 8 0 0 1 16 0v3"></path>
-        <path d="M18 19a6 3 0 0 1 -6 3"></path>
+        <path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" />
+        <path d="m9 10 2 2 4-4" />
       </svg>
     ),
-    name: "Available",
-    value: "30 hours a week",
+    name: "Location",
+    value: "Prefers remote, open to off-site",
   },
 ];
 
@@ -97,8 +94,8 @@ const About = () => {
             ))}
           </div>
           <div className="c-secondary my-10 text-justify text-xl leading-loose tracking-wide">
-            I’ve been building full-stack web applications since 2020, using a
-            variety of modern technologies.
+            I’ve been building full-stack web applications using a variety of
+            modern technologies.
             <br />
             I’ve worked independently, with teams, and for companies across
             different countries.
