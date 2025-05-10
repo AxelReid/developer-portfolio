@@ -4,7 +4,7 @@ import Projects from "./Projects";
 const Qualification = () => {
   return (
     <section id="projects" className="sTo section">
-      <Title title="Projects" desc="" />
+      <Title title="Projects" desc="Some projects" />
       <Projects />
     </section>
   );

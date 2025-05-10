@@ -9,7 +9,7 @@ const Skills = () => {
       id="skills"
       className="section container max-w-[1208px] scroll-mt-32 !pt-0"
     >
-      <Title title="Skills" desc="My technical level" />
+      <Title title="Skills" desc="Technical level" />
       <div onMouseMove={handleHoverEffect} id="hover-cards">
         {Object.entries(skills).map(([name, techs]) => {
           return (
