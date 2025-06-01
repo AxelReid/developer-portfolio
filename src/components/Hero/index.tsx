@@ -49,8 +49,8 @@ const Hero = () => {
             </p>
           </div>
           <p className="c-secondary mt-4 max-w-lg text-lg sm:text-xl">
-            Building web since 2020, with expertise in cross-platform and native
-            app development.
+            Building web since 2020, passionate about AI and mobile app
+            development.
           </p>
           <div className="mt-10 flex gap-3 text-sm min-[500px]:gap-5 sm:mt-11 sm:text-base">
             <Link
