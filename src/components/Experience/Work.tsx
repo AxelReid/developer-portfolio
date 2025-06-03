@@ -1,6 +1,5 @@
 import { CalendarDaysIcon } from "@heroicons/react/24/outline";
-import type { WorkType } from ".";
-
+import { WorkType } from "./helpers";
 interface Props extends WorkType {
   className?: string;
 }
@@ -14,7 +13,11 @@ const Work: React.FC<Props> = ({
   desc,
 }) => {
   return (
-    <div className={`flex flex-col ${className}`}>
+    <div className={`relative flex flex-col ${className}`}>
+      <div className="absolute right-[calc(100%+1rem)] top-0.5 h-7 w-7 rounded-full border border-zinc-300 p-1 dark:border-zinc-600">
+        <div className="h-full w-full rounded-full border-4 border-zinc-300   bg-zinc-50 dark:border-zinc-600 dark:bg-[#121212]"></div>
+      </div>
+
       <h4 className="text-xl font-medium md:text-2xl">{title}</h4>
       <div className="c-secondary mt-1 mb-4 flex items-center gap-2 text-sm md:text-base">
         <p>{company}</p>
@@ -35,7 +38,7 @@ const Work: React.FC<Props> = ({
       {/* <p className="mb-2 italic">{desc}</p> */}
       <div className="c-secondary flex items-center gap-1.5 text-sm md:text-base">
         <CalendarDaysIcon className="-mt-0.5 h-5 w-5" />
-        <p>{date.start}</p>-<p>{date.end}</p>
+        <p>{date.start}</p>-<p>{date?.end || "Present"}</p>
       </div>
     </div>
   );

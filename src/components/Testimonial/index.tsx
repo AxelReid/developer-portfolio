@@ -1,9 +1,7 @@
 "use client";
 
-import useEmblaCarousel from "embla-carousel-react";
 import Title from "@components/Title";
 import Review from "./Review";
-import Dots from "./Dots";
 import { handleHoverEffect } from "@utils/hoverCardEffect";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -15,19 +13,16 @@ const Testimonial = () => {
   const feedbacks = api.feedbacks.getAll.useQuery({
     includeUnPublished: false,
   });
-  const [emblaRef, emblaApi] = useEmblaCarousel({
-    containScroll: "trimSnaps",
-  });
   const { data: session } = useSession();
 
   return (
-    <section id="testimonial" className="sTo overflow-hidden pt-28 pb-28">
+    <section id="testimonial" className="sTo">
+      <Title title="Testimonial" desc="People saying" />
       <div
-        className="container"
+        className="content container mb-28"
         onMouseMove={handleHoverEffect}
         id="hover-cards"
       >
-        <Title title="Testimonial" desc="People saying" />
         {session?.user?.role !== Role.ADMIN && (
           <div className="mb-10 w-fit">
             <Link href="/dashboard/give-a-feedback">
@@ -38,18 +33,14 @@ const Testimonial = () => {
             </Link>
           </div>
         )}
-        {!feedbacks.isLoading && (
-          <div className="embla pr-4 xl:pr-0" ref={emblaRef}>
-            <div className="embla__container flex items-stretch space-x-4 ">
-              {feedbacks.data?.map((feed, i) => (
-                <Review key={i} {...feed} />
-              ))}
-            </div>
-          </div>
-        )}
-        {feedbacks?.data && (
-          <Dots length={feedbacks.data?.length} emblaApi={emblaApi} />
-        )}
+
+        <div
+          className="columns-2 [column-gap:0.75rem] md:[column-gap:1rem] lg:columns-3"
+          style={{}}
+        >
+          {!feedbacks.isLoading &&
+            feedbacks.data?.map((feed, i) => <Review key={i} {...feed} />)}
+        </div>
       </div>
     </section>
   );

@@ -45,7 +45,7 @@ export const skills = {
     skill("Type ORM", SkillLevel.Intermediate, Icon.typeorm),
   ],
   "API Integration": [
-    skill("Rest API & Axios", SkillLevel.Advanced, Icon.restapi),
+    skill("Rest API", SkillLevel.Advanced, Icon.restapi),
     skill("GraphQl", SkillLevel.Advanced, Icon.gql),
     skill("tRPC", SkillLevel.Advanced, Icon.trpc),
   ],

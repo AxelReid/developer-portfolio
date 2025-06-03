@@ -6,15 +6,7 @@ const Review: React.FC<FeedbackType> = ({ rating, feedback, bio, user }) => {
   return (
     <div
       id="hover-card"
-      className="embla__slide flex
-      flex-[0_0_calc(100%-10px)] 
-      flex-col 
-      justify-between rounded-xl p-6
-      min-[400px]:flex-[0_0_calc(90%-10px)] 
-      sm:flex-[0_0_calc(65%-10px)] 
-      md:flex-[0_0_calc(50%-10px)] 
-      lg:flex-[0_0_calc(40%-10px)] 
-      xl:flex-[0_0_calc(33%-20px)]"
+      className="mb-3 inline-block w-full break-inside-avoid rounded-xl p-4 sm:p-5 md:mb-4"
     >
       <span id="hover-card-overlay" />
       <p className={`text-base`}>{feedback}</p>

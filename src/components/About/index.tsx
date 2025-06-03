@@ -58,17 +58,14 @@ const cards = [
 const About = () => {
   const [showIt, setShowIt] = useState(false);
   const isMatch = useMediaQuery({ maxWidth: 1280 });
+
   useEffect(() => {
     setShowIt(isMatch);
   }, [isMatch]);
+
   return (
-    <section className="section container max-w-[1208px] !pt-0 xl:mt-36">
+    <section className="content container xl:mt-32">
       <div>
-        {/* <Title title="About Me" desc="My introduction" /> */}
-        {/* <div className="grid grid-cols-1 gap-10 md:grid-cols-2 lg:gap-20"> */}
-        {/* <div className="bb flex items-center justify-center rounded-2xl p-10">
-            <Image className="object-contain" src={Anim} alt="" />
-          </div> */}
         <div>
           {showIt && (
             <div className="aspect-[9/4.7] w-full md:-mt-10">

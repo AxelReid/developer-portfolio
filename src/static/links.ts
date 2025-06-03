@@ -16,6 +16,10 @@ export const menus = [
     link: "/#qualification",
   },
   {
+    name: "Awards",
+    link: "/#certificates",
+  },
+  {
     name: "Feedbacks",
     link: "/#testimonial",
   },

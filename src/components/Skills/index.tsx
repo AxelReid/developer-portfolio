@@ -5,12 +5,13 @@ import { skills } from "./skills";
 
 const Skills = () => {
   return (
-    <section
-      id="skills"
-      className="section container max-w-[1208px] scroll-mt-32 !pt-0"
-    >
+    <section id="skills" className="sTo">
       <Title title="Skills" desc="Technical level" />
-      <div onMouseMove={handleHoverEffect} id="hover-cards">
+      <div
+        onMouseMove={handleHoverEffect}
+        id="hover-cards"
+        className="content container"
+      >
         {Object.entries(skills).map(([name, techs]) => {
           return (
             <div key={name}>
