@@ -12,6 +12,13 @@ export type WorkType = {
 
 export const experience: WorkType[] = [
   {
+    title: "Senior Frontend Engineer",
+    company: "Noor - Tashkent, On-site full-time",
+    date: {
+      start: "2025 Jul",
+    },
+  },
+  {
     title: "Full-Stack Engineer",
     company: "Freelancing",
     date: {
@@ -20,7 +27,7 @@ export const experience: WorkType[] = [
   },
   {
     title: "Full-Stack Engineer",
-    company: "UNIIT Slovakia, Remote full-time",
+    company: "UNIIT - Slovakia, Remote full-time",
     date: {
       start: "2023 Apr",
       end: "2025 Jan",

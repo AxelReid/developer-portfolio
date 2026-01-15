@@ -9,5 +9,5 @@ export const email = "mr.webdevsemail@gmail.com";
 export const phone = "+998999877153";
 
 export const resume =
-  "https://drive.google.com/file/d/10XYwCGSRAv3j5DdD5Mv8qijOgFeXNBeo/view?usp=share_link";
+  "https://drive.google.com/file/d/1NoX0hP03BiA9tSsH1Fi7dufG1n2EFyh_/view?usp=sharing";
 //"https://drive.google.com/file/d/1joTC-Jm9k1msCYuWjWBHjAeLj_IJ2IQw/view";
