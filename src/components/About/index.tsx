@@ -9,6 +9,7 @@ const ComputersCanvas = dynamic(() => import("@components/canvas/Computers"), {
   ssr: false,
 });
 
+// Hello
 const cards = [
   {
     icon: (
